@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import api from "../../services/api";
+import authApi from "../../services/authApi";
 
 class Login extends Component {
   state = {
@@ -17,13 +17,13 @@ class Login extends Component {
     this.setState({ fields: newFields });
   };
 
-  handleSubmit = (e) => {
+  handleLoginSubmit = (e) => {
     const { handleLogin, history } = this.props;
     const { username, password } = this.state.fields;
 
     e.preventDefault();
 
-    api.auth.login(username, password).then((user) => {
+    authApi.auth.login(username, password).then((user) => {
       if (user.error) {
         this.setState({ error: true });
       } else {
@@ -40,7 +40,7 @@ class Login extends Component {
       <div>
         <h1>Log In</h1>
         {error ? <h3>Invalid username or password</h3> : null}
-        <form className="login-form" onSubmit={this.handleSubmit}>
+        <form className="login-form" onSubmit={this.handleLoginSubmit}>
           <input
             type="text"
             name="username"

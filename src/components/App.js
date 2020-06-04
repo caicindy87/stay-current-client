@@ -5,8 +5,9 @@ import "../style/App.css";
 import Login from "./auth/Login";
 import Signup from "./auth/Signup";
 import About from "./About";
-import api from "../services/api";
+import authApi from "../services/authApi";
 import NavBar from "./NavBar";
+import PostsContainer from "./post/PostsContainer";
 
 class App extends Component {
   state = {
@@ -22,7 +23,7 @@ class App extends Component {
     const token = localStorage.getItem("token");
 
     if (token) {
-      api.auth.getCurrentUser().then((currentUser) => {
+      authApi.auth.getCurrentUser().then((currentUser) => {
         if (currentUser.error) {
           console.log(currentUser.error);
         } else {
@@ -63,7 +64,7 @@ class App extends Component {
 
     return (
       <div>
-        <NavBar handleLogOut={this.handleLogOut} />
+        <NavBar handleLogOut={this.handleLogOut} currentUser={currentUser} />
         <Switch>
           <Route
             path="/login"
@@ -79,8 +80,9 @@ class App extends Component {
               );
             }}
           ></Route>
-          <Route path="/" component={About}></Route>
+          <Route exact path="/" component={About}></Route>
         </Switch>
+        <PostsContainer currentUser={currentUser} />
       </div>
     );
   }

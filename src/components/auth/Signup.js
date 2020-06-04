@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 
+import api from "../../services/api";
+
 class Signup extends Component {
   state = {
     error: false,
     fields: {
+      email: "",
       username: "",
       password: "",
       passwordConfirm: "",
@@ -18,12 +21,36 @@ class Signup extends Component {
     });
   };
 
+  handleSubmit = (e) => {
+    const { handleSignup, history } = this.props;
+
+    e.preventDefault();
+
+    api.auth.signup(this.state.fields).then((user) => {
+      if (user.error) {
+        console.log(user.error);
+      } else {
+        handleSignup(user);
+        history.push("/");
+      }
+    });
+  };
+
   render() {
-    const { fields } = this.state;
+    const { fields, error } = this.state;
 
     return (
       <div>
+        <h1>Create an Account</h1>
+        {error ? <h3>Try Again</h3> : null}
         <form className="signup-form" onSubmit={this.handleSubmit}>
+          <input
+            type="text"
+            name="email"
+            placeholder="Email address"
+            value={fields.email}
+            onChange={this.handleChange}
+          ></input>
           <input
             type="text"
             name="username"

@@ -24,9 +24,25 @@ const getCurrentUser = () => {
   }).then((resp) => resp.json());
 };
 
+const signup = ({ email, username, password, passwordConfirm }) => {
+  return fetch(`${API_ROOT}/users`, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify({
+      user: {
+        email,
+        username,
+        password,
+        passwordConfirm,
+      },
+    }),
+  }).then((resp) => resp.json());
+};
+
 export default {
   auth: {
     login: login,
     getCurrentUser: getCurrentUser,
+    signup: signup,
   },
 };

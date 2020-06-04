@@ -50,6 +50,14 @@ class App extends Component {
     });
   };
 
+  handleSignup = (user) => {
+    localStorage.setItem("token", user.token);
+
+    this.setState({
+      currentUser: user,
+    });
+  };
+
   render() {
     const { currentUser } = this.state;
 
@@ -66,7 +74,9 @@ class App extends Component {
           <Route
             path="/signup"
             render={(routerProps) => {
-              return <Signup />;
+              return (
+                <Signup {...routerProps} handleSignup={this.handleSignup} />
+              );
             }}
           ></Route>
           <Route path="/" component={About}></Route>

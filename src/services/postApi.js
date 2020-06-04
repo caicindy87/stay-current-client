@@ -15,13 +15,14 @@ const getPosts = () => {
   }).then((resp) => resp.json());
 };
 
-const createNewPost = ({ text, image }, user) => {
+const createNewPost = ({ text, image, selectedTags }, user) => {
   return fetch(`${API_ROOT}/users/${user.id}/posts`, {
     method: "POST",
     headers: headers,
     body: JSON.stringify({
       text: text,
       image: image,
+      selected_tags: selectedTags,
       user_id: user.id,
     }),
   }).then((resp) => resp.json());

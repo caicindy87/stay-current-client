@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 
 import postApi from "../../services/postApi";
 import tagApi from "../../services/tagApi";
@@ -30,7 +30,9 @@ class PostsContainer extends Component {
       .catch((err) => console.log(err));
   };
 
-  handlePostSubmit = (e, inputs) => {
+  // when submit a post, have to create post and post-tag(s)
+
+  handlePostSubmit = (e, inputs, clearFieldsOnSubmit) => {
     const { currentUser } = this.props;
 
     e.preventDefault();
@@ -40,10 +42,13 @@ class PostsContainer extends Component {
         posts: [...prevState.posts, post],
       }))
     );
+
+    clearFieldsOnSubmit();
   };
 
   render() {
     const { currentUser } = this.props;
+    const { tags } = this.state;
 
     return (
       <div>
@@ -55,6 +60,7 @@ class PostsContainer extends Component {
                 <PostNew
                   currentUser={currentUser}
                   handlePostSubmit={this.handlePostSubmit}
+                  tags={tags}
                 />
               );
             }}

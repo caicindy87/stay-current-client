@@ -1,15 +1,16 @@
 import React, { Component } from "react";
-import { Dropdown } from "semantic-ui-react";
+import { Container, Form, Dropdown } from "semantic-ui-react";
 
 class PostNew extends Component {
   state = {
     fields: {
       text: "",
       image: "",
+      selectedTags: [],
     },
   };
 
-  handleChange = (e) => {
+  handleInputChange = (e) => {
     const newFields = { ...this.state.fields, [e.target.name]: e.target.value };
 
     this.setState({
@@ -17,36 +18,67 @@ class PostNew extends Component {
     });
   };
 
+  handleDropdownChange = (e, { value }) => {
+    this.setState((prevState) => ({
+      fields: {
+        ...prevState.fields,
+        selectedTags: value,
+      },
+    }));
+  };
+
+  clearFieldsOnSubmit = () => {
+    this.setState({
+      fields: { text: "", image: "", selectedTags: [] },
+    });
+  };
+
   render() {
     const { fields } = this.state;
     const { handlePostSubmit } = this.props;
+    const selectOptions = this.props.tags.map((tag) => ({
+      key: tag.id,
+      text: tag.name,
+      value: tag.id,
+    }));
 
     return (
-      <div>
-        <form
-          className="new-post-form"
-          onSubmit={(e) => handlePostSubmit(e, fields)}
+      <Container className="new-post-form" textAlign="center">
+        <h1>Create a post</h1>
+        <Form
+          onSubmit={(e) =>
+            handlePostSubmit(e, fields, this.clearFieldsOnSubmit)
+          }
         >
-          <input
+          <Form.TextArea
             type="textarea"
             name="text"
             value={fields.text}
-            placeholder="Share your thoughts or other resources to learn about current events."
-            onChange={this.handleChange}
+            placeholder="Share your thoughts or other resources where you learn about current events."
+            onChange={this.handleInputChange}
           />
           <br />
-          <label htmlFor="image">Add Image (Optional)</label>
-          <input
+          <Form.Input
             type="text"
             name="image"
             value={fields.image}
-            placeholder="Image URL"
-            onChange={this.handleChange}
+            placeholder="Add an image (optional) - image URL "
+            onChange={this.handleInputChange}
           />
           <br />
-          <button>Create Post</button>
-        </form>
-      </div>
+          <Dropdown
+            placeholder="Add tags"
+            fluid
+            multiple
+            search
+            selection
+            options={selectOptions}
+            onChange={this.handleDropdownChange}
+          ></Dropdown>
+          <br />
+          <Form.Button>Create Post</Form.Button>
+        </Form>
+      </Container>
     );
   }
 }

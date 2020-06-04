@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Dropdown } from "semantic-ui-react";
 
 class PostNew extends Component {
   state = {
@@ -16,14 +17,16 @@ class PostNew extends Component {
     });
   };
 
-  handlePostSubmit = () => {};
-
   render() {
     const { fields } = this.state;
+    const { handlePostSubmit } = this.props;
 
     return (
       <div>
-        <form className="new-post-form" onSubmit={this.handlePostSubmit}>
+        <form
+          className="new-post-form"
+          onSubmit={(e) => handlePostSubmit(e, fields)}
+        >
           <input
             type="textarea"
             name="text"

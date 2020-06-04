@@ -15,6 +15,19 @@ const getPosts = () => {
   }).then((resp) => resp.json());
 };
 
+const createNewPost = ({ text, image }, user) => {
+  return fetch(`${API_ROOT}/users/${user.id}/posts`, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify({
+      text: text,
+      image: image,
+      user_id: user.id,
+    }),
+  }).then((resp) => resp.json());
+};
+
 export default {
   getPosts: getPosts,
+  createNewPost: createNewPost,
 };

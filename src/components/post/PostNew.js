@@ -27,6 +27,8 @@ class PostNew extends Component {
     }));
   };
 
+  // instead of clearing the fields, just redirect to /posts
+
   clearFieldsOnSubmit = () => {
     this.setState({
       fields: { text: "", image: "", selectedTags: [] },

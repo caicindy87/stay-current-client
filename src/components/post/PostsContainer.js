@@ -4,6 +4,7 @@ import { Switch, Route, withRouter } from "react-router-dom";
 import postApi from "../../services/postApi";
 import tagApi from "../../services/tagApi";
 import PostNew from "./PostNew";
+import PostsList from "./PostsList";
 
 class PostsContainer extends Component {
   state = {
@@ -30,8 +31,6 @@ class PostsContainer extends Component {
       .catch((err) => console.log(err));
   };
 
-  // when submit a post, have to create post and post-tag(s)
-
   handlePostSubmit = (e, inputs, clearFieldsOnSubmit) => {
     const { currentUser } = this.props;
 
@@ -43,15 +42,16 @@ class PostsContainer extends Component {
       }))
     );
 
+    // instead of clearing the fields, just redirect to /posts
     clearFieldsOnSubmit();
   };
 
   render() {
     const { currentUser } = this.props;
-    const { tags } = this.state;
+    const { tags, posts } = this.state;
 
     return (
-      <div>
+      <div className="posts-container">
         <Switch>
           <Route
             path={`/${currentUser.username}/posts/new`}
@@ -63,6 +63,12 @@ class PostsContainer extends Component {
                   tags={tags}
                 />
               );
+            }}
+          ></Route>
+          <Route
+            path="/"
+            render={() => {
+              return <PostsList posts={posts} currentUser={currentUser} />;
             }}
           ></Route>
         </Switch>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 
-import "../style/App.css";
+import "../style/App.scss";
 import Login from "./auth/Login";
 import Signup from "./auth/Signup";
 import About from "./About";
@@ -63,7 +63,7 @@ class App extends Component {
     const { currentUser } = this.state;
 
     return (
-      <div>
+      <div className="app">
         <NavBar handleLogOut={this.handleLogOut} currentUser={currentUser} />
         <Switch>
           <Route
@@ -82,7 +82,10 @@ class App extends Component {
           ></Route>
           <Route exact path="/" component={About}></Route>
         </Switch>
-        <PostsContainer currentUser={currentUser} />
+        <main>
+          <PostsContainer currentUser={currentUser} />
+          <div className="tags-container">tags container</div>
+        </main>
       </div>
     );
   }

@@ -6,10 +6,11 @@ class NavBar extends Component {
     const { handleLogOut, history, currentUser } = this.props;
 
     return (
-      <div>
-        <Link to="/">Stay Current</Link>
+      <nav className="navbar">
+        <Link to="/" className="logo">
+          Stay Current
+        </Link>
         <br />
-
         {!!currentUser.id ? (
           <>
             <Link to={`/${currentUser.username}/posts/new`}>New Post</Link>
@@ -28,7 +29,7 @@ class NavBar extends Component {
         ) : (
           <Link to="/login">Log In</Link>
         )}
-      </div>
+      </nav>
     );
   }
 }

@@ -5,6 +5,7 @@ import postApi from "../../services/postApi";
 import tagApi from "../../services/tagApi";
 import PostNew from "./PostNew";
 import PostsList from "./PostsList";
+import "../../style/PostsContainer.scss";
 
 class PostsContainer extends Component {
   state = {
@@ -32,7 +33,7 @@ class PostsContainer extends Component {
   };
 
   handlePostSubmit = (e, inputs, clearFieldsOnSubmit) => {
-    const { currentUser } = this.props;
+    const { currentUser, history } = this.props;
 
     e.preventDefault();
 
@@ -42,8 +43,7 @@ class PostsContainer extends Component {
       }))
     );
 
-    // instead of clearing the fields, just redirect to /posts
-    clearFieldsOnSubmit();
+    history.push("/");
   };
 
   render() {
@@ -68,7 +68,13 @@ class PostsContainer extends Component {
           <Route
             path="/"
             render={() => {
-              return <PostsList posts={posts} currentUser={currentUser} />;
+              return (
+                <PostsList
+                  posts={posts}
+                  currentUser={currentUser}
+                  tags={tags}
+                />
+              );
             }}
           ></Route>
         </Switch>
@@ -77,4 +83,4 @@ class PostsContainer extends Component {
   }
 }
 
-export default PostsContainer;
+export default withRouter(PostsContainer);

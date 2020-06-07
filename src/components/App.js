@@ -84,7 +84,6 @@ class App extends Component {
         </Switch>
         <main>
           <PostsContainer currentUser={currentUser} />
-          <div className="tags-container">tags container</div>
         </main>
       </div>
     );

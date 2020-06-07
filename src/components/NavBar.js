@@ -10,11 +10,9 @@ class NavBar extends Component {
         <Link to="/" className="logo">
           Stay Current
         </Link>
-        <br />
         {!!currentUser.id ? (
           <>
             <Link to={`/${currentUser.username}/posts/new`}>New Post</Link>
-            <br />
             <Link
               to="/logout"
               onClick={() => {
@@ -24,7 +22,6 @@ class NavBar extends Component {
             >
               Log Out
             </Link>
-            <br />
           </>
         ) : (
           <Link to="/login">Log In</Link>

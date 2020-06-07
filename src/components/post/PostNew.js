@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Container, Form, Dropdown } from "semantic-ui-react";
 
+import "../../style/PostNew.scss";
+
 class PostNew extends Component {
   state = {
     fields: {
@@ -25,14 +27,6 @@ class PostNew extends Component {
         selectedTags: value,
       },
     }));
-  };
-
-  // instead of clearing the fields, just redirect to /posts
-
-  clearFieldsOnSubmit = () => {
-    this.setState({
-      fields: { text: "", image: "", selectedTags: [] },
-    });
   };
 
   render() {
@@ -61,6 +55,7 @@ class PostNew extends Component {
           />
           <br />
           <Form.Input
+            label="Image"
             type="text"
             name="image"
             value={fields.image}
@@ -68,6 +63,7 @@ class PostNew extends Component {
             onChange={this.handleInputChange}
           />
           <br />
+          <label>Tags</label>
           <Dropdown
             placeholder="Add tags"
             fluid
@@ -78,7 +74,7 @@ class PostNew extends Component {
             onChange={this.handleDropdownChange}
           ></Dropdown>
           <br />
-          <Form.Button>Create Post</Form.Button>
+          <Form.Button className="create-post-btn">Create Post</Form.Button>
         </Form>
       </Container>
     );

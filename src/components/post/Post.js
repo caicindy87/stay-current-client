@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Image, Item, Button, Label } from "semantic-ui-react";
+import { Image, Item, Icon, Label, Button } from "semantic-ui-react";
 
 import "../../style/Post.scss";
 
 export default class Post extends Component {
   render() {
-    const { post, currentUser } = this.props;
+    const { post, currentUser, handleFilterBySelectedTag } = this.props;
     const { post_info } = this.props.post;
 
     return (
@@ -18,13 +18,20 @@ export default class Post extends Component {
             />
 
             <Item.Content>
+              {!!currentUser.id ? <></> : null}
               <Item.Header>{post_info.user.username}</Item.Header>
               <Item.Meta>Published {post.publish_date} ago</Item.Meta>
               <Item.Extra>
                 <Label.Group>
                   {post_info.tags
                     ? post_info.tags.map((tag) => (
-                        <Label as="button" size="tiny" color="yellow">
+                        <Label
+                          key={tag.id}
+                          as="button"
+                          size="tiny"
+                          color="yellow"
+                          onClick={handleFilterBySelectedTag}
+                        >
                           {tag.name}
                         </Label>
                       ))
@@ -38,6 +45,18 @@ export default class Post extends Component {
                 ) : null}
               </Item.Description>
             </Item.Content>
+            <div>
+              <button className="upvote-btn">
+                <i class="far fa-thumbs-up"></i>
+              </button>
+              <button
+                icon="thumbs down outline"
+                size="huge"
+                className="downvote"
+              ></button>
+              {/* upvote - changes color after after being clicked. if clicked
+                    again, will remove upvote */}
+            </div>
           </Item>
         </Item.Group>
       </div>

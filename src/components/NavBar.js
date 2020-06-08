@@ -13,6 +13,7 @@ class NavBar extends Component {
         {!!currentUser.id ? (
           <>
             <Link to={`/${currentUser.username}/posts/new`}>New Post</Link>
+            <Link to="/myposts">My Posts</Link>
             <Link
               to="/logout"
               onClick={() => {

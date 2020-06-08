@@ -8,6 +8,7 @@ import About from "./About";
 import authApi from "../services/authApi";
 import NavBar from "./NavBar";
 import PostsContainer from "./post/PostsContainer";
+import MyPostsContainer from "../components/myPosts/MyPostsContainer";
 
 class App extends Component {
   state = {
@@ -84,6 +85,7 @@ class App extends Component {
         </Switch>
         <main>
           <PostsContainer currentUser={currentUser} />
+          <MyPostsContainer currentUser={currentUser} />
         </main>
       </div>
     );

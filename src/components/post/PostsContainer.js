@@ -110,6 +110,7 @@ class PostsContainer extends Component {
             }}
           ></Route>
           <Route
+            exact
             path="/"
             render={() => {
               return (

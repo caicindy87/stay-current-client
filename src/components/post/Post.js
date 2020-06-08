@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Image, Item, Icon, Label, Button } from "semantic-ui-react";
+import { Image, Item, Label } from "semantic-ui-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -46,10 +46,8 @@ export default class Post extends Component {
 
     return (
       <div className="post">
-        <Item.Group className="">
+        <Item.Group>
           <Item>
-            {!!currentUser.id ? <></> : null}
-
             <Item.Image
               size="tiny"
               src="https://cdn2.iconfinder.com/data/icons/people-80/96/Picture1-512.png"
@@ -59,7 +57,7 @@ export default class Post extends Component {
                 <button
                   className="downvote-btn"
                   onClick={this.handleSetStateOnDownvoteClick}
-                  disabled={upvoteClicked}
+                  disabled={!!currentUser.id ? upvoteClicked : true}
                 >
                   <FontAwesomeIcon
                     icon={downvoteClicked ? faThumbsDown : faThumbsDownReg}
@@ -71,7 +69,7 @@ export default class Post extends Component {
                 <button
                   className="upvote-btn"
                   onClick={this.handleSetStateOnUpvoteClick}
-                  disabled={downvoteClicked}
+                  disabled={!!currentUser.id ? downvoteClicked : true}
                 >
                   <FontAwesomeIcon
                     icon={upvoteClicked ? faThumbsUp : faThumbsUpReg}

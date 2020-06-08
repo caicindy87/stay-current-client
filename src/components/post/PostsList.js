@@ -7,7 +7,6 @@ import PostNew from "./PostNew";
 
 class PostsList extends Component {
   state = {
-    selectedTag: "",
     filteredPosts: [],
   };
 
@@ -21,9 +20,14 @@ class PostsList extends Component {
   };
 
   render() {
-    const { currentUser, tags } = this.props;
-    let posts = [];
+    const {
+      currentUser,
+      tags,
+      handleUpvoteClick,
+      handleDownvoteClick,
+    } = this.props;
 
+    let posts = [];
     if (this.state.filteredPosts.length === 0) {
       posts = this.props.posts;
     } else {
@@ -41,6 +45,8 @@ class PostsList extends Component {
                 post={post}
                 currentUser={currentUser}
                 handleFilterBySelectedTag={this.handleFilterBySelectedTag}
+                handleUpvoteClick={handleUpvoteClick}
+                handleDownvoteClick={handleDownvoteClick}
               />
             );
           })}

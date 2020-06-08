@@ -46,6 +46,50 @@ class PostsContainer extends Component {
     history.push("/");
   };
 
+  handleUpvoteClick = (post, upvoteClicked) => {
+    const { currentUser } = this.props;
+
+    if (upvoteClicked) {
+      postApi.decreaseUpvote(post, currentUser).then((updatedPost) =>
+        this.setState((prevState) => ({
+          posts: prevState.posts.map((post) =>
+            post.post_info.id === updatedPost.post_info.id ? updatedPost : post
+          ),
+        }))
+      );
+    } else {
+      postApi.increaseUpvote(post, currentUser).then((updatedPost) =>
+        this.setState((prevState) => ({
+          posts: prevState.posts.map((post) =>
+            post.post_info.id === updatedPost.post_info.id ? updatedPost : post
+          ),
+        }))
+      );
+    }
+  };
+
+  handleDownvoteClick = (post, downvoteClicked) => {
+    const { currentUser } = this.props;
+
+    if (downvoteClicked) {
+      postApi.decreaseDownvote(post, currentUser).then((updatedPost) =>
+        this.setState((prevState) => ({
+          posts: prevState.posts.map((post) =>
+            post.post_info.id === updatedPost.post_info.id ? updatedPost : post
+          ),
+        }))
+      );
+    } else {
+      postApi.increaseDownvote(post, currentUser).then((updatedPost) =>
+        this.setState((prevState) => ({
+          posts: prevState.posts.map((post) =>
+            post.post_info.id === updatedPost.post_info.id ? updatedPost : post
+          ),
+        }))
+      );
+    }
+  };
+
   render() {
     const { currentUser } = this.props;
     const { tags, posts } = this.state;
@@ -73,6 +117,8 @@ class PostsContainer extends Component {
                   posts={posts}
                   currentUser={currentUser}
                   tags={tags}
+                  handleUpvoteClick={this.handleUpvoteClick}
+                  handleDownvoteClick={this.handleDownvoteClick}
                 />
               );
             }}

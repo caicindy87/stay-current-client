@@ -28,7 +28,51 @@ const createNewPost = ({ text, image, selectedTags }, user) => {
   }).then((resp) => resp.json());
 };
 
+const increaseUpvote = (post, user) => {
+  return fetch(`${API_ROOT}/users/${user.id}/posts/${post.id}`, {
+    method: "PATCH",
+    headers: headers,
+    body: JSON.stringify({
+      upvotes: post.upvotes + 1,
+    }),
+  }).then((resp) => resp.json());
+};
+
+const decreaseUpvote = (post, user) => {
+  return fetch(`${API_ROOT}/users/${user.id}/posts/${post.id}`, {
+    method: "PATCH",
+    headers: headers,
+    body: JSON.stringify({
+      upvotes: post.upvotes - 1,
+    }),
+  }).then((resp) => resp.json());
+};
+
+const increaseDownvote = (post, user) => {
+  return fetch(`${API_ROOT}/users/${user.id}/posts/${post.id}`, {
+    method: "PATCH",
+    headers: headers,
+    body: JSON.stringify({
+      downvotes: post.downvotes + 1,
+    }),
+  }).then((resp) => resp.json());
+};
+
+const decreaseDownvote = (post, user) => {
+  return fetch(`${API_ROOT}/users/${user.id}/posts/${post.id}`, {
+    method: "PATCH",
+    headers: headers,
+    body: JSON.stringify({
+      downvotes: post.downvotes - 1,
+    }),
+  }).then((resp) => resp.json());
+};
+
 export default {
   getPosts: getPosts,
   createNewPost: createNewPost,
+  increaseUpvote: increaseUpvote,
+  decreaseUpvote: decreaseUpvote,
+  increaseDownvote: increaseDownvote,
+  decreaseDownvote: decreaseDownvote,
 };

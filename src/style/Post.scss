@@ -10,12 +10,22 @@
   padding-right: 15px;
 }
 
-.upvote {
-  background-color: white;
-  color: #16324f;
+.upvote-btn-container {
+  display: inline-flex;
+  float: right;
+  padding: 10px;
+
+  p {
+    padding-left: 4px;
+  }
 }
 
-.downvote {
-  background-color: white;
-  color: #16324f;
+.downvote-btn-container {
+  display: inline-flex;
+  float: right;
+  padding: 10px;
+
+  p {
+    padding-left: 4px;
+  }
 }

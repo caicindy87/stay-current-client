@@ -23,7 +23,7 @@ class PostsContainer extends Component {
       .catch((err) => console.log(err));
   };
 
-  handlePostSubmit = (e, inputs, clearFieldsOnSubmit) => {
+  handlePostSubmit = (e, inputs) => {
     const { currentUser, history } = this.props;
 
     e.preventDefault();

@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { Container, Form, Dropdown } from "semantic-ui-react";
+import { Form, Dropdown } from "semantic-ui-react";
 
-import "../../style/PostNew.scss";
-
-class PostNew extends Component {
+class EditMyPostForm extends Component {
   state = {
     fields: {
       text: "",
@@ -11,6 +9,19 @@ class PostNew extends Component {
       selectedTags: [],
     },
   };
+
+  componentDidMount() {
+    const { post_info } = this.props;
+    const tagIds = post_info.tags.map((tag) => tag.id);
+
+    this.setState({
+      fields: {
+        text: post_info.text,
+        image: post_info.image,
+        selectedTags: tagIds,
+      },
+    });
+  }
 
   handleInputChange = (e) => {
     const newFields = { ...this.state.fields, [e.target.name]: e.target.value };
@@ -31,17 +42,16 @@ class PostNew extends Component {
 
   render() {
     const { fields } = this.state;
-    const { handlePostSubmit } = this.props;
     const selectOptions = this.props.tags.map((tag) => ({
       key: tag.id,
       text: tag.name,
       value: tag.id,
     }));
+    const tagIds = this.props.post_info.tags.map((tag) => tag.id);
 
     return (
-      <Container className="new-post-form" textAlign="center">
-        <h1>Create a post</h1>
-        <Form onSubmit={(e) => handlePostSubmit(e, fields)}>
+      <div className="edit-my-post-form">
+        <Form onSubmit={this.handleSubmit}>
           <Form.TextArea
             type="textarea"
             name="text"
@@ -49,32 +59,30 @@ class PostNew extends Component {
             placeholder="Share your thoughts or other resources where you learn about current events."
             onChange={this.handleInputChange}
           />
-          <br />
           <Form.Input
-            label="Image"
             type="text"
             name="image"
-            value={fields.image}
-            placeholder="Add an image (optional) - image URL "
+            label="Image"
+            value={fields.image === "" ? "No image" : fields.image}
+            placeholder="Edit image url"
             onChange={this.handleInputChange}
           />
-          <br />
-          <label>Tags</label>
           <Dropdown
-            placeholder="Add tags"
+            placeholder="Edit tags"
             fluid
             multiple
             search
             selection
+            defaultValue={
+              fields.selectedTags.length === 0 ? tagIds : fields.selectedTags
+            }
             options={selectOptions}
             onChange={this.handleDropdownChange}
           ></Dropdown>
-          <br />
-          <Form.Button className="create-post-btn">Create Post</Form.Button>
         </Form>
-      </Container>
+      </div>
     );
   }
 }
 
-export default PostNew;
+export default EditMyPostForm;

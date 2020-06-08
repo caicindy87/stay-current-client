@@ -22,7 +22,6 @@ class App extends Component {
     this.fetchTags();
   }
 
-  // checkLoginStatus when reload page so user doesn't have to keep signing in
   checkLoginStatus = () => {
     const token = localStorage.getItem("token");
 
@@ -95,7 +94,7 @@ class App extends Component {
         </Switch>
         <main>
           <PostsContainer currentUser={currentUser} tags={tags} />
-          <MyPostsContainer currentUser={currentUser} />
+          <MyPostsContainer currentUser={currentUser} tags={tags} />
         </main>
       </div>
     );

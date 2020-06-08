@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 
-import postApi from "../../services/postApi";
+import myPostApi from "../../services/myPostApi";
 import MyPostsList from "../../components/myPosts/MyPostsList";
 import "../../style/MyPostsContainer.scss";
 
@@ -26,8 +26,22 @@ class MyPostsContainer extends Component {
       .then((posts) => this.setState({ myPosts: posts }));
   };
 
+  handleEditPostSubmit = (e, inputs) => {
+    const { currentUser, history } = this.props;
+
+    e.preventDefault();
+
+    postApi.createNewPost(inputs, currentUser).then((post) =>
+      this.setState((prevState) => ({
+        posts: [...prevState.posts, post],
+      }))
+    );
+
+    history.push("/");
+  };
+
   render() {
-    const { currentUser } = this.props;
+    const { currentUser, tags } = this.props;
     const { myPosts } = this.state;
 
     return (
@@ -36,7 +50,13 @@ class MyPostsContainer extends Component {
           <Route
             path="/myposts"
             render={() => {
-              return <MyPostsList posts={myPosts} currentUser={currentUser} />;
+              return (
+                <MyPostsList
+                  posts={myPosts}
+                  currentUser={currentUser}
+                  tags={tags}
+                />
+              );
             }}
           ></Route>
         </Switch>

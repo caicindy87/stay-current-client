@@ -1,21 +1,20 @@
 import React, { Component } from "react";
-import {
-  Item,
-  Image,
-  Dropdown,
-  Modal,
-  Form,
-  Button,
-  Label,
-} from "semantic-ui-react";
+import { Item, Image, Dropdown, Modal, Button, Label } from "semantic-ui-react";
+import EditMyPostForm from "./EditMyPostForm";
 
 class MyPost extends Component {
   handleSubmit = () => {
     console.log("submitted");
   };
   render() {
-    const { post } = this.props;
+    const { post, tags } = this.props;
     const { post_info } = this.props.post;
+    const selectOptions = this.props.tags.map((tag) => ({
+      key: tag.id,
+      text: tag.name,
+      value: tag.id,
+    }));
+    const tagIds = post_info.tags.map((tag) => tag.id);
 
     return (
       <div className="my-post">
@@ -33,7 +32,7 @@ class MyPost extends Component {
                   >
                     <Modal.Header content="Edit post"></Modal.Header>
                     <Modal.Content>
-                      <Form onSubmit={this.handleSubmit}>
+                      {/* <Form onSubmit={this.handleSubmit}>
                         <Form.TextArea>{post_info.text}</Form.TextArea>
                         <Form.Input>
                           {post_info.image ? post_info.image : null}
@@ -44,11 +43,12 @@ class MyPost extends Component {
                           multiple
                           search
                           selection
-                          value={post_info.tags}
-                          // options={selectOptions}
+                          defaultValue={tagIds}
+                          options={selectOptions}
                           onChange={this.handleDropdownChange}
                         ></Dropdown>
-                      </Form>
+                      </Form> */}
+                      <EditMyPostForm post_info={post_info} tags={tags} />
                     </Modal.Content>
                     <Modal.Actions>
                       <Button>Save</Button>
@@ -72,12 +72,7 @@ class MyPost extends Component {
                 <Label.Group>
                   {post_info.tags
                     ? post_info.tags.map((tag) => (
-                        <Label
-                          key={tag.id}
-                          as="button"
-                          size="tiny"
-                          color="yellow"
-                        >
+                        <Label key={tag.id} size="tiny" color="yellow">
                           {tag.name}
                         </Label>
                       ))

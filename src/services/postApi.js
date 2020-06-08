@@ -68,14 +68,6 @@ const decreaseDownvote = (post, user) => {
   }).then((resp) => resp.json());
 };
 
-const getMyPosts = (user) => {
-  // debugger;
-  return fetch(`${API_ROOT}/users/${user.id}/posts`, {
-    method: "GET",
-    headers: headers,
-  }).then((resp) => resp.json());
-};
-
 export default {
   getPosts: getPosts,
   createNewPost: createNewPost,
@@ -83,5 +75,4 @@ export default {
   decreaseUpvote: decreaseUpvote,
   increaseDownvote: increaseDownvote,
   decreaseDownvote: decreaseDownvote,
-  getMyPosts: getMyPosts,
 };

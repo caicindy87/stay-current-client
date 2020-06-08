@@ -6,6 +6,7 @@ import Login from "./auth/Login";
 import Signup from "./auth/Signup";
 import About from "./About";
 import authApi from "../services/authApi";
+import tagApi from "../services/tagApi";
 import NavBar from "./NavBar";
 import PostsContainer from "./post/PostsContainer";
 import MyPostsContainer from "../components/myPosts/MyPostsContainer";
@@ -13,10 +14,12 @@ import MyPostsContainer from "../components/myPosts/MyPostsContainer";
 class App extends Component {
   state = {
     currentUser: {},
+    tags: [],
   };
 
   componentDidMount() {
     this.checkLoginStatus();
+    this.fetchTags();
   }
 
   // checkLoginStatus when reload page so user doesn't have to keep signing in
@@ -34,6 +37,13 @@ class App extends Component {
         }
       });
     }
+  };
+
+  fetchTags = () => {
+    tagApi
+      .getTags()
+      .then((tags) => this.setState({ tags: tags }))
+      .catch((err) => console.log(err));
   };
 
   handleLogin = (user) => {
@@ -61,7 +71,7 @@ class App extends Component {
   };
 
   render() {
-    const { currentUser } = this.state;
+    const { currentUser, tags } = this.state;
 
     return (
       <div className="app">
@@ -84,7 +94,7 @@ class App extends Component {
           <Route exact path="/" component={About}></Route>
         </Switch>
         <main>
-          <PostsContainer currentUser={currentUser} />
+          <PostsContainer currentUser={currentUser} tags={tags} />
           <MyPostsContainer currentUser={currentUser} />
         </main>
       </div>

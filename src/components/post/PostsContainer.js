@@ -10,25 +10,16 @@ import "../../style/PostsContainer.scss";
 class PostsContainer extends Component {
   state = {
     posts: [],
-    tags: [],
   };
 
   componentDidMount() {
     this.fetchPosts();
-    this.fetchTags();
   }
 
   fetchPosts = () => {
     postApi
       .getPosts()
       .then((posts) => this.setState({ posts: posts }))
-      .catch((err) => console.log(err));
-  };
-
-  fetchTags = () => {
-    tagApi
-      .getTags()
-      .then((tags) => this.setState({ tags: tags }))
       .catch((err) => console.log(err));
   };
 
@@ -91,8 +82,8 @@ class PostsContainer extends Component {
   };
 
   render() {
-    const { currentUser } = this.props;
-    const { tags, posts } = this.state;
+    const { currentUser, tags } = this.props;
+    const { posts } = this.state;
 
     return (
       <div className="posts-container">

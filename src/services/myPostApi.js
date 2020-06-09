@@ -28,8 +28,8 @@ const editMyPost = (inputs, user, postId) => {
 };
 
 const deleteMyPost = (user, postId) => {
-  // console.log("user", user);
-  // console.log("post id", postId);
+  console.log("user", user);
+  console.log("post id in fetch", postId);
   return fetch(`${API_ROOT}/users/${user.id}/posts/${postId}`, {
     method: "DELETE",
     headers: headers,

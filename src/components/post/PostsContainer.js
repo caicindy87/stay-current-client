@@ -28,12 +28,14 @@ class PostsContainer extends Component {
 
     e.preventDefault();
 
-    postApi.createNewPost(inputs, currentUser).then((post) =>
+    postApi.createNewPost(inputs, currentUser).then((post) => {
       this.setState((prevState) => ({
         posts: [...prevState.posts, post],
-      }))
-    );
+      }));
+      this.props.updateMyPostsOnNewPostSubmit(post);
+    });
 
+    this.props.fetchMyPosts();
     history.push("/");
   };
 

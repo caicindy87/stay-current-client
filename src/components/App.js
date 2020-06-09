@@ -90,7 +90,9 @@ class App extends Component {
               );
             }}
           ></Route>
-          <Route exact path="/" component={About}></Route>
+          {!!currentUser.id ? null : (
+            <Route exact path="/" component={About}></Route>
+          )}
         </Switch>
         <main>
           <PostsContainer currentUser={currentUser} tags={tags} />

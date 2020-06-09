@@ -58,7 +58,7 @@ class PostsList extends Component {
                 <Label
                   key={tag.id}
                   as="button"
-                  color="yellow"
+                  basic
                   onClick={this.handleFilterBySelectedTag}
                 >
                   {tag.name}

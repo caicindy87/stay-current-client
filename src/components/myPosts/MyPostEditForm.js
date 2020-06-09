@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form, Dropdown } from "semantic-ui-react";
 
-class EditMyPostForm extends Component {
+class MyPostEditForm extends Component {
   state = {
     fields: {
       text: "",
@@ -42,16 +42,22 @@ class EditMyPostForm extends Component {
 
   render() {
     const { fields } = this.state;
-    const selectOptions = this.props.tags.map((tag) => ({
+    const { handleEditPostSubmit, post_info, tags, handleClose } = this.props;
+    const selectOptions = tags.map((tag) => ({
       key: tag.id,
       text: tag.name,
       value: tag.id,
     }));
-    const tagIds = this.props.post_info.tags.map((tag) => tag.id);
+    const tagIds = post_info.tags.map((tag) => tag.id);
 
     return (
       <div className="edit-my-post-form">
-        <Form onSubmit={this.handleSubmit}>
+        <Form
+          onSubmit={(e) => {
+            handleEditPostSubmit(e, fields, post_info.id);
+            handleClose();
+          }}
+        >
           <Form.TextArea
             type="textarea"
             name="text"
@@ -79,10 +85,12 @@ class EditMyPostForm extends Component {
             options={selectOptions}
             onChange={this.handleDropdownChange}
           ></Dropdown>
+          <br />
+          <Form.Button className="save-edit-post-btn">Save changes</Form.Button>
         </Form>
       </div>
     );
   }
 }
 
-export default EditMyPostForm;
+export default MyPostEditForm;

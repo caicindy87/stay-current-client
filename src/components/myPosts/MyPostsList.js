@@ -4,12 +4,18 @@ import MyPost from "./MyPost";
 
 class MyPostsList extends Component {
   render() {
-    const { posts, tags } = this.props;
+    const { posts, tags, handleEditPostSubmit, handleDeletePost } = this.props;
 
     return (
       <div className="my-posts-list">
         {posts.map((post) => (
-          <MyPost post={post} tags={tags} />
+          <MyPost
+            key={post.post_info.id}
+            post={post}
+            tags={tags}
+            handleEditPostSubmit={handleEditPostSubmit}
+            handleDeletePost={handleDeletePost}
+          />
         ))}
       </div>
     );

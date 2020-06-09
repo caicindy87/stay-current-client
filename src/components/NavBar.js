@@ -15,10 +15,10 @@ class NavBar extends Component {
             <Link to={`/${currentUser.username}/posts/new`}>New Post</Link>
             <Link to="/myposts">My Posts</Link>
             <Link
-              to="/logout"
+              to="/"
               onClick={() => {
-                history.push("/");
                 handleLogOut();
+                // history.push("/");
               }}
             >
               Log Out

@@ -1,20 +1,29 @@
 import React, { Component } from "react";
 import { Item, Image, Dropdown, Modal, Button, Label } from "semantic-ui-react";
-import EditMyPostForm from "./EditMyPostForm";
+import MyPostEditForm from "./MyPostEditForm";
 
 class MyPost extends Component {
-  handleSubmit = () => {
-    console.log("submitted");
+  state = {
+    modalOpen: false,
   };
+
+  handleOpen = () => {
+    this.setState({ modalOpen: true });
+  };
+
+  handleClose = () => {
+    this.setState({ modalOpen: false });
+  };
+
   render() {
-    const { post, tags } = this.props;
+    const { post, tags, handleEditPostSubmit, handleDeletePost } = this.props;
     const { post_info } = this.props.post;
-    const selectOptions = this.props.tags.map((tag) => ({
-      key: tag.id,
-      text: tag.name,
-      value: tag.id,
-    }));
-    const tagIds = post_info.tags.map((tag) => tag.id);
+    // const selectOptions = this.props.tags.map((tag) => ({
+    //   key: tag.id,
+    //   text: tag.name,
+    //   value: tag.id,
+    // }));
+    // const tagIds = post_info.tags.map((tag) => tag.id);
 
     return (
       <div className="my-post">
@@ -28,34 +37,33 @@ class MyPost extends Component {
               <Dropdown className="options-button" icon="ellipsis horizontal">
                 <Dropdown.Menu>
                   <Modal
-                    trigger={<Dropdown.Item icon="edit" text="Edit post" />}
+                    trigger={
+                      <Dropdown.Item
+                        icon="edit"
+                        text="Edit post"
+                        onClick={this.handleOpen}
+                      />
+                    }
+                    onClose={this.handleClose}
+                    open={this.state.modalOpen}
+                    closeIcon
                   >
                     <Modal.Header content="Edit post"></Modal.Header>
                     <Modal.Content>
-                      {/* <Form onSubmit={this.handleSubmit}>
-                        <Form.TextArea>{post_info.text}</Form.TextArea>
-                        <Form.Input>
-                          {post_info.image ? post_info.image : null}
-                        </Form.Input>
-                        <Dropdown
-                          placeholder="Add tags"
-                          fluid
-                          multiple
-                          search
-                          selection
-                          defaultValue={tagIds}
-                          options={selectOptions}
-                          onChange={this.handleDropdownChange}
-                        ></Dropdown>
-                      </Form> */}
-                      <EditMyPostForm post_info={post_info} tags={tags} />
+                      <MyPostEditForm
+                        post_info={post_info}
+                        tags={tags}
+                        handleEditPostSubmit={handleEditPostSubmit}
+                        handleClose={this.handleClose}
+                      />
                     </Modal.Content>
-                    <Modal.Actions>
-                      <Button>Save</Button>
-                    </Modal.Actions>
                   </Modal>
 
-                  <Dropdown.Item icon="trash" text="Delete post" />
+                  <Dropdown.Item
+                    icon="trash"
+                    text="Delete post"
+                    onClick={() => handleDeletePost(post_info.id)}
+                  />
                 </Dropdown.Menu>
               </Dropdown>
               <p className="upvote-count">Upvotes: {post_info.downvotes}</p>
@@ -72,7 +80,7 @@ class MyPost extends Component {
                 <Label.Group>
                   {post_info.tags
                     ? post_info.tags.map((tag) => (
-                        <Label key={tag.id} size="tiny" color="yellow">
+                        <Label key={tag.id} size="tiny" basic>
                           {tag.name}
                         </Label>
                       ))

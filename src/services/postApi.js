@@ -22,7 +22,7 @@ const createNewPost = ({ text, image, selectedTags }, user) => {
     body: JSON.stringify({
       text: text,
       image: image,
-      selected_tags: selectedTags,
+      selected_tags_id: selectedTags,
       user_id: user.id,
     }),
   }).then((resp) => resp.json());

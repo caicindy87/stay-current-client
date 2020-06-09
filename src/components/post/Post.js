@@ -79,6 +79,13 @@ export default class Post extends Component {
               </div>
               <Item.Header>{post_info.user.username}</Item.Header>
               <Item.Meta>Published {post.publish_date} ago</Item.Meta>
+
+              <Item.Description>
+                {post_info.text}
+                {post_info.image ? (
+                  <Image src={post_info.image} size="small" />
+                ) : null}
+              </Item.Description>
               <Item.Extra>
                 <Label.Group>
                   {post_info.tags
@@ -87,7 +94,7 @@ export default class Post extends Component {
                           key={tag.id}
                           as="button"
                           size="tiny"
-                          color="yellow"
+                          basic
                           onClick={handleFilterBySelectedTag}
                         >
                           {tag.name}
@@ -96,12 +103,6 @@ export default class Post extends Component {
                     : null}
                 </Label.Group>
               </Item.Extra>
-              <Item.Description>
-                {post_info.text}
-                {post_info.image ? (
-                  <Image src={post_info.image} size="small" />
-                ) : null}
-              </Item.Description>
             </Item.Content>
           </Item>
         </Item.Group>

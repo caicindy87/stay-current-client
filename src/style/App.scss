@@ -1,13 +1,14 @@
 nav {
-  background-color: #a4b0be;
+  background-color: white;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-around;
 
   a {
-    color: white;
+    color: #16324f;
     font-size: 1.5rem;
+    font-weight: bold;
   }
 }
 
@@ -19,4 +20,9 @@ main {
 
 .filter-bar {
   padding: 20px;
+}
+
+.about {
+  background-color: #16324f;
+  color: white;
 }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 
 import myPostApi from "../../services/myPostApi";
 import MyPostsList from "../../components/myPosts/MyPostsList";
@@ -21,23 +21,30 @@ class MyPostsContainer extends Component {
   fetchMyPosts = () => {
     const { currentUser } = this.props;
 
-    postApi
+    myPostApi
       .getMyPosts(currentUser)
       .then((posts) => this.setState({ myPosts: posts }));
   };
 
-  handleEditPostSubmit = (e, inputs) => {
+  handleEditPostSubmit = (e, inputs, postId) => {
     const { currentUser, history } = this.props;
 
     e.preventDefault();
 
-    postApi.createNewPost(inputs, currentUser).then((post) =>
+    myPostApi.editMyPost(inputs, currentUser, postId).then((updatedPost) => {
       this.setState((prevState) => ({
-        posts: [...prevState.posts, post],
-      }))
-    );
+        myPosts: prevState.myPosts.map((post) =>
+          post.post_info.id === updatedPost.post_info.id ? updatedPost : post
+        ),
+      }));
+      history.push("/myposts");
+    });
+  };
 
-    history.push("/");
+  handleDeletePost = (postId) => {
+    const { currentUser, history } = this.props;
+    myPostApi.deleteMyPost(currentUser, postId);
+    history.push("/myposts");
   };
 
   render() {
@@ -55,6 +62,8 @@ class MyPostsContainer extends Component {
                   posts={myPosts}
                   currentUser={currentUser}
                   tags={tags}
+                  handleEditPostSubmit={this.handleEditPostSubmit}
+                  handleDeletePost={this.handleDeletePost}
                 />
               );
             }}
@@ -65,4 +74,4 @@ class MyPostsContainer extends Component {
   }
 }
 
-export default MyPostsContainer;
+export default withRouter(MyPostsContainer);

@@ -15,6 +15,29 @@ const getMyPosts = (user) => {
   }).then((resp) => resp.json());
 };
 
+const editMyPost = (inputs, user, postId) => {
+  return fetch(`${API_ROOT}/users/${user.id}/posts/${postId}`, {
+    method: "PATCH",
+    headers: headers,
+    body: JSON.stringify({
+      text: inputs.text,
+      image: inputs.image,
+      selected_tags_id: inputs.selectedTags,
+    }),
+  }).then((resp) => resp.json());
+};
+
+const deleteMyPost = (user, postId) => {
+  // console.log("user", user);
+  // console.log("post id", postId);
+  return fetch(`${API_ROOT}/users/${user.id}/posts/${postId}`, {
+    method: "DELETE",
+    headers: headers,
+  });
+};
+
 export default {
   getMyPosts: getMyPosts,
+  editMyPost: editMyPost,
+  deleteMyPost: deleteMyPost,
 };

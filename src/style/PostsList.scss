@@ -1,0 +1,21 @@
+.posts-list {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  height: calc(100vh - 60px);
+  position: absolute;
+  left: 100px;
+  right: 100px;
+}
+
+.tags-container {
+  background-color: #a4b0be;
+  padding: 20px;
+  height: 60vh;
+  border: solid 1px #b2bec3;
+  border-radius: 15px;
+}
+
+// .ui.button {
+//   background-color: white;
+//   color: #16324f;
+// }

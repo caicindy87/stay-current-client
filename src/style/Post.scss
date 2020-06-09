@@ -1,0 +1,31 @@
+.post {
+  border: solid 1px #b2bec3;
+  border-radius: 25px;
+  box-shadow: 5px 5px #747d8c;
+  margin: 40px;
+  padding: 15px;
+}
+
+.label {
+  padding-right: 15px;
+}
+
+.upvote-btn-container {
+  display: inline-flex;
+  float: right;
+  padding: 10px;
+
+  p {
+    padding-left: 4px;
+  }
+}
+
+.downvote-btn-container {
+  display: inline-flex;
+  float: right;
+  padding: 10px;
+
+  p {
+    padding-left: 4px;
+  }
+}

@@ -1,24 +1,27 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 
-import "../style/App.css";
+import "../style/App.scss";
 import Login from "./auth/Login";
 import Signup from "./auth/Signup";
 import About from "./About";
 import authApi from "../services/authApi";
+import tagApi from "../services/tagApi";
 import NavBar from "./NavBar";
 import PostsContainer from "./post/PostsContainer";
+import MyPostsContainer from "../components/myPosts/MyPostsContainer";
 
 class App extends Component {
   state = {
     currentUser: {},
+    tags: [],
   };
 
   componentDidMount() {
     this.checkLoginStatus();
+    this.fetchTags();
   }
 
-  // checkLoginStatus when reload page so user doesn't have to keep signing in
   checkLoginStatus = () => {
     const token = localStorage.getItem("token");
 
@@ -33,6 +36,13 @@ class App extends Component {
         }
       });
     }
+  };
+
+  fetchTags = () => {
+    tagApi
+      .getTags()
+      .then((tags) => this.setState({ tags: tags }))
+      .catch((err) => console.log(err));
   };
 
   handleLogin = (user) => {
@@ -60,10 +70,10 @@ class App extends Component {
   };
 
   render() {
-    const { currentUser } = this.state;
+    const { currentUser, tags } = this.state;
 
     return (
-      <div>
+      <div className="app">
         <NavBar handleLogOut={this.handleLogOut} currentUser={currentUser} />
         <Switch>
           <Route
@@ -80,9 +90,14 @@ class App extends Component {
               );
             }}
           ></Route>
-          <Route exact path="/" component={About}></Route>
+          {!!currentUser.id ? null : (
+            <Route exact path="/" component={About}></Route>
+          )}
         </Switch>
-        <PostsContainer currentUser={currentUser} />
+        <main>
+          <PostsContainer currentUser={currentUser} tags={tags} />
+          <MyPostsContainer currentUser={currentUser} tags={tags} />
+        </main>
       </div>
     );
   }

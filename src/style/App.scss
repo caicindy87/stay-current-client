@@ -1,0 +1,28 @@
+nav {
+  background-color: white;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  a {
+    color: #16324f;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+}
+
+main {
+  // display: grid;
+  // grid-template-columns: 4fr 1fr;
+  height: calc(100vh - 60px);
+}
+
+.filter-bar {
+  padding: 20px;
+}
+
+.about {
+  background-color: #16324f;
+  color: white;
+}

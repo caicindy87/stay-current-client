@@ -43,7 +43,16 @@ class MyPostsContainer extends Component {
 
   handleDeletePost = (postId) => {
     const { currentUser, history } = this.props;
-    myPostApi.deleteMyPost(currentUser, postId);
+    myPostApi.deleteMyPost(currentUser, postId).then((data) => {
+      this.setState((prevState) => ({
+        myPosts: prevState.myPosts.filter(
+          (myPost) => myPost.post_info.id !== postId
+        ),
+      }));
+      if (data.ok) {
+        alert("Successfully deleted");
+      }
+    });
     history.push("/myposts");
   };
 

@@ -37,7 +37,6 @@ class MyPostsContainer extends Component {
           post.post_info.id === updatedPost.post_info.id ? updatedPost : post
         ),
       }));
-      history.push("/myposts");
     });
   };
 
@@ -53,7 +52,6 @@ class MyPostsContainer extends Component {
         alert("Successfully deleted");
       }
     });
-    history.push("/myposts");
   };
 
   render() {

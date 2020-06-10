@@ -1,21 +1,10 @@
 import React, { Component } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 
-import myPostApi from "../../services/myPostApi";
 import MyPostsList from "../../components/myPosts/MyPostsList";
 import "../../style/MyPostsContainer.scss";
 
 class MyPostsContainer extends Component {
-  // state = {};
-
-  // fetchMyPosts = () => {
-  //   const { currentUser } = this.props;
-
-  //   myPostApi
-  //     .getMyPosts(currentUser)
-  //     .then((posts) => this.setState({ myPosts: posts }));
-  // };
-
   render() {
     const {
       currentUser,
@@ -24,7 +13,6 @@ class MyPostsContainer extends Component {
       handleEditPostSubmit,
       handleDeletePost,
     } = this.props;
-    // const { myPosts } = this.state;
 
     return (
       <div className="my-posts-container">

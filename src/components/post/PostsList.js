@@ -34,11 +34,15 @@ class PostsList extends Component {
       posts = this.state.filteredPosts;
     }
 
+    const sortedPostsFromMostToLeastUpvotes = posts.sort(
+      (a, b) => b.post_info.upvotes - a.post_info.upvotes
+    );
+
     return (
       <div className="container">
         {/* <PostNew /> move the post form to posts instead of having a separate page */}
         <Item.Group className="posts-list">
-          {posts.map((post) => {
+          {sortedPostsFromMostToLeastUpvotes.map((post) => {
             return (
               <Post
                 key={post.post_info.id}

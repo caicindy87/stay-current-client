@@ -104,8 +104,8 @@ class MyPost extends Component {
                     : null}
                 </Label.Group>
               </Item.Extra>
-              <p className="upvote-count">Upvotes: {post_info.downvotes}</p>
-              <p className="downvote-count">Downvotes: {post_info.upvotes}</p>
+              {/* <p className="upvote-count">Upvotes: {post_info.downvotes}</p>
+              <p className="downvote-count">Downvotes: {post_info.upvotes}</p> */}
             </Item.Content>
           </Item>
         </Item.Group>

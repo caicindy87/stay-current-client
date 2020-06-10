@@ -10,6 +10,19 @@
   box-shadow: 3px 3px 5px #4e545c;
   margin-bottom: 20px;
   padding: 30px;
+
+  .ui.items > .item > .content > .header:not(.ui) {
+    font-size: 20px;
+  }
+
+  .ui.items > .item > .content > .description {
+    font-size: 20px;
+  }
+
+  i.icon,
+  i.icons {
+    font-size: 20px;
+  }
 }
 
 .options-button {

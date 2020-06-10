@@ -1,29 +1,40 @@
 import React, { Component } from "react";
-import { Item, Image, Dropdown, Modal, Button, Label } from "semantic-ui-react";
+import {
+  Item,
+  Image,
+  Dropdown,
+  Modal,
+  Confirm,
+  Label,
+} from "semantic-ui-react";
 import MyPostEditForm from "./MyPostEditForm";
 
 class MyPost extends Component {
   state = {
     modalOpen: false,
+    confirmOpen: false,
   };
 
-  handleOpen = () => {
-    this.setState({ modalOpen: true });
+  handleOpen = () => this.setState({ modalOpen: true });
+
+  handleClose = () => this.setState({ modalOpen: false });
+
+  showConfirm = () => this.setState({ confirmOpen: true });
+
+  handleConfirm = () => {
+    const { handleDeletePost } = this.props;
+    const { post_info } = this.props.post;
+
+    handleDeletePost(post_info.id);
+    this.setState({ confirmOpen: false });
   };
 
-  handleClose = () => {
-    this.setState({ modalOpen: false });
-  };
+  handleCancel = () => this.setState({ confirmOpen: false });
 
   render() {
     const { post, tags, handleEditPostSubmit, handleDeletePost } = this.props;
     const { post_info } = this.props.post;
-    // const selectOptions = this.props.tags.map((tag) => ({
-    //   key: tag.id,
-    //   text: tag.name,
-    //   value: tag.id,
-    // }));
-    // const tagIds = post_info.tags.map((tag) => tag.id);
+    const { modalOpen, confirmOpen } = this.state;
 
     return (
       <div className="my-post">
@@ -58,11 +69,18 @@ class MyPost extends Component {
                       />
                     </Modal.Content>
                   </Modal>
-
                   <Dropdown.Item
                     icon="trash"
                     text="Delete post"
-                    onClick={() => handleDeletePost(post_info.id)}
+                    onClick={this.showConfirm}
+                  />
+                  <Confirm
+                    open={confirmOpen}
+                    content="Delete post?"
+                    cancelButton="Cancel"
+                    confirmButton="Delete"
+                    onCancel={this.handleCancel}
+                    onConfirm={this.handleConfirm}
                   />
                 </Dropdown.Menu>
               </Dropdown>

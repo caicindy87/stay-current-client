@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 
 import postApi from "../../services/postApi";
-import tagApi from "../../services/tagApi";
 import PostNew from "./PostNew";
 import PostsList from "./PostsList";
 import "../../style/PostsContainer.scss";
@@ -28,12 +27,14 @@ class PostsContainer extends Component {
 
     e.preventDefault();
 
-    postApi.createNewPost(inputs, currentUser).then((post) =>
+    postApi.createNewPost(inputs, currentUser).then((post) => {
       this.setState((prevState) => ({
         posts: [...prevState.posts, post],
-      }))
-    );
+      }));
+      this.props.updateMyPostsOnNewPostSubmit(post);
+    });
 
+    this.props.fetchMyPosts();
     history.push("/");
   };
 

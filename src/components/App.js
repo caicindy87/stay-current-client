@@ -5,16 +5,18 @@ import "../style/App.scss";
 import Login from "./auth/Login";
 import Signup from "./auth/Signup";
 import About from "./About";
-import authApi from "../services/authApi";
-import tagApi from "../services/tagApi";
 import NavBar from "./NavBar";
 import PostsContainer from "./post/PostsContainer";
 import MyPostsContainer from "../components/myPosts/MyPostsContainer";
+import authApi from "../services/authApi";
+import tagApi from "../services/tagApi";
+import myPostApi from "../services/myPostApi";
 
 class App extends Component {
   state = {
     currentUser: {},
     tags: [],
+    myPosts: [],
   };
 
   componentDidMount() {
@@ -30,19 +32,15 @@ class App extends Component {
         if (currentUser.error) {
           console.log(currentUser.error);
         } else {
-          this.setState({
-            currentUser: currentUser,
-          });
+          this.setState(
+            {
+              currentUser: currentUser,
+            },
+            this.fetchMyPosts
+          );
         }
       });
     }
-  };
-
-  fetchTags = () => {
-    tagApi
-      .getTags()
-      .then((tags) => this.setState({ tags: tags }))
-      .catch((err) => console.log(err));
   };
 
   handleLogin = (user) => {
@@ -69,8 +67,58 @@ class App extends Component {
     });
   };
 
+  fetchTags = () => {
+    tagApi
+      .getTags()
+      .then((tags) => this.setState({ tags: tags }))
+      .catch((err) => console.log(err));
+  };
+
+  fetchMyPosts = () => {
+    const { currentUser } = this.state;
+
+    myPostApi
+      .getMyPosts(currentUser)
+      .then((posts) => this.setState({ myPosts: posts }));
+  };
+
+  updateMyPostsOnNewPostSubmit = (newPost) => {
+    this.setState({
+      myPosts: [...this.state.myPosts, newPost],
+    });
+  };
+
+  handleEditPostSubmit = (e, inputs, postId) => {
+    const { currentUser } = this.state;
+
+    e.preventDefault();
+
+    myPostApi.editMyPost(inputs, currentUser, postId).then((updatedPost) => {
+      this.setState((prevState) => ({
+        myPosts: prevState.myPosts.map((post) =>
+          post.post_info.id === updatedPost.post_info.id ? updatedPost : post
+        ),
+      }));
+    });
+  };
+
+  handleDeletePost = (postId) => {
+    const { currentUser } = this.state;
+
+    myPostApi.deleteMyPost(currentUser, postId).then((data) => {
+      this.setState((prevState) => ({
+        myPosts: prevState.myPosts.filter(
+          (myPost) => myPost.post_info.id !== postId
+        ),
+      }));
+      // if (data.ok) {
+      //   alert("Successfully deleted");
+      // }
+    });
+  };
+
   render() {
-    const { currentUser, tags } = this.state;
+    const { currentUser, tags, myPosts } = this.state;
 
     return (
       <div className="app">
@@ -95,8 +143,19 @@ class App extends Component {
           )}
         </Switch>
         <main>
-          <PostsContainer currentUser={currentUser} tags={tags} />
-          <MyPostsContainer currentUser={currentUser} tags={tags} />
+          <PostsContainer
+            currentUser={currentUser}
+            tags={tags}
+            fetchMyPosts={this.fetchMyPosts}
+            updateMyPostsOnNewPostSubmit={this.updateMyPostsOnNewPostSubmit}
+          />
+          <MyPostsContainer
+            currentUser={currentUser}
+            tags={tags}
+            myPosts={myPosts}
+            handleEditPostSubmit={this.handleEditPostSubmit}
+            handleDeletePost={this.handleDeletePost}
+          />
         </main>
       </div>
     );

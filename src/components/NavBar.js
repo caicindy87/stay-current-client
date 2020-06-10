@@ -3,13 +3,13 @@ import { Link, withRouter } from "react-router-dom";
 
 class NavBar extends Component {
   render() {
-    const { handleLogOut, history, currentUser } = this.props;
+    const { handleLogOut, currentUser } = this.props;
 
     return (
       <nav className="navbar">
-        <Link to="/" className="logo">
+        <a href="/" className="logo">
           Stay Current
-        </Link>
+        </a>
         {!!currentUser.id ? (
           <>
             <Link to={`/${currentUser.username}/posts/new`}>New Post</Link>

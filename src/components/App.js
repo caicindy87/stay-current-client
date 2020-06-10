@@ -89,7 +89,7 @@ class App extends Component {
   };
 
   handleEditPostSubmit = (e, inputs, postId) => {
-    const { currentUser } = this.props;
+    const { currentUser } = this.state;
 
     e.preventDefault();
 

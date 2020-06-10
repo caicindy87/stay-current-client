@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 
 import postApi from "../../services/postApi";
-import tagApi from "../../services/tagApi";
 import PostNew from "./PostNew";
 import PostsList from "./PostsList";
 import "../../style/PostsContainer.scss";

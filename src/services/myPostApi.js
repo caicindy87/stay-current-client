@@ -16,6 +16,8 @@ const getMyPosts = (user) => {
 };
 
 const editMyPost = (inputs, user, postId) => {
+  console.log("user", user);
+  console.log("post id in editMyPost", postId);
   return fetch(`${API_ROOT}/users/${user.id}/posts/${postId}`, {
     method: "PATCH",
     headers: headers,

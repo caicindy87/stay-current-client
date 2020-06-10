@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { Button } from "semantic-ui-react";
 
 import authApi from "../../services/authApi";
+import "../../style/Login.scss";
+import "../../fonts/Geomanist-Regular.otf";
 
 class Login extends Component {
   state = {
@@ -37,29 +40,36 @@ class Login extends Component {
     const { error, fields } = this.state;
 
     return (
-      <div>
-        <h1>Log In</h1>
-        {error ? <h3>Invalid username or password</h3> : null}
-        <form className="login-form" onSubmit={this.handleLoginSubmit}>
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={fields.username}
-            onChange={this.handleChange}
-          ></input>
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={fields.password}
-            onChange={this.handleChange}
-          ></input>
-          <button>Log In</button>
-        </form>
-        <p>
-          Don't have an account? <Link to="/signup">Sign Up</Link>
-        </p>
+      <div className="login-form-container">
+        <div></div>
+        <div className="login-form">
+          <h1>Log In</h1>
+          {error ? (
+            <h3 className="login-error-msg">Invalid username or password</h3>
+          ) : null}
+          <form onSubmit={this.handleLoginSubmit}>
+            <input
+              className="username"
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={fields.username}
+              onChange={this.handleChange}
+            ></input>
+            <input
+              className="password"
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={fields.password}
+              onChange={this.handleChange}
+            ></input>
+            <Button fluid>Log In</Button>
+          </form>
+          <p className="signup-link">
+            Need an account? <Link to="/signup">Sign Up</Link>
+          </p>
+        </div>
       </div>
     );
   }

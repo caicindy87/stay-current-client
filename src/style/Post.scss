@@ -1,9 +1,17 @@
 .post {
   border: solid 1px #b2bec3;
   border-radius: 25px;
-  box-shadow: 5px 5px #747d8c;
-  margin: 40px;
-  padding: 15px;
+  box-shadow: 3px 3px 5px #4e545c;
+  padding: 30px;
+  margin-bottom: 20px;
+
+  .ui.items > .item > .content > .header:not(.ui) {
+    font-size: 20px;
+  }
+
+  .ui.items > .item > .content > .description {
+    font-size: 20px;
+  }
 }
 
 .label {
@@ -12,7 +20,7 @@
 
 .upvote-btn-container {
   display: inline-flex;
-  float: right;
+  // float: right;
   padding: 10px;
 
   p {
@@ -22,7 +30,7 @@
 
 .downvote-btn-container {
   display: inline-flex;
-  float: right;
+  // float: right;
   padding: 10px;
 
   p {

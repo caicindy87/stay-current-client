@@ -30,7 +30,7 @@ class MyPostsContainer extends Component {
       <div className="my-posts-container">
         <Switch>
           <Route
-            path="/myposts"
+            path="/mypage"
             render={() => {
               return (
                 <MyPostsList

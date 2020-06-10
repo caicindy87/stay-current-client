@@ -84,27 +84,28 @@ class MyPost extends Component {
                   />
                 </Dropdown.Menu>
               </Dropdown>
-              <p className="upvote-count">Upvotes: {post_info.downvotes}</p>
-              <p className="downvote-count">Downvotes: {post_info.upvotes}</p>
+
               <Item.Header>{post_info.user.username}</Item.Header>
               <Item.Meta>Published {post.publish_date} ago</Item.Meta>
               <Item.Description>
                 {post_info.text}
                 {post_info.image ? (
-                  <Image src={post_info.image} size="small" />
+                  <Image src={post_info.image} size="large" />
                 ) : null}
               </Item.Description>
               <Item.Extra>
                 <Label.Group>
                   {post_info.tags
                     ? post_info.tags.map((tag) => (
-                        <Label key={tag.id} size="tiny" basic>
+                        <Label key={tag.id} size="big" basic>
                           {tag.name}
                         </Label>
                       ))
                     : null}
                 </Label.Group>
               </Item.Extra>
+              <p className="upvote-count">Upvotes: {post_info.downvotes}</p>
+              <p className="downvote-count">Downvotes: {post_info.upvotes}</p>
             </Item.Content>
           </Item>
         </Item.Group>

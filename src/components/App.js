@@ -123,26 +123,28 @@ class App extends Component {
     return (
       <div className="app">
         <NavBar handleLogOut={this.handleLogOut} currentUser={currentUser} />
-        <Switch>
-          <Route
-            path="/login"
-            render={(routerProps) => {
-              return <Login {...routerProps} handleLogin={this.handleLogin} />;
-            }}
-          ></Route>
-          <Route
-            path="/signup"
-            render={(routerProps) => {
-              return (
-                <Signup {...routerProps} handleSignup={this.handleSignup} />
-              );
-            }}
-          ></Route>
-          {!!currentUser.id ? null : (
-            <Route exact path="/" component={About}></Route>
-          )}
-        </Switch>
         <main>
+          <Switch>
+            <Route
+              path="/login"
+              render={(routerProps) => {
+                return (
+                  <Login {...routerProps} handleLogin={this.handleLogin} />
+                );
+              }}
+            ></Route>
+            <Route
+              path="/signup"
+              render={(routerProps) => {
+                return (
+                  <Signup {...routerProps} handleSignup={this.handleSignup} />
+                );
+              }}
+            ></Route>
+            {!!currentUser.id ? null : (
+              <Route exact path="/" component={About}></Route>
+            )}
+          </Switch>
           <PostsContainer
             currentUser={currentUser}
             tags={tags}

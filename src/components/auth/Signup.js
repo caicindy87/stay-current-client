@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { Button } from "semantic-ui-react";
 
 import authApi from "../../services/authApi";
+import "../../style/Signup.scss";
 
 class Signup extends Component {
   state = {
@@ -28,7 +30,7 @@ class Signup extends Component {
 
     authApi.auth.signup(this.state.fields).then((user) => {
       if (user.error) {
-        console.log(user.error);
+        this.setState({ error: true });
       } else {
         handleSignup(user);
         history.push("/");
@@ -40,40 +42,47 @@ class Signup extends Component {
     const { fields, error } = this.state;
 
     return (
-      <div>
-        <h1>Create an Account</h1>
-        {error ? <h3>Try Again</h3> : null}
-        <form className="signup-form" onSubmit={this.handleSignupSubmit}>
-          <input
-            type="text"
-            name="email"
-            placeholder="Email address"
-            value={fields.email}
-            onChange={this.handleChange}
-          ></input>
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={fields.username}
-            onChange={this.handleChange}
-          ></input>
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={fields.password}
-            onChange={this.handleChange}
-          ></input>
-          <input
-            type="password"
-            name="passwordConfirm"
-            placeholder="Confirm Password"
-            value={fields.passwordConfirm}
-            onChange={this.handleChange}
-          ></input>
-          <button>Create Account</button>
-        </form>
+      <div className="signup-form-container">
+        <div></div>
+        <div className="signup-form">
+          <h1>Create an Account</h1>
+          {error ? <h3 className="signup-error-msg">Try Again</h3> : null}
+          <form onSubmit={this.handleSignupSubmit}>
+            <input
+              className="username"
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={fields.username}
+              onChange={this.handleChange}
+            ></input>
+            <input
+              className="email"
+              type="text"
+              name="email"
+              placeholder="Email address"
+              value={fields.email}
+              onChange={this.handleChange}
+            ></input>
+            <input
+              className="password"
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={fields.password}
+              onChange={this.handleChange}
+            ></input>
+            <input
+              className="password-confirm"
+              type="password"
+              name="passwordConfirm"
+              placeholder="Confirm Password"
+              value={fields.passwordConfirm}
+              onChange={this.handleChange}
+            ></input>
+            <Button fluid>Create Account</Button>
+          </form>
+        </div>
       </div>
     );
   }

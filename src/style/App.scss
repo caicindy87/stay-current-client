@@ -1,20 +1,30 @@
-nav {
+.navbar {
   background-color: white;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+  height: 70px;
 
-  a {
+  .logo {
+    font-size: 48px;
+    font-family: Geomanist-Bold;
     color: #16324f;
-    font-size: 1.5rem;
-    font-weight: bold;
+    float: left;
+    text-align: center;
+    padding: 25px 15px;
+  }
+
+  .navbar-right {
+    a {
+      color: #16324f;
+      font-family: Geomanist;
+      font-size: 20px;
+      text-decoration: underline;
+      float: right;
+      text-align: center;
+      padding: 25px 10px;
+    }
   }
 }
 
 main {
-  // display: grid;
-  // grid-template-columns: 4fr 1fr;
   height: calc(100vh - 60px);
 }
 
@@ -25,4 +35,10 @@ main {
 .about {
   background-color: #16324f;
   color: white;
+}
+
+.ui.basic.label {
+  font-family: Geomanist;
+  color: #16324f;
+  border: 1px solid #16324f;
 }

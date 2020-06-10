@@ -35,9 +35,9 @@ class PostsList extends Component {
     }
 
     return (
-      <div className="posts-list">
+      <div className="container">
         {/* <PostNew /> move the post form to posts instead of having a separate page */}
-        <Item.Group>
+        <Item.Group className="posts-list">
           {posts.map((post) => {
             return (
               <Post
@@ -52,7 +52,7 @@ class PostsList extends Component {
           })}
         </Item.Group>
         <div className="tags-container">
-          <Label.Group size="large">
+          <Label.Group size="big">
             {tags.map((tag) => {
               return (
                 <Label

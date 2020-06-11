@@ -11,6 +11,7 @@ import MyPostsContainer from "../components/myPosts/MyPostsContainer";
 import authApi from "../services/authApi";
 import tagApi from "../services/tagApi";
 import myPostApi from "../services/myPostApi";
+import ArticlesContainer from "./articles/ArticlesContainer";
 
 class App extends Component {
   state = {
@@ -141,9 +142,9 @@ class App extends Component {
                 );
               }}
             ></Route>
-            {!!currentUser.id ? null : (
+            {/* {!!currentUser.id ? null : (
               <Route exact path="/" component={About}></Route>
-            )}
+            )} */}
           </Switch>
           <PostsContainer
             currentUser={currentUser}
@@ -158,6 +159,7 @@ class App extends Component {
             handleEditPostSubmit={this.handleEditPostSubmit}
             handleDeletePost={this.handleDeletePost}
           />
+          <ArticlesContainer />
         </main>
       </div>
     );

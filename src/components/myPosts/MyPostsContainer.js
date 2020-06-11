@@ -18,6 +18,7 @@ class MyPostsContainer extends Component {
       <div className="my-posts-container">
         <Switch>
           <Route
+            exact
             path="/mypage"
             render={() => {
               return (

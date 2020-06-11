@@ -53,30 +53,6 @@ export default class Post extends Component {
               src="https://cdn2.iconfinder.com/data/icons/people-80/96/Picture1-512.png"
             />
             <Item.Content>
-              {/* <div className="downvote-btn-container">
-                <button
-                  className="downvote-btn"
-                  onClick={this.handleSetStateOnDownvoteClick}
-                  disabled={!!currentUser.id ? upvoteClicked : true}
-                >
-                  <FontAwesomeIcon
-                    icon={downvoteClicked ? faThumbsDown : faThumbsDownReg}
-                  />
-                </button>
-                <p className="upvote-count">{post_info.downvotes}</p>
-              </div>
-              <div className="upvote-btn-container">
-                <button
-                  className="upvote-btn"
-                  onClick={this.handleSetStateOnUpvoteClick}
-                  disabled={!!currentUser.id ? downvoteClicked : true}
-                >
-                  <FontAwesomeIcon
-                    icon={upvoteClicked ? faThumbsUp : faThumbsUpReg}
-                  />
-                </button>
-                <p className="downvote-count">{post_info.upvotes}</p>
-              </div> */}
               <Item.Header>{post_info.user.username}</Item.Header>
               <Item.Meta>Published {post.publish_date} ago</Item.Meta>
 

@@ -39,6 +39,20 @@ export default class Post extends Component {
     handleDownvoteClick(post.post_info, downvoteClicked);
   };
 
+  urlify = (text) => {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.split(urlRegex).map((part) => {
+      if (part.match(urlRegex)) {
+        return (
+          <a key={part} href={part} target="_blank">
+            {part}
+          </a>
+        );
+      }
+      return part;
+    });
+  };
+
   render() {
     const { post, currentUser, handleFilterBySelectedTag } = this.props;
     const { post_info } = this.props.post;
@@ -57,7 +71,7 @@ export default class Post extends Component {
               <Item.Meta>Published {post.publish_date} ago</Item.Meta>
 
               <Item.Description>
-                {post_info.text}
+                {this.urlify(post_info.text)}
                 {post_info.image ? (
                   <Image src={post_info.image} size="large" />
                 ) : null}

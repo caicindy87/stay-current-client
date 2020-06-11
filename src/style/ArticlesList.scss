@@ -54,70 +54,8 @@
 
         a:hover {
           text-decoration: underline;
-          color: #16324f;
         }
       }
     }
   }
 }
-
-// .articles-list {
-//   display: grid;
-//   grid-template-columns: [line1] 100px [line2] 1fr [line3] 40px [line4] 2fr [line6] 100px;
-//   grid-template-rows: [rowline1] 20px [rowline2];
-//   row-gap: 20px;
-
-//   // .filter {
-//   //   grid-column-start: line2;
-//   //   grid-column-end: line3;
-//   //   height: 100vh;
-//   //   background-color: #ebf2fa;
-//   // }
-
-//   .phrase {
-//     grid-column-start: line2;
-//     grid-column-end: line3;
-
-//     height: 100vh;
-//     background-color: #ebf2fa;
-//     border: 1px solid #ebf2fa;
-//     border-radius: 10px;
-
-//     h1 {
-//       font-size: 48px;
-//       font-family: Geomanist-Bold;
-//     }
-//   }
-
-//   .article-card {
-//     grid-column-start: line4;
-
-//     border-bottom: 1px solid #16324f;
-//     border-radius: 10px;
-//     box-shadow: 3px 3px 5px #4e545c;
-//     padding: 15px;
-
-//     .image {
-//       // display: flex;
-//       // justify-content: center;
-
-//       img {
-//         justify-self: center;
-//         width: 80%;
-//         height: 80%;
-//         padding: 10px;
-//       }
-//     }
-
-//     .article-content {
-//       font-size: 20px;
-//       color: #16324f;
-//       width: 80%;
-//       height: 80%;
-
-//       a {
-//         color: #16324f;
-//       }
-//     }
-//   }
-// }

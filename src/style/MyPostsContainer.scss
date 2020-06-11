@@ -1,8 +1,4 @@
 .my-posts-list {
-  // position: absolute;
-  // left: 300px;
-  // right: 300px;
-  // margin-top: 20px;
   margin: 20px 20%;
 }
 
@@ -24,6 +20,10 @@
   i.icon,
   i.icons {
     font-size: 20px;
+  }
+
+  a {
+    text-decoration: underline;
   }
 }
 

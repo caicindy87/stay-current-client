@@ -39,6 +39,20 @@ export default class Post extends Component {
     handleDownvoteClick(post.post_info, downvoteClicked);
   };
 
+  urlify = (text) => {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.split(urlRegex).map((part) => {
+      if (part.match(urlRegex)) {
+        return (
+          <a key={part} href={part} target="_blank">
+            {part}
+          </a>
+        );
+      }
+      return part;
+    });
+  };
+
   render() {
     const { post, currentUser, handleFilterBySelectedTag } = this.props;
     const { post_info } = this.props.post;
@@ -53,35 +67,11 @@ export default class Post extends Component {
               src="https://cdn2.iconfinder.com/data/icons/people-80/96/Picture1-512.png"
             />
             <Item.Content>
-              {/* <div className="downvote-btn-container">
-                <button
-                  className="downvote-btn"
-                  onClick={this.handleSetStateOnDownvoteClick}
-                  disabled={!!currentUser.id ? upvoteClicked : true}
-                >
-                  <FontAwesomeIcon
-                    icon={downvoteClicked ? faThumbsDown : faThumbsDownReg}
-                  />
-                </button>
-                <p className="upvote-count">{post_info.downvotes}</p>
-              </div>
-              <div className="upvote-btn-container">
-                <button
-                  className="upvote-btn"
-                  onClick={this.handleSetStateOnUpvoteClick}
-                  disabled={!!currentUser.id ? downvoteClicked : true}
-                >
-                  <FontAwesomeIcon
-                    icon={upvoteClicked ? faThumbsUp : faThumbsUpReg}
-                  />
-                </button>
-                <p className="downvote-count">{post_info.upvotes}</p>
-              </div> */}
               <Item.Header>{post_info.user.username}</Item.Header>
               <Item.Meta>Published {post.publish_date} ago</Item.Meta>
 
               <Item.Description>
-                {post_info.text}
+                {this.urlify(post_info.text)}
                 {post_info.image ? (
                   <Image src={post_info.image} size="large" />
                 ) : null}

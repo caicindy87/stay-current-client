@@ -1,5 +1,4 @@
 .navbar {
-  background-color: white;
   height: 70px;
 
   .logo {
@@ -33,12 +32,23 @@ main {
 }
 
 .about {
-  background-color: #16324f;
-  color: white;
+  background-color: #ebf2fa;
+  color: #16324f;
+  height: 60px;
+  font-size: 30px;
+  padding: 25px;
+  text-align: center;
+  font-family: Geomanist-Bold;
+  border-radius: 15px;
 }
 
 .ui.basic.label {
   font-family: Geomanist;
   color: #16324f;
   border: 1px solid #16324f;
+}
+
+.ui.basic.label:hover {
+  color: #ffd400;
+  border: 1px solid #ffd400;
 }

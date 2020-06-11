@@ -21,13 +21,17 @@ class NavBar extends Component {
               >
                 Log Out
               </Link>
-              <Link to={`/${currentUser.username}/posts/new`}>New Post</Link>
-              <Link to="/mypage">My Page</Link>
             </>
           ) : (
             <Link to="/login">Log In</Link>
           )}
-          <Link to="articles">Articles</Link>
+          {!!currentUser.id ? (
+            <>
+              <Link to={`/${currentUser.username}/posts/new`}>New Post</Link>
+              <Link to="/mypage">My Page</Link>
+            </>
+          ) : null}
+          <Link to="/articles">Articles</Link>
         </div>
       </div>
     );

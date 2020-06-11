@@ -5,10 +5,19 @@ import MyPost from "./MyPost";
 class MyPostsList extends Component {
   render() {
     const { posts, tags, handleEditPostSubmit, handleDeletePost } = this.props;
+    const postsClone = [...posts];
+    const postsSortedFromNewestToOldest = postsClone.sort((a, b) => {
+      if (b.post_info.created_at < a.post_info.created_at) {
+        return -1;
+      }
+      if (b.post_info.created_at > a.post_info.created_at) {
+        return 1;
+      }
+    });
 
     return (
       <div className="my-posts-list">
-        {posts.map((post) => (
+        {postsSortedFromNewestToOldest.map((post) => (
           <MyPost
             key={post.post_info.id}
             post={post}

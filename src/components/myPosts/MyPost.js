@@ -13,9 +13,10 @@ class MyPost extends Component {
   state = {
     modalOpen: false,
     confirmOpen: false,
+    dropdownOpen: false,
   };
 
-  handleOpen = () => this.setState({ modalOpen: true });
+  handleOpen = () => this.setState({ modalOpen: true, dropdownOpen: true });
 
   handleClose = () => this.setState({ modalOpen: false });
 
@@ -31,10 +32,24 @@ class MyPost extends Component {
 
   handleCancel = () => this.setState({ confirmOpen: false });
 
+  urlify = (text) => {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.split(urlRegex).map((part) => {
+      if (part.match(urlRegex)) {
+        return (
+          <a key={part} href={part} target="_blank">
+            {part}
+          </a>
+        );
+      }
+      return part;
+    });
+  };
+
   render() {
     const { post, tags, handleEditPostSubmit, handleDeletePost } = this.props;
     const { post_info } = this.props.post;
-    const { modalOpen, confirmOpen } = this.state;
+    const { modalOpen, confirmOpen, dropdownOpen } = this.state;
 
     return (
       <div className="my-post">
@@ -47,28 +62,11 @@ class MyPost extends Component {
             <Item.Content>
               <Dropdown className="options-button" icon="ellipsis horizontal">
                 <Dropdown.Menu>
-                  <Modal
-                    trigger={
-                      <Dropdown.Item
-                        icon="edit"
-                        text="Edit post"
-                        onClick={this.handleOpen}
-                      />
-                    }
-                    onClose={this.handleClose}
-                    open={this.state.modalOpen}
-                    closeIcon
-                  >
-                    <Modal.Header content="Edit post"></Modal.Header>
-                    <Modal.Content>
-                      <MyPostEditForm
-                        post_info={post_info}
-                        tags={tags}
-                        handleEditPostSubmit={handleEditPostSubmit}
-                        handleClose={this.handleClose}
-                      />
-                    </Modal.Content>
-                  </Modal>
+                  <Dropdown.Item
+                    icon="edit"
+                    text="Edit post"
+                    onClick={this.handleOpen}
+                  />
                   <Dropdown.Item
                     icon="trash"
                     text="Delete post"
@@ -84,11 +82,25 @@ class MyPost extends Component {
                   />
                 </Dropdown.Menu>
               </Dropdown>
-
+              <Modal
+                onClose={this.handleClose}
+                open={this.state.modalOpen}
+                closeIcon
+              >
+                <Modal.Header content="Edit post"></Modal.Header>
+                <Modal.Content>
+                  <MyPostEditForm
+                    post_info={post_info}
+                    tags={tags}
+                    handleEditPostSubmit={handleEditPostSubmit}
+                    handleClose={this.handleClose}
+                  />
+                </Modal.Content>
+              </Modal>
               <Item.Header>{post_info.user.username}</Item.Header>
               <Item.Meta>Published {post.publish_date} ago</Item.Meta>
               <Item.Description>
-                {post_info.text}
+                {this.urlify(post_info.text)}
                 {post_info.image ? (
                   <Image src={post_info.image} size="large" />
                 ) : null}
@@ -104,8 +116,8 @@ class MyPost extends Component {
                     : null}
                 </Label.Group>
               </Item.Extra>
-              <p className="upvote-count">Upvotes: {post_info.downvotes}</p>
-              <p className="downvote-count">Downvotes: {post_info.upvotes}</p>
+              {/* <p className="upvote-count">Upvotes: {post_info.downvotes}</p>
+              <p className="downvote-count">Downvotes: {post_info.upvotes}</p> */}
             </Item.Content>
           </Item>
         </Item.Group>

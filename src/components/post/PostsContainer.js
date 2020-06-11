@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
-import { Label } from "semantic-ui-react";
 
 import postApi from "../../services/postApi";
 import PostNew from "./PostNew";
 import PostsList from "./PostsList";
-import "../../style/PostsContainer.scss";
 
 class PostsContainer extends Component {
   state = {

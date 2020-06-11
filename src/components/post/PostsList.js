@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Item, Label } from "semantic-ui-react";
+import { Item, Label, Modal } from "semantic-ui-react";
 
 import Post from "./Post";
 import "../../style/PostsList.scss";
@@ -9,6 +9,7 @@ import About from "../About";
 class PostsList extends Component {
   state = {
     filteredPosts: [],
+    modalOpen: false,
   };
 
   handleFilterBySelectedTag = (e) => {
@@ -31,19 +32,45 @@ class PostsList extends Component {
     return posts.sort((a, b) => b.post_info.upvotes - a.post_info.upvotes);
   };
 
+  handleOpen = () => this.setState({ modalOpen: true });
+
+  handleClose = () => this.setState({ modalOpen: false });
+
   render() {
     const {
       currentUser,
       tags,
       handleUpvoteClick,
       handleDownvoteClick,
+      handlePostSubmit,
     } = this.props;
 
     return (
       <div className="container">
-        {/* <PostNew /> move the post form to posts instead of having a separate page */}
+        <Modal onClose={this.handleClose} open={this.state.modalOpen} closeIcon>
+          <Modal.Header>Create a post</Modal.Header>
+          <Modal.Content>
+            <PostNew
+              tags={tags}
+              handlePostSubmit={handlePostSubmit}
+              handleClose={this.handleClose}
+            />
+          </Modal.Content>
+        </Modal>
+
         <div className="posts-list">
-          <About />
+          {!!currentUser.id ? (
+            <div className="new-post">
+              <input
+                type="textarea"
+                value=""
+                placeholder="What's new?"
+                onClick={this.handleOpen}
+              ></input>
+            </div>
+          ) : (
+            <About />
+          )}
           <Item.Group>
             {this.sortPostsFromMostToLeastUpvotes().map((post) => {
               return (

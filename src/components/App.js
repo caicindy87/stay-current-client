@@ -12,6 +12,7 @@ import authApi from "../services/authApi";
 import tagApi from "../services/tagApi";
 import myPostApi from "../services/myPostApi";
 import ArticlesContainer from "./articles/ArticlesContainer";
+import PostsList from "./post/PostsList";
 
 class App extends Component {
   state = {
@@ -142,9 +143,6 @@ class App extends Component {
                 );
               }}
             ></Route>
-            {/* {!!currentUser.id ? null : (
-              <Route exact path="/" component={About}></Route>
-            )} */}
           </Switch>
           <PostsContainer
             currentUser={currentUser}

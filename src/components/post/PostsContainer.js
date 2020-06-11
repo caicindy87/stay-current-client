@@ -111,6 +111,7 @@ class PostsContainer extends Component {
                   tags={tags}
                   handleUpvoteClick={this.handleUpvoteClick}
                   handleDownvoteClick={this.handleDownvoteClick}
+                  handlePostSubmit={this.handlePostSubmit}
                 />
               );
             }}

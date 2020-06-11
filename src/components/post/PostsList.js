@@ -20,6 +20,17 @@ class PostsList extends Component {
     this.setState({ filteredPosts: filteredPosts });
   };
 
+  sortPostsFromMostToLeastUpvotes = () => {
+    let posts = [];
+    if (this.state.filteredPosts.length === 0) {
+      posts = this.props.posts;
+    } else {
+      posts = this.state.filteredPosts;
+    }
+
+    return posts.sort((a, b) => b.post_info.upvotes - a.post_info.upvotes);
+  };
+
   render() {
     const {
       currentUser,
@@ -28,24 +39,13 @@ class PostsList extends Component {
       handleDownvoteClick,
     } = this.props;
 
-    let posts = [];
-    if (this.state.filteredPosts.length === 0) {
-      posts = this.props.posts;
-    } else {
-      posts = this.state.filteredPosts;
-    }
-
-    const sortedPostsFromMostToLeastUpvotes = posts.sort(
-      (a, b) => b.post_info.upvotes - a.post_info.upvotes
-    );
-
     return (
       <div className="container">
         {/* <PostNew /> move the post form to posts instead of having a separate page */}
         <div className="posts-list">
           <About />
           <Item.Group>
-            {sortedPostsFromMostToLeastUpvotes.map((post) => {
+            {this.sortPostsFromMostToLeastUpvotes().map((post) => {
               return (
                 <Post
                   key={post.post_info.id}

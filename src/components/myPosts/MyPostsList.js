@@ -3,10 +3,10 @@ import React, { Component } from "react";
 import MyPost from "./MyPost";
 
 class MyPostsList extends Component {
-  render() {
-    const { posts, tags, handleEditPostSubmit, handleDeletePost } = this.props;
-    const postsClone = [...posts];
-    const postsSortedFromNewestToOldest = postsClone.sort((a, b) => {
+  sortPostsFromNewestToOldest = () => {
+    const postsClone = [...this.props.posts];
+
+    return postsClone.sort((a, b) => {
       if (b.post_info.created_at < a.post_info.created_at) {
         return -1;
       }
@@ -14,10 +14,14 @@ class MyPostsList extends Component {
         return 1;
       }
     });
+  };
+
+  render() {
+    const { tags, handleEditPostSubmit, handleDeletePost } = this.props;
 
     return (
       <div className="my-posts-list">
-        {postsSortedFromNewestToOldest.map((post) => (
+        {this.sortPostsFromNewestToOldest().map((post) => (
           <MyPost
             key={post.post_info.id}
             post={post}

@@ -1,12 +1,13 @@
 .container {
   display: grid;
-  grid-template-columns: [first] 30px [line2] 2fr [line3] 1fr [line4] 30px;
+  grid-template-columns: 2fr 1fr;
   grid-template-rows: [row1-start] 20px [row1-end] 1fr [third-line] auto;
   font-family: Geomanist;
   column-gap: 20px;
+  margin: 0px 5%;
 
   .posts-list {
-    grid-column-start: line2;
+    grid-column-start: 1;
     grid-row-start: row1-end;
 
     .new-post {
@@ -32,7 +33,7 @@
     height: 100vh;
     border: solid 1px #ebf2fa;
     border-radius: 15px;
-    grid-column-start: line3;
+    grid-column-start: 2;
     grid-row-start: row1-end;
   }
 }

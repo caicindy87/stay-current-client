@@ -48,6 +48,7 @@ class Login extends Component {
             <h3 className="login-error-msg">Invalid username or password</h3>
           ) : null}
           <form onSubmit={this.handleLoginSubmit}>
+            <label htmlFor="username">Username</label>
             <input
               className="username"
               type="text"
@@ -56,6 +57,7 @@ class Login extends Component {
               value={fields.username}
               onChange={this.handleChange}
             ></input>
+            <label htmlFor="username">Password</label>
             <input
               className="password"
               type="password"

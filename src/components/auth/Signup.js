@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "semantic-ui-react";
 
 import authApi from "../../services/authApi";
@@ -48,6 +49,7 @@ class Signup extends Component {
           <h1>Create an Account</h1>
           {error ? <h3 className="signup-error-msg">Try Again</h3> : null}
           <form onSubmit={this.handleSignupSubmit}>
+            <label htmlFor="username">Username</label>
             <input
               className="username"
               type="text"
@@ -56,6 +58,7 @@ class Signup extends Component {
               value={fields.username}
               onChange={this.handleChange}
             ></input>
+            <label htmlFor="username">Email address</label>
             <input
               className="email"
               type="text"
@@ -64,6 +67,7 @@ class Signup extends Component {
               value={fields.email}
               onChange={this.handleChange}
             ></input>
+            <label htmlFor="username">Password</label>
             <input
               className="password"
               type="password"
@@ -72,6 +76,7 @@ class Signup extends Component {
               value={fields.password}
               onChange={this.handleChange}
             ></input>
+            <label htmlFor="username">Confirm password</label>
             <input
               className="password-confirm"
               type="password"
@@ -82,6 +87,9 @@ class Signup extends Component {
             ></input>
             <Button fluid>Create Account</Button>
           </form>
+          <p className="login-link">
+            Already have an account? <Link to="/login">Log in</Link>
+          </p>
         </div>
       </div>
     );

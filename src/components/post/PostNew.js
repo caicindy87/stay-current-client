@@ -31,7 +31,7 @@ class PostNew extends Component {
 
   render() {
     const { fields } = this.state;
-    const { handlePostSubmit } = this.props;
+    const { handlePostSubmit, handleClose } = this.props;
     const selectOptions = this.props.tags.map((tag) => ({
       key: tag.id,
       text: tag.name,
@@ -40,27 +40,31 @@ class PostNew extends Component {
 
     return (
       <Container className="new-post-form" textAlign="center">
-        <h1>Create a post</h1>
-        <Form onSubmit={(e) => handlePostSubmit(e, fields)}>
+        <Form
+          onSubmit={(e) => {
+            handlePostSubmit(e, fields);
+            handleClose();
+          }}
+        >
           <Form.TextArea
             type="textarea"
             name="text"
             value={fields.text}
-            placeholder="Share your thoughts or other resources where you learn about current events."
+            placeholder="Share your thoughts. Share resources where you learn about current events."
             onChange={this.handleInputChange}
           />
           <br />
           <Form.Input
-            label="Image"
+            label="Image (Optional)"
             type="text"
             name="image"
             value={fields.image}
-            placeholder="Add an image (optional) - image URL "
+            placeholder="Add an image URL "
             onChange={this.handleInputChange}
           />
           <br />
-          <label>Tags</label>
-          <Dropdown
+          <Form.Dropdown
+            label="Tags (Optional)"
             placeholder="Add tags"
             fluid
             multiple
@@ -68,7 +72,7 @@ class PostNew extends Component {
             selection
             options={selectOptions}
             onChange={this.handleDropdownChange}
-          ></Dropdown>
+          ></Form.Dropdown>
           <br />
           <Form.Button className="create-post-btn">Create Post</Form.Button>
         </Form>

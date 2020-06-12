@@ -13,10 +13,9 @@ class MyPost extends Component {
   state = {
     modalOpen: false,
     confirmOpen: false,
-    dropdownOpen: false,
   };
 
-  handleOpen = () => this.setState({ modalOpen: true, dropdownOpen: true });
+  handleOpen = () => this.setState({ modalOpen: true });
 
   handleClose = () => this.setState({ modalOpen: false });
 

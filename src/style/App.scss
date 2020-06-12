@@ -18,13 +18,13 @@
       text-decoration: underline;
       float: right;
       text-align: center;
-      padding: 25px 10px;
+      padding: 25px 15px;
     }
   }
 }
 
 main {
-  height: calc(100vh - 60px);
+  height: calc(100vh - 70px);
 }
 
 .filter-bar {
@@ -51,4 +51,13 @@ main {
 .ui.basic.label:hover {
   color: #ffd400;
   border: 1px solid #ffd400;
+}
+
+.ui.button {
+  background-color: #16324f;
+  color: white;
+}
+
+.ui.button:hover {
+  background-color: #ffd400;
 }

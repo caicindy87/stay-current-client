@@ -50,7 +50,7 @@ class PostNew extends Component {
             type="textarea"
             name="text"
             value={fields.text}
-            placeholder="Share your thoughts. Share resources where you learn about current events."
+            placeholder="Share your thoughts or resources where you learn about current events."
             onChange={this.handleInputChange}
           />
           <br />

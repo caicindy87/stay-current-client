@@ -64,7 +64,7 @@ class PostsList extends Component {
               <input
                 type="textarea"
                 value=""
-                placeholder="What's new?"
+                placeholder="What news is on your mind?"
                 onClick={this.handleOpen}
               ></input>
             </div>

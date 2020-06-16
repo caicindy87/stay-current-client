@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Item, Label, Modal } from "semantic-ui-react";
+import { Item, Label, Modal, Button } from "semantic-ui-react";
 
 import Post from "./Post";
 import "../../style/PostsList.scss";
@@ -66,6 +66,9 @@ class PostsList extends Component {
                 placeholder="What news is on your mind?"
                 onClick={this.handleOpen}
               ></input>
+              <Button className="submit-post" onClick={this.handleOpen}>
+                Post
+              </Button>
             </div>
           ) : (
             <About />

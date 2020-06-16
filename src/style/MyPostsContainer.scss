@@ -1,40 +1,81 @@
-.my-posts-list {
-  margin: 20px 20%;
+.myposts-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  column-gap: 60px;
+  margin: 0px 18%;
+  grid-template-rows: 1fr auto;
+  margin: 20px 18%;
 }
 
-.my-post {
+.profile-container {
+  grid-column-start: 1;
+  grid-column-end: 2;
   border-bottom: solid 1px #ebf2fa;
   border-radius: 25px;
-  box-shadow: 2px 2px 5px #4e545c;
-  margin-bottom: 20px;
   padding: 30px;
+  text-align: center;
 
-  .ui.items > .item > .content > .header:not(.ui) {
-    font-size: 20px;
+  .profile-pic {
+    width: 100%;
+    border-radius: 50%;
   }
 
-  .ui.items > .item > .content > .description {
-    font-size: 20px;
-  }
-
-  i.icon,
-  i.icons {
-    font-size: 20px;
-  }
-
-  a {
-    text-decoration: underline;
+  h1 {
+    font-family: Geomanist-Medium;
   }
 }
 
-.options-button {
-  float: right;
-}
+.my-posts-list {
+  grid-column-start: 2;
+  grid-column-end: 4;
 
+  .my-post {
+    border-bottom: solid 1px #ebf2fa;
+    border-radius: 25px;
+    box-shadow: 2px 2px 5px #4e545c;
+    margin-bottom: 20px;
+    padding: 30px;
+
+    .ui.items > .item > .image > img {
+      border-radius: 50%;
+    }
+
+    .ui.items > .item > .content > .header:not(.ui) {
+      font-size: 20px;
+    }
+
+    .ui.items > .item > .content > .description {
+      font-size: 20px;
+      width: 95%;
+    }
+
+    .ui.items > .item .content img {
+      padding: 10px 0px;
+      width: 95%;
+    }
+
+    i.icon,
+    i.icons {
+      font-size: 20px;
+    }
+
+    a {
+      text-decoration: underline;
+    }
+  }
+
+  .options-button {
+    float: right;
+  }
+}
 .ui.primary.button {
   background-color: #d63031;
 }
 
 .ui.primary.button:hover {
-  background-color: #d63031;
+  background-color: red;
+}
+
+.ui.modal > .content {
+  font-size: 18px;
 }

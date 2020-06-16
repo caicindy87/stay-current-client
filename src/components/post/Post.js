@@ -68,14 +68,11 @@ export default class Post extends Component {
             />
             <Item.Content>
               <Item.Header>{post_info.user.username}</Item.Header>
-              <Item.Meta>Published {post.publish_date} ago</Item.Meta>
-
-              <Item.Description>
-                {this.urlify(post_info.text)}
-                {post_info.image ? (
-                  <Image src={post_info.image} size="large" />
-                ) : null}
-              </Item.Description>
+              <Item.Meta>{post.publish_date} ago</Item.Meta>
+              <Item.Description>{this.urlify(post_info.text)}</Item.Description>
+              {post_info.image ? (
+                <Image src={post_info.image} size="large" />
+              ) : null}
               <Item.Extra>
                 <Label.Group>
                   {post_info.tags
@@ -93,19 +90,7 @@ export default class Post extends Component {
                     : null}
                 </Label.Group>
               </Item.Extra>
-              <div className="downvote-btn-container">
-                <button
-                  className="downvote-btn"
-                  onClick={this.handleSetStateOnDownvoteClick}
-                  disabled={!!currentUser.id ? upvoteClicked : true}
-                >
-                  <FontAwesomeIcon
-                    icon={downvoteClicked ? faThumbsDown : faThumbsDownReg}
-                  />
-                </button>
-                <p className="upvote-count">{post_info.downvotes}</p>
-              </div>
-              <div className="upvote-btn-container">
+              <div className="vote-btn-container">
                 <button
                   className="upvote-btn"
                   onClick={this.handleSetStateOnUpvoteClick}
@@ -116,6 +101,18 @@ export default class Post extends Component {
                   />
                 </button>
                 <p className="downvote-count">{post_info.upvotes}</p>
+              </div>
+              <div className="vote-btn-container">
+                <button
+                  className="downvote-btn"
+                  onClick={this.handleSetStateOnDownvoteClick}
+                  disabled={!!currentUser.id ? upvoteClicked : true}
+                >
+                  <FontAwesomeIcon
+                    icon={downvoteClicked ? faThumbsDown : faThumbsDownReg}
+                  />
+                </button>
+                <p className="upvote-count">{post_info.downvotes}</p>
               </div>
             </Item.Content>
           </Item>

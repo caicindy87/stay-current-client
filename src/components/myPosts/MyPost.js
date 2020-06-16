@@ -29,7 +29,7 @@ class MyPost extends Component {
     this.setState({ confirmOpen: false });
   };
 
-  handleCancel = () => this.setState({ confirmOpen: false });
+  handleCancelDelete = () => this.setState({ confirmOpen: false });
 
   urlify = (text) => {
     const urlRegex = /(https?:\/\/[^\s]+)/g;
@@ -46,9 +46,9 @@ class MyPost extends Component {
   };
 
   render() {
-    const { post, tags, handleEditPostSubmit, handleDeletePost } = this.props;
+    const { post, tags, handleEditPostSubmit } = this.props;
     const { post_info } = this.props.post;
-    const { modalOpen, confirmOpen, dropdownOpen } = this.state;
+    const { confirmOpen } = this.state;
 
     return (
       <div className="my-post">
@@ -73,10 +73,11 @@ class MyPost extends Component {
                   />
                   <Confirm
                     open={confirmOpen}
-                    content="Delete post?"
+                    header="Delete Post?"
+                    content="Are you sure you want to delete this post?"
                     cancelButton="Cancel"
                     confirmButton="Delete"
-                    onCancel={this.handleCancel}
+                    onCancel={this.handleCancelDelete}
                     onConfirm={this.handleConfirm}
                   />
                 </Dropdown.Menu>
@@ -97,7 +98,7 @@ class MyPost extends Component {
                 </Modal.Content>
               </Modal>
               <Item.Header>{post_info.user.username}</Item.Header>
-              <Item.Meta>Published {post.publish_date} ago</Item.Meta>
+              <Item.Meta>{post.publish_date} ago</Item.Meta>
               <Item.Description>
                 {this.urlify(post_info.text)}
                 {post_info.image ? (
@@ -115,8 +116,6 @@ class MyPost extends Component {
                     : null}
                 </Label.Group>
               </Item.Extra>
-              {/* <p className="upvote-count">Upvotes: {post_info.downvotes}</p>
-              <p className="downvote-count">Downvotes: {post_info.upvotes}</p> */}
             </Item.Content>
           </Item>
         </Item.Group>

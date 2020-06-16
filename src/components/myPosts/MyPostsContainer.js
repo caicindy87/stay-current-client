@@ -19,7 +19,7 @@ class MyPostsContainer extends Component {
         <Switch>
           <Route
             exact
-            path="/mypage"
+            path="/profile"
             render={() => {
               return (
                 <MyPostsList

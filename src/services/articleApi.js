@@ -8,8 +8,9 @@ const headers = {
   Authorization: `Bearer ${token}`,
 };
 
-const getArticles = () => {
-  return fetch(`${API_ROOT}/news`, {
+const getArticles = (page) => {
+  console.log("current page", page);
+  return fetch(`${API_ROOT}/news?page=${page}`, {
     method: "GET",
     headers: headers,
   }).then((resp) => resp.json());

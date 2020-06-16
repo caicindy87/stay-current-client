@@ -29,11 +29,11 @@
     grid-row-start: 1;
 
     .article-card {
-      border-bottom: solid 1px #ebf2fa;
+      border: solid 1px #ebf2fa;
       border-radius: 25px;
       box-shadow: 2px 2px 5px #4e545c;
       padding: 15px;
-      margin-top: 20px;
+      margin: 20px 5px;
 
       .image {
         display: flex;

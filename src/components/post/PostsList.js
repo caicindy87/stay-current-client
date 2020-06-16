@@ -57,7 +57,6 @@ class PostsList extends Component {
             />
           </Modal.Content>
         </Modal>
-
         <div className="posts-list">
           {!!currentUser.id ? (
             <div className="new-post">

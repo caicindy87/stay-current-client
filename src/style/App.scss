@@ -1,13 +1,22 @@
 .navbar {
   height: 70px;
 
+  .icon {
+    padding: 0px 5px;
+  }
+
   .logo {
     font-size: 48px;
     font-family: Geomanist-Bold;
     color: #16324f;
     float: left;
     text-align: center;
-    padding: 25px 15px;
+    line-height: 70px;
+
+    .logo-img {
+      padding-left: 20px;
+      padding-right: 10px;
+    }
   }
 
   .navbar-right {
@@ -18,7 +27,8 @@
       text-decoration: underline;
       float: right;
       text-align: center;
-      padding: 25px 15px;
+      padding-right: 20px;
+      line-height: 70px;
     }
   }
 }

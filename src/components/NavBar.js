@@ -5,7 +5,6 @@ import logo from "../icons/logo.jpg";
 import loginIcon from "../icons/loginIcon.jpg";
 import logoutIcon from "../icons/logoutIcon.jpg";
 import profileIcon from "../icons/profileIcon.jpg";
-import smallProfileIcon from "../icons/smallProfileIcon.jpg";
 import newsIcon from "../icons/newsIcon.jpeg";
 
 class NavBar extends Component {
@@ -50,7 +49,7 @@ class NavBar extends Component {
             </>
           ) : null}
           <Link to="/news">
-            <img src={newsIcon} alt="login-icon" className="icon"></img>
+            <img src={newsIcon} alt="news-icon" className="icon"></img>
             News
           </Link>
         </div>

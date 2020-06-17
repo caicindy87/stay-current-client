@@ -62,10 +62,7 @@ export default class Post extends Component {
       <div className="post">
         <Item.Group>
           <Item>
-            <Item.Image
-              size="tiny"
-              src="https://cdn2.iconfinder.com/data/icons/people-80/96/Picture1-512.png"
-            />
+            <Item.Image size="tiny" src={post_info.user.profile_pic} />
             <Item.Content>
               <Item.Header>{post_info.user.username}</Item.Header>
               <Item.Meta>{post.publish_date} ago</Item.Meta>

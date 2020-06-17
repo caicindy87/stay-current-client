@@ -54,10 +54,7 @@ class MyPost extends Component {
       <div className="my-post">
         <Item.Group>
           <Item>
-            <Item.Image
-              size="tiny"
-              src="https://cdn2.iconfinder.com/data/icons/people-80/96/Picture1-512.png"
-            />
+            <Item.Image size="tiny" src={post_info.user.profile_pic} />
             <Item.Content>
               <Dropdown className="options-button" icon="ellipsis horizontal">
                 <Dropdown.Menu>

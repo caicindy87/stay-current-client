@@ -22,6 +22,10 @@
     width: 95%;
   }
 
+  .ui.items > .item > .image > img {
+    border-radius: 50%;
+  }
+
   a {
     text-decoration: underline;
   }

@@ -34,7 +34,10 @@ class App extends Component {
         if (currentUser.error) {
           console.log(currentUser.error);
         } else {
-          this.setState({ currentUser: currentUser });
+          this.setState(
+            { currentUser: currentUser }
+            this.fetchMyPosts(currentUser)
+          );
         }
       });
     }

@@ -44,7 +44,7 @@ class NavBar extends Component {
                   alt="profile-icon"
                   className="icon"
                 ></img>
-                Profile
+                {currentUser.username}
               </Link>
             </>
           ) : null}

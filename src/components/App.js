@@ -34,12 +34,7 @@ class App extends Component {
         if (currentUser.error) {
           console.log(currentUser.error);
         } else {
-          this.setState(
-            {
-              currentUser: currentUser,
-            },
-            this.fetchMyPosts
-          );
+          this.setState({ currentUser: currentUser });
         }
       });
     }
@@ -48,9 +43,12 @@ class App extends Component {
   handleLogin = (user) => {
     localStorage.setItem("token", user.token);
 
-    this.setState({
-      currentUser: user,
-    });
+    this.setState(
+      {
+        currentUser: user,
+      },
+      this.fetchMyPosts(user)
+    );
   };
 
   handleLogOut = () => {
@@ -58,6 +56,7 @@ class App extends Component {
 
     this.setState({
       currentUser: {},
+      myPosts: [],
     });
   };
 
@@ -76,11 +75,9 @@ class App extends Component {
       .catch((err) => console.log(err));
   };
 
-  fetchMyPosts = () => {
-    const { currentUser } = this.state;
-
+  fetchMyPosts = (user) => {
     myPostApi
-      .getMyPosts(currentUser)
+      .getMyPosts(user)
       .then((posts) => this.setState({ myPosts: posts }));
   };
 

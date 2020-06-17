@@ -1,19 +1,39 @@
+// .myposts-container {
+//   display: grid;
+//   grid-template-columns: 1fr 1fr 2fr;
+//   column-gap: 60px;
+//   margin: 0px 18%;
+//   grid-template-rows: 1fr auto;
+//   margin: 20px 18%;
+// }
+
 .myposts-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 2fr;
+  grid-template-columns: 2fr 0.8fr;
   column-gap: 60px;
-  margin: 0px 18%;
-  grid-template-rows: 1fr auto;
-  margin: 20px 18%;
+  margin: 0px 15%;
+  grid-template-rows: 40px auto;
+  margin: 0px 15%;
+}
+
+h2 {
+  grid-row-start: 1;
+  grid-row-end: 2;
 }
 
 .profile-container {
-  grid-column-start: 1;
-  grid-column-end: 2;
-  border-bottom: solid 1px #ebf2fa;
-  border-radius: 25px;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
   padding: 30px;
   text-align: center;
+  background-color: #f4f5f6;
+  // background-color: #d8dee4;
+  // border: 1px solid #ebf2fa;
+  border: solid 3px #f4f5f6;
+  border-radius: 25px;
+
+  height: 50vh;
 
   .profile-pic {
     width: 100%;
@@ -23,25 +43,34 @@
   h1 {
     font-family: Geomanist-Medium;
   }
+
+  p {
+    margin-bottom: 0;
+    font-size: 18px;
+    padding: 15px;
+  }
 }
 
 .my-posts-list {
-  grid-column-start: 2;
-  grid-column-end: 4;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
 
   .my-post {
-    border-bottom: solid 1px #ebf2fa;
+    border: solid 3px #f4f5f6;
     border-radius: 25px;
-    box-shadow: 2px 2px 5px #4e545c;
     margin-bottom: 20px;
     padding: 30px;
+    background-color: #f4f5f6;
+    // background-color: #d8dee4;
 
     .ui.items > .item > .image > img {
       border-radius: 50%;
     }
 
     .ui.items > .item > .content > .header:not(.ui) {
-      font-size: 20px;
+      font-size: 18px;
+      font-family: Geomanist-Medium;
     }
 
     .ui.items > .item > .content > .description {

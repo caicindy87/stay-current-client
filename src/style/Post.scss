@@ -4,10 +4,12 @@
   box-shadow: 2px 2px 5px #4e545c;
   padding: 30px;
   margin-bottom: 20px;
+  // background-color: #f4f5f6;
+  // background-color: #ebf2fa;
 
   .ui.items > .item > .content > .header:not(.ui) {
-    font-size: 20px;
-    font-family: Geomanist;
+    font-size: 18px;
+    font-family: Geomanist-Medium;
   }
 
   .ui.items > .item > .content > .description {

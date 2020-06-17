@@ -11,7 +11,7 @@ class ArticlesList extends Component {
     return (
       <div className="articles-wrapper">
         <div className="phrase">
-          <h1>Top headlines</h1>
+          <h1>Top Stories</h1>
         </div>
         <div className="articles-list">
           <InfiniteScroll

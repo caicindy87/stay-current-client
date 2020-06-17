@@ -26,12 +26,11 @@ class MyPostsList extends Component {
 
     return (
       <div className="myposts-container">
+        <h2>Posts</h2>
         <div className="profile-container">
           <h1>{currentUser.username}</h1>
-          <img
-            src="https://cdn2.iconfinder.com/data/icons/people-80/96/Picture1-512.png"
-            className="profile-pic"
-          />
+          <img src={currentUser.profile_pic} className="profile-pic" />
+          <p className="bio">{currentUser.bio}</p>
         </div>
         <div className="my-posts-list">
           {this.sortPostsFromNewestToOldest().map((post) => (

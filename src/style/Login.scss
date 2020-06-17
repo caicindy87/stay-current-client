@@ -6,7 +6,7 @@
   align-items: center;
   color: #16324f;
   font-family: Geomanist;
-  width: 90%;
+  margin: 0px 15%;
 }
 
 .login-error-msg {
@@ -17,7 +17,7 @@
   grid-column-start: 1;
   grid-row-start: 2;
   grid-row-end: 3;
-  justify-self: right;
+  justify-self: center;
 }
 
 .login-form {

@@ -35,10 +35,8 @@ class App extends Component {
           console.log(currentUser.error);
         } else {
           this.setState(
-            {
-              currentUser: currentUser,
-            },
-            this.fetchMyPosts
+            { currentUser: currentUser },
+            this.fetchMyPosts(currentUser)
           );
         }
       });
@@ -48,9 +46,7 @@ class App extends Component {
   handleLogin = (user) => {
     localStorage.setItem("token", user.token);
 
-    this.setState({
-      currentUser: user,
-    });
+    this.setState({ currentUser: user }, this.fetchMyPosts(user));
   };
 
   handleLogOut = () => {
@@ -58,6 +54,7 @@ class App extends Component {
 
     this.setState({
       currentUser: {},
+      myPosts: [],
     });
   };
 
@@ -76,11 +73,12 @@ class App extends Component {
       .catch((err) => console.log(err));
   };
 
-  fetchMyPosts = () => {
-    const { currentUser } = this.state;
+  fetchMyPosts = (user) => {
+    const token = localStorage.getItem("token");
+    console.log("user for fetching", user);
 
     myPostApi
-      .getMyPosts(currentUser)
+      .getMyPosts(user, token)
       .then((posts) => this.setState({ myPosts: posts }));
   };
 
@@ -92,30 +90,31 @@ class App extends Component {
 
   handleEditPostSubmit = (e, inputs, postId) => {
     const { currentUser } = this.state;
+    const token = localStorage.getItem("token");
 
     e.preventDefault();
 
-    myPostApi.editMyPost(inputs, currentUser, postId).then((updatedPost) => {
-      this.setState((prevState) => ({
-        myPosts: prevState.myPosts.map((post) =>
-          post.post_info.id === updatedPost.post_info.id ? updatedPost : post
-        ),
-      }));
-    });
+    myPostApi
+      .editMyPost(inputs, currentUser, postId, token)
+      .then((updatedPost) => {
+        this.setState((prevState) => ({
+          myPosts: prevState.myPosts.map((post) =>
+            post.post_info.id === updatedPost.post_info.id ? updatedPost : post
+          ),
+        }));
+      });
   };
 
   handleDeletePost = (postId) => {
     const { currentUser } = this.state;
+    const token = localStorage.getItem("token");
 
-    myPostApi.deleteMyPost(currentUser, postId).then((data) => {
+    myPostApi.deleteMyPost(currentUser, postId, token).then((data) => {
       this.setState((prevState) => ({
         myPosts: prevState.myPosts.filter(
           (myPost) => myPost.post_info.id !== postId
         ),
       }));
-      // if (data.ok) {
-      //   alert("Successfully deleted");
-      // }
     });
   };
 
@@ -128,6 +127,7 @@ class App extends Component {
         <main>
           <Switch>
             <Route
+              exact
               path="/login"
               render={(routerProps) => {
                 return (
@@ -136,6 +136,7 @@ class App extends Component {
               }}
             ></Route>
             <Route
+              exact
               path="/signup"
               render={(routerProps) => {
                 return (
@@ -147,7 +148,6 @@ class App extends Component {
           <PostsContainer
             currentUser={currentUser}
             tags={tags}
-            fetchMyPosts={this.fetchMyPosts}
             updateMyPostsOnNewPostSubmit={this.updateMyPostsOnNewPostSubmit}
           />
           <MyPostsContainer

@@ -15,33 +15,40 @@ class PostsContainer extends Component {
   }
 
   fetchPosts = () => {
+    const token = localStorage.getItem("token");
+
     postApi
-      .getPosts()
+      .getPosts(token)
       .then((posts) => this.setState({ posts: posts }))
       .catch((err) => console.log(err));
   };
 
   handlePostSubmit = (e, inputs) => {
     const { currentUser, history } = this.props;
+    const token = localStorage.getItem("token");
 
     e.preventDefault();
 
-    postApi.createNewPost(inputs, currentUser).then((post) => {
-      this.setState((prevState) => ({
-        posts: [...prevState.posts, post],
-      }));
-      this.props.updateMyPostsOnNewPostSubmit(post);
+    postApi.createNewPost(inputs, currentUser, token).then((post) => {
+      if (post.error) {
+        console.log(post.error);
+      } else {
+        this.setState((prevState) => ({
+          posts: [...prevState.posts, post],
+        }));
+        this.props.updateMyPostsOnNewPostSubmit(post);
+      }
     });
 
-    this.props.fetchMyPosts();
     history.push("/");
   };
 
   handleUpvoteClick = (post, upvoteClicked) => {
     const { currentUser } = this.props;
+    const token = localStorage.getItem("token");
 
     if (upvoteClicked) {
-      postApi.decreaseUpvote(post, currentUser).then((updatedPost) =>
+      postApi.decreaseUpvote(post, currentUser, token).then((updatedPost) =>
         this.setState((prevState) => ({
           posts: prevState.posts.map((post) =>
             post.post_info.id === updatedPost.post_info.id ? updatedPost : post
@@ -49,7 +56,7 @@ class PostsContainer extends Component {
         }))
       );
     } else {
-      postApi.increaseUpvote(post, currentUser).then((updatedPost) =>
+      postApi.increaseUpvote(post, currentUser, token).then((updatedPost) =>
         this.setState((prevState) => ({
           posts: prevState.posts.map((post) =>
             post.post_info.id === updatedPost.post_info.id ? updatedPost : post
@@ -61,9 +68,10 @@ class PostsContainer extends Component {
 
   handleDownvoteClick = (post, downvoteClicked) => {
     const { currentUser } = this.props;
+    const token = localStorage.getItem("token");
 
     if (downvoteClicked) {
-      postApi.decreaseDownvote(post, currentUser).then((updatedPost) =>
+      postApi.decreaseDownvote(post, currentUser, token).then((updatedPost) =>
         this.setState((prevState) => ({
           posts: prevState.posts.map((post) =>
             post.post_info.id === updatedPost.post_info.id ? updatedPost : post
@@ -71,13 +79,13 @@ class PostsContainer extends Component {
         }))
       );
     } else {
-      postApi.increaseDownvote(post, currentUser).then((updatedPost) =>
+      postApi.increaseDownvote(post, currentUser, token).then((updatedPost) => {
         this.setState((prevState) => ({
           posts: prevState.posts.map((post) =>
             post.post_info.id === updatedPost.post_info.id ? updatedPost : post
           ),
-        }))
-      );
+        }));
+      });
     }
   };
 

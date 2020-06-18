@@ -1,5 +1,6 @@
 .navbar {
-  height: 70px;
+  height: 80px;
+  position: sticky;
 
   .icon {
     padding: 0px 5px;
@@ -11,7 +12,7 @@
     color: #16324f;
     float: left;
     text-align: center;
-    line-height: 70px;
+    line-height: 80px;
 
     .logo-img {
       padding-left: 20px;
@@ -28,13 +29,13 @@
       float: right;
       text-align: center;
       padding-right: 20px;
-      line-height: 70px;
+      line-height: 80px;
     }
   }
 }
 
 main {
-  height: calc(100vh - 70px);
+  height: calc(100%vh - 80px);
 }
 
 .filter-bar {
@@ -47,11 +48,6 @@ main {
   border: 1px solid #16324f;
 }
 
-.ui.basic.label:hover {
-  color: #ffd400;
-  border: 1px solid #ffd400;
-}
-
 .ui.button {
   background-color: #16324f;
   color: white;
@@ -59,4 +55,9 @@ main {
 
 .ui.button:hover {
   background-color: #ffd400;
+  cursor: pointer;
+}
+
+.ui.items > .item .meta {
+  font-size: 15px;
 }

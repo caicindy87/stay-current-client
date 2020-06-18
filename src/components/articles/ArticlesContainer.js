@@ -32,11 +32,8 @@ class ArticlesContainer extends Component {
 
     if (this.state.hasMore) {
       this.setState({ page: this.state.page + 1 }, () => {
-        console.log("new page", this.state.page);
         articleApi.getArticles(this.state.page).then((data) => {
-          console.log(data.articles);
           const moreArticles = [...this.state.articles, ...data.articles];
-          console.log("fetched", moreArticles);
           this.setState({ articles: moreArticles });
         });
       });

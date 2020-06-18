@@ -1,40 +1,97 @@
-.my-posts-list {
-  margin: 20px 20%;
+.myposts-container {
+  display: grid;
+  grid-template-columns: 1.5fr 250px;
+  column-gap: 40px;
+
+  grid-template-rows: 40px auto;
+  margin: 0px 15%;
 }
 
-.my-post {
-  border-bottom: solid 1px #ebf2fa;
-  border-radius: 25px;
-  box-shadow: 2px 2px 5px #4e545c;
-  margin-bottom: 20px;
+h2 {
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+.profile-container {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
   padding: 30px;
+  text-align: center;
+  background-color: #f4f5f6;
+  border-radius: 25px;
 
-  .ui.items > .item > .content > .header:not(.ui) {
-    font-size: 20px;
+  height: 500px;
+
+  .profile-pic {
+    width: 90%;
+    border-radius: 50%;
   }
 
-  .ui.items > .item > .content > .description {
-    font-size: 20px;
+  h1 {
+    font-family: Geomanist-Medium;
   }
 
-  i.icon,
-  i.icons {
-    font-size: 20px;
-  }
-
-  a {
-    text-decoration: underline;
+  p {
+    margin-bottom: 0;
+    font-size: 18px;
+    padding: 15px;
   }
 }
 
-.options-button {
-  float: right;
-}
+.my-posts-list {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
 
+  .my-post {
+    border: solid 3px #f4f5f6;
+    border-radius: 25px;
+    margin-bottom: 20px;
+    padding: 30px;
+    background-color: #f4f5f6;
+
+    .ui.items > .item > .image > img {
+      border-radius: 50%;
+    }
+
+    .ui.items > .item > .content > .header:not(.ui) {
+      font-size: 18px;
+      font-family: Geomanist-Medium;
+    }
+
+    .ui.items > .item > .content > .description {
+      font-size: 20px;
+      width: 95%;
+    }
+
+    .ui.items > .item .content img {
+      padding: 10px 0px;
+      width: 95%;
+    }
+
+    i.icon,
+    i.icons {
+      font-size: 20px;
+    }
+
+    a {
+      text-decoration: underline;
+    }
+  }
+
+  .options-button {
+    float: right;
+  }
+}
 .ui.primary.button {
   background-color: #d63031;
 }
 
 .ui.primary.button:hover {
-  background-color: #d63031;
+  background-color: red;
+}
+
+.ui.modal > .content {
+  font-size: 18px;
 }

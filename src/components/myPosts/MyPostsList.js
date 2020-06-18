@@ -17,19 +17,32 @@ class MyPostsList extends Component {
   };
 
   render() {
-    const { tags, handleEditPostSubmit, handleDeletePost } = this.props;
+    const {
+      tags,
+      handleEditPostSubmit,
+      handleDeletePost,
+      currentUser,
+    } = this.props;
 
     return (
-      <div className="my-posts-list">
-        {this.sortPostsFromNewestToOldest().map((post) => (
-          <MyPost
-            key={post.post_info.id}
-            post={post}
-            tags={tags}
-            handleEditPostSubmit={handleEditPostSubmit}
-            handleDeletePost={handleDeletePost}
-          />
-        ))}
+      <div className="myposts-container">
+        <h2>Past Posts</h2>
+        <div className="profile-container">
+          <h1>{currentUser.username}</h1>
+          <img src={currentUser.profile_pic} className="profile-pic" />
+          <p className="bio">{currentUser.bio}</p>
+        </div>
+        <div className="my-posts-list">
+          {this.sortPostsFromNewestToOldest().map((post) => (
+            <MyPost
+              key={post.post_info.id}
+              post={post}
+              tags={tags}
+              handleEditPostSubmit={handleEditPostSubmit}
+              handleDeletePost={handleDeletePost}
+            />
+          ))}
+        </div>
       </div>
     );
   }

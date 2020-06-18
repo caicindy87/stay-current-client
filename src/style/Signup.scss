@@ -1,11 +1,17 @@
 .signup-form-container {
   display: grid;
   grid-template-columns: [first] 40% [line2] 60%;
-  grid-template-rows: [row1-start] 130px [row1-end] 1fr [third-line] auto;
+  grid-template-rows: [row1-start] 100px [row1-end] 1fr [third-line] auto;
   justify-items: center;
   align-items: center;
   color: #16324f;
   font-family: Geomanist;
+  margin: 0px 15%;
+}
+
+.signup-img {
+  grid-column-start: first;
+  grid-row-start: row1-end;
 }
 
 .signup-error-msg {
@@ -13,7 +19,7 @@
 }
 
 .signup-form {
-  width: 60%;
+  width: 70%;
   grid-column-start: line2;
   grid-row-start: row1-end;
 

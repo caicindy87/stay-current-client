@@ -4,6 +4,7 @@ import { Button } from "semantic-ui-react";
 
 import authApi from "../../services/authApi";
 import "../../style/Signup.scss";
+import signupImage from "../../icons/signup.jpg";
 
 class Signup extends Component {
   state = {
@@ -44,7 +45,9 @@ class Signup extends Component {
 
     return (
       <div className="signup-form-container">
-        <div></div>
+        <div className="signup-img">
+          <img src={signupImage} />
+        </div>
         <div className="signup-form">
           <h1>Create an Account</h1>
           {error ? <h3 className="signup-error-msg">Try Again</h3> : null}

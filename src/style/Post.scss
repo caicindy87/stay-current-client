@@ -6,11 +6,22 @@
   margin-bottom: 20px;
 
   .ui.items > .item > .content > .header:not(.ui) {
-    font-size: 20px;
+    font-size: 18px;
+    font-family: Geomanist-Medium;
   }
 
   .ui.items > .item > .content > .description {
     font-size: 20px;
+    width: 95%;
+  }
+
+  .ui.items > .item .content img {
+    padding: 10px 0px;
+    width: 95%;
+  }
+
+  .ui.items > .item > .image > img {
+    border-radius: 50%;
   }
 
   a {
@@ -22,22 +33,37 @@
   padding-right: 15px;
 }
 
-.upvote-btn-container {
+.vote-btn-container {
   display: inline-flex;
-  // float: right;
-  padding: 10px;
+  font-size: 15px;
+  padding: 10px 0px;
 
   p {
-    padding-left: 4px;
+    padding: 0px 10px;
   }
 }
 
-.downvote-btn-container {
-  display: inline-flex;
-  // float: right;
-  padding: 10px;
+button,
+input,
+optgroup,
+select,
+textarea {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #16324f;
+}
 
-  p {
-    padding-left: 4px;
-  }
+button:hover,
+optgroup,
+select,
+textarea {
+  color: #ffd400;
+}
+
+button:disabled,
+optgroup,
+select,
+textarea {
+  color: #cccccc;
 }

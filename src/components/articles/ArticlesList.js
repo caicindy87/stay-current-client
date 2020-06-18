@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import { Checkbox } from "semantic-ui-react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import Article from "../articles/Article";
 import "../../style/ArticlesList.scss";
-import articleApi from "../../services/articleApi";
 
 class ArticlesList extends Component {
   render() {
@@ -13,7 +11,7 @@ class ArticlesList extends Component {
     return (
       <div className="articles-wrapper">
         <div className="phrase">
-          <h1>Top headlines</h1>
+          <h1>Top Stories</h1>
         </div>
         <div className="articles-list">
           <InfiniteScroll

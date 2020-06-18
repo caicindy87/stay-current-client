@@ -8,19 +8,18 @@ const headers = {
   Authorization: `Bearer ${token}`,
 };
 
-const getMyPosts = (user) => {
+const getMyPosts = (user, token) => {
+  console.log("fetching", user);
   return fetch(`${API_ROOT}/users/${user.id}/posts`, {
     method: "GET",
-    headers: headers,
+    headers: { ...headers, Authorization: `Bearer ${token}` },
   }).then((resp) => resp.json());
 };
 
-const editMyPost = (inputs, user, postId) => {
-  console.log("user", user);
-  console.log("post id in editMyPost", postId);
+const editMyPost = (inputs, user, postId, token) => {
   return fetch(`${API_ROOT}/users/${user.id}/posts/${postId}`, {
     method: "PATCH",
-    headers: headers,
+    headers: { ...headers, Authorization: `Bearer ${token}` },
     body: JSON.stringify({
       text: inputs.text,
       image: inputs.image,
@@ -29,12 +28,10 @@ const editMyPost = (inputs, user, postId) => {
   }).then((resp) => resp.json());
 };
 
-const deleteMyPost = (user, postId) => {
-  console.log("user", user);
-  console.log("post id in fetch", postId);
+const deleteMyPost = (user, postId, token) => {
   return fetch(`${API_ROOT}/users/${user.id}/posts/${postId}`, {
     method: "DELETE",
-    headers: headers,
+    headers: { ...headers, Authorization: `Bearer ${token}` },
   });
 };
 

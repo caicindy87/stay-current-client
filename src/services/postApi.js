@@ -8,17 +8,17 @@ const headers = {
   Authorization: `Bearer ${token}`,
 };
 
-const getPosts = () => {
+const getPosts = (token) => {
   return fetch(`${API_ROOT}/posts`, {
     method: "GET",
-    headers: headers,
+    headers: { ...headers, Authorization: `Bearer ${token}` },
   }).then((resp) => resp.json());
 };
 
-const createNewPost = ({ text, image, selectedTags }, user) => {
+const createNewPost = ({ text, image, selectedTags }, user, token) => {
   return fetch(`${API_ROOT}/users/${user.id}/posts`, {
     method: "POST",
-    headers: headers,
+    headers: { ...headers, Authorization: `Bearer ${token}` },
     body: JSON.stringify({
       text: text,
       image: image,
@@ -28,20 +28,20 @@ const createNewPost = ({ text, image, selectedTags }, user) => {
   }).then((resp) => resp.json());
 };
 
-const increaseUpvote = (post, user) => {
+const increaseUpvote = (post, user, token) => {
   return fetch(`${API_ROOT}/users/${user.id}/posts/${post.id}`, {
     method: "PATCH",
-    headers: headers,
+    headers: { ...headers, Authorization: `Bearer ${token}` },
     body: JSON.stringify({
       upvotes: post.upvotes + 1,
     }),
   }).then((resp) => resp.json());
 };
 
-const decreaseUpvote = (post, user) => {
+const decreaseUpvote = (post, user, token) => {
   return fetch(`${API_ROOT}/users/${user.id}/posts/${post.id}`, {
     method: "PATCH",
-    headers: headers,
+    headers: { ...headers, Authorization: `Bearer ${token}` },
     body: JSON.stringify({
       upvotes: post.upvotes - 1,
     }),
@@ -58,10 +58,10 @@ const increaseDownvote = (post, user, token) => {
   }).then((resp) => resp.json());
 };
 
-const decreaseDownvote = (post, user) => {
+const decreaseDownvote = (post, user, token) => {
   return fetch(`${API_ROOT}/users/${user.id}/posts/${post.id}`, {
     method: "PATCH",
-    headers: headers,
+    headers: { ...headers, Authorization: `Bearer ${token}` },
     body: JSON.stringify({
       downvotes: post.downvotes - 1,
     }),

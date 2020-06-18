@@ -74,8 +74,11 @@ class App extends Component {
   };
 
   fetchMyPosts = (user) => {
+    const token = localStorage.getItem("token");
+    console.log("user for fetching", user);
+
     myPostApi
-      .getMyPosts(user)
+      .getMyPosts(user, token)
       .then((posts) => this.setState({ myPosts: posts }));
   };
 
@@ -87,22 +90,26 @@ class App extends Component {
 
   handleEditPostSubmit = (e, inputs, postId) => {
     const { currentUser } = this.state;
+    const token = localStorage.getItem("token");
 
     e.preventDefault();
 
-    myPostApi.editMyPost(inputs, currentUser, postId).then((updatedPost) => {
-      this.setState((prevState) => ({
-        myPosts: prevState.myPosts.map((post) =>
-          post.post_info.id === updatedPost.post_info.id ? updatedPost : post
-        ),
-      }));
-    });
+    myPostApi
+      .editMyPost(inputs, currentUser, postId, token)
+      .then((updatedPost) => {
+        this.setState((prevState) => ({
+          myPosts: prevState.myPosts.map((post) =>
+            post.post_info.id === updatedPost.post_info.id ? updatedPost : post
+          ),
+        }));
+      });
   };
 
   handleDeletePost = (postId) => {
     const { currentUser } = this.state;
+    const token = localStorage.getItem("token");
 
-    myPostApi.deleteMyPost(currentUser, postId).then((data) => {
+    myPostApi.deleteMyPost(currentUser, postId, token).then((data) => {
       this.setState((prevState) => ({
         myPosts: prevState.myPosts.filter(
           (myPost) => myPost.post_info.id !== postId

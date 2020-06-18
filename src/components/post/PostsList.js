@@ -10,22 +10,23 @@ class PostsList extends Component {
   state = {
     filteredPosts: [],
     modalOpen: false,
-    tagSelected: false,
+    selectedTag: "",
   };
 
   handleTagSelected = (e) => {
     const tagName = e.target.innerText;
 
-    this.setState(
-      (prevState) => ({ tagSelected: !prevState.tagSelected }),
-      () => {
-        if (this.state.tagSelected) {
-          this.handleFilterBySelectedTag(tagName);
-        } else {
-          this.handleFilterBySelectedTag("");
-        }
-      }
-    );
+    if (this.state.selectedTag !== tagName) {
+      this.setState(
+        { selectedTag: tagName },
+        this.handleFilterBySelectedTag(tagName)
+      );
+    } else {
+      this.setState(
+        { selectedTag: "" },
+        this.handleFilterBySelectedTag("no tag selected")
+      );
+    }
   };
 
   handleFilterBySelectedTag = (tagName) => {

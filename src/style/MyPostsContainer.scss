@@ -2,7 +2,6 @@
   display: grid;
   grid-template-columns: 1.5fr 250px;
   column-gap: 40px;
-
   grid-template-rows: 40px auto;
   margin: 0px 15%;
 }
@@ -18,7 +17,7 @@ h2 {
   grid-row-start: 2;
   padding: 30px;
   text-align: center;
-  background-color: #f4f5f6;
+  background-color: #ebf2fa;
   border-radius: 25px;
 
   height: 500px;
@@ -45,11 +44,11 @@ h2 {
   grid-row-start: 2;
 
   .my-post {
-    border: solid 3px #f4f5f6;
+    border-bottom: solid 1px #ebf2fa;
     border-radius: 25px;
+    box-shadow: 2px 2px 5px #4e545c;
     margin-bottom: 20px;
     padding: 30px;
-    background-color: #f4f5f6;
 
     .ui.items > .item > .image > img {
       border-radius: 50%;

@@ -26,13 +26,13 @@ class MyPostsList extends Component {
 
     return (
       <div className="myposts-container">
-        <h2>Past Posts</h2>
         <div className="profile-container">
           <h1>{currentUser.username}</h1>
           <img src={currentUser.profile_pic} className="profile-pic" />
           <p className="bio">{currentUser.bio}</p>
         </div>
         <div className="my-posts-list">
+          <h2>Past Posts</h2>
           {this.sortPostsFromNewestToOldest().map((post) => (
             <MyPost
               key={post.post_info.id}

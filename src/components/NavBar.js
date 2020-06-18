@@ -12,12 +12,28 @@ class NavBar extends Component {
     const { handleLogOut, currentUser } = this.props;
 
     return (
-      <div className="navbar">
+      <nav className="navbar">
         <a href="/" className="logo">
           <img src={logo} alt="logo" className="logo-img"></img>
           Stay Current
         </a>
         <div className="navbar-right">
+          <Link to="/news">
+            <img src={newsIcon} alt="news-icon" className="icon"></img>
+            News
+          </Link>
+          {!!localStorage.getItem("token") ? (
+            <>
+              <Link to="/profile">
+                <img
+                  src={profileIcon}
+                  alt="profile-icon"
+                  className="icon"
+                ></img>
+                {currentUser.username}
+              </Link>
+            </>
+          ) : null}
           {!!localStorage.getItem("token") ? (
             <>
               <Link
@@ -36,24 +52,8 @@ class NavBar extends Component {
               Log In
             </Link>
           )}
-          {!!localStorage.getItem("token") ? (
-            <>
-              <Link to="/profile">
-                <img
-                  src={profileIcon}
-                  alt="profile-icon"
-                  className="icon"
-                ></img>
-                {currentUser.username}
-              </Link>
-            </>
-          ) : null}
-          <Link to="/news">
-            <img src={newsIcon} alt="news-icon" className="icon"></img>
-            News
-          </Link>
         </div>
-      </div>
+      </nav>
     );
   }
 }

@@ -10,12 +10,29 @@ class PostsList extends Component {
   state = {
     filteredPosts: [],
     modalOpen: false,
+    selectedTag: "",
   };
 
-  handleFilterBySelectedTag = (e) => {
+  handleTagSelected = (e) => {
+    const tagName = e.target.innerText;
+
+    if (this.state.selectedTag !== tagName) {
+      this.setState(
+        { selectedTag: tagName },
+        this.handleFilterBySelectedTag(tagName)
+      );
+    } else {
+      this.setState(
+        { selectedTag: "" },
+        this.handleFilterBySelectedTag("no tag selected")
+      );
+    }
+  };
+
+  handleFilterBySelectedTag = (tagName) => {
     const { posts } = this.props;
     const filteredPosts = posts.filter((post) =>
-      post.post_info.tags.find((tag) => tag.name === e.target.innerText)
+      post.post_info.tags.find((tag) => tag.name === tagName)
     );
 
     this.setState({ filteredPosts: filteredPosts });
@@ -96,7 +113,7 @@ class PostsList extends Component {
                   key={tag.id}
                   as="button"
                   basic
-                  onClick={this.handleFilterBySelectedTag}
+                  onClick={this.handleTagSelected}
                 >
                   {tag.name}
                 </Label>

@@ -26,7 +26,7 @@ class MyPostsList extends Component {
 
     return (
       <div className="myposts-container">
-        <h2>Posts</h2>
+        <h2>Past Posts</h2>
         <div className="profile-container">
           <h1>{currentUser.username}</h1>
           <img src={currentUser.profile_pic} className="profile-pic" />

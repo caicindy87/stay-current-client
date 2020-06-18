@@ -1,17 +1,8 @@
-// .myposts-container {
-//   display: grid;
-//   grid-template-columns: 1fr 1fr 2fr;
-//   column-gap: 60px;
-//   margin: 0px 18%;
-//   grid-template-rows: 1fr auto;
-//   margin: 20px 18%;
-// }
-
 .myposts-container {
   display: grid;
-  grid-template-columns: 2fr 0.8fr;
-  column-gap: 60px;
-  margin: 0px 15%;
+  grid-template-columns: 1.5fr 250px;
+  column-gap: 40px;
+
   grid-template-rows: 40px auto;
   margin: 0px 15%;
 }
@@ -28,15 +19,12 @@ h2 {
   padding: 30px;
   text-align: center;
   background-color: #f4f5f6;
-  // background-color: #d8dee4;
-  // border: 1px solid #ebf2fa;
-  border: solid 3px #f4f5f6;
   border-radius: 25px;
 
   height: 500px;
 
   .profile-pic {
-    width: 100%;
+    width: 90%;
     border-radius: 50%;
   }
 
@@ -62,7 +50,6 @@ h2 {
     margin-bottom: 20px;
     padding: 30px;
     background-color: #f4f5f6;
-    // background-color: #d8dee4;
 
     .ui.items > .item > .image > img {
       border-radius: 50%;

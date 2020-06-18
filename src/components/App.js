@@ -115,9 +115,6 @@ class App extends Component {
           (myPost) => myPost.post_info.id !== postId
         ),
       }));
-      // if (data.ok) {
-      //   alert("Successfully deleted");
-      // }
     });
   };
 
@@ -151,7 +148,6 @@ class App extends Component {
           <PostsContainer
             currentUser={currentUser}
             tags={tags}
-            fetchMyPosts={this.fetchMyPosts}
             updateMyPostsOnNewPostSubmit={this.updateMyPostsOnNewPostSubmit}
           />
           <MyPostsContainer

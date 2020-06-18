@@ -1,9 +1,9 @@
 .container {
   display: grid;
-  grid-template-columns: 2fr 0.8fr;
+  grid-template-columns: 1.4fr 275px;
   grid-template-rows: [row1-start] 20px [row1-end] 1fr [third-line] auto;
   font-family: Geomanist;
-  column-gap: 20px;
+  column-gap: 40px;
   margin: 0px 15%;
 
   .posts-list {
@@ -41,6 +41,7 @@
     border: solid 1px #ebf2fa;
     border-radius: 15px;
     grid-column-start: 2;
+    grid-column-end: 3;
     grid-row-start: row1-end;
 
     .ui.basic.label {
@@ -51,5 +52,6 @@
   .ui.basic.label:hover {
     color: #ffd400;
     border: 1px solid #ffd400;
+    cursor: pointer;
   }
 }

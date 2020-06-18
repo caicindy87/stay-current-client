@@ -55,12 +55,9 @@ main {
 
 .ui.button:hover {
   background-color: #ffd400;
+  cursor: pointer;
 }
 
 .ui.items > .item .meta {
   font-size: 15px;
 }
-
-// * {
-//   background-color: #f4f5f6;
-// }

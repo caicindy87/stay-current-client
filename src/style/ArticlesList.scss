@@ -1,6 +1,5 @@
 .articles-wrapper {
   display: grid;
-  // grid-template-columns: [line1] 300px [line2] 0.75fr [line3] 40px [line4] 2.25fr [line5] 300px;
   grid-template-columns: 1fr 1fr 2fr;
   column-gap: 20px;
   margin: 0px 13%;
@@ -12,9 +11,6 @@
     grid-row-start: 1;
     margin-top: 20px;
     height: 200px;
-    // background-color: #ebf2fa;
-    // border: 1px solid #ebf2fa;
-    // border-radius: 10px;
     padding: 30px;
     text-align: center;
 

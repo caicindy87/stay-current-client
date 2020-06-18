@@ -1,6 +1,14 @@
 .navbar {
-  height: 80px;
-  position: sticky;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  background-color: white;
+  padding: 15px 0px;
 
   .icon {
     padding: 0px 5px;
@@ -10,12 +18,10 @@
     font-size: 48px;
     font-family: Geomanist-Bold;
     color: #16324f;
-    float: left;
     text-align: center;
-    line-height: 80px;
 
     .logo-img {
-      padding-left: 20px;
+      padding-left: 15px;
       padding-right: 10px;
     }
   }
@@ -26,16 +32,14 @@
       font-family: Geomanist;
       font-size: 20px;
       text-decoration: underline;
-      float: right;
-      text-align: center;
-      padding-right: 20px;
-      line-height: 80px;
+      padding-right: 15px;
     }
   }
 }
 
 main {
-  height: calc(100%vh - 80px);
+  height: calc(100%vh - 66px);
+  // background-color: #ebf2fa;
 }
 
 .filter-bar {

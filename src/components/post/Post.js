@@ -91,7 +91,9 @@ export default class Post extends Component {
                 <button
                   className="upvote-btn"
                   onClick={this.handleSetStateOnUpvoteClick}
-                  disabled={!!currentUser.id ? downvoteClicked : true}
+                  disabled={
+                    !!localStorage.getItem("token") ? downvoteClicked : true
+                  }
                 >
                   <FontAwesomeIcon
                     icon={upvoteClicked ? faThumbsUp : faThumbsUpReg}
@@ -103,7 +105,9 @@ export default class Post extends Component {
                 <button
                   className="downvote-btn"
                   onClick={this.handleSetStateOnDownvoteClick}
-                  disabled={!!currentUser.id ? upvoteClicked : true}
+                  disabled={
+                    !!localStorage.getItem("token") ? upvoteClicked : true
+                  }
                 >
                   <FontAwesomeIcon
                     icon={downvoteClicked ? faThumbsDown : faThumbsDownReg}

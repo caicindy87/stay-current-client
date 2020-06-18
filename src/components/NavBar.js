@@ -18,7 +18,7 @@ class NavBar extends Component {
           Stay Current
         </a>
         <div className="navbar-right">
-          {!!currentUser.id ? (
+          {!!localStorage.getItem("token") ? (
             <>
               <Link
                 to="/"
@@ -36,7 +36,7 @@ class NavBar extends Component {
               Log In
             </Link>
           )}
-          {!!currentUser.id ? (
+          {!!localStorage.getItem("token") ? (
             <>
               <Link to="/profile">
                 <img

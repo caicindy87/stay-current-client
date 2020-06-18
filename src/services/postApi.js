@@ -48,10 +48,10 @@ const decreaseUpvote = (post, user) => {
   }).then((resp) => resp.json());
 };
 
-const increaseDownvote = (post, user) => {
+const increaseDownvote = (post, user, token) => {
   return fetch(`${API_ROOT}/users/${user.id}/posts/${post.id}`, {
     method: "PATCH",
-    headers: headers,
+    headers: { ...headers, Authorization: `Bearer ${token}` },
     body: JSON.stringify({
       downvotes: post.downvotes + 1,
     }),

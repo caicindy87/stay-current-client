@@ -58,7 +58,7 @@ class PostsList extends Component {
           </Modal.Content>
         </Modal>
         <div className="posts-list">
-          {!!currentUser.id ? (
+          {!!localStorage.getItem("token") ? (
             <div className="new-post">
               <input
                 type="textarea"

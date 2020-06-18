@@ -62,3 +62,10 @@ select,
 textarea {
   color: #ffd400;
 }
+
+button:disabled,
+optgroup,
+select,
+textarea {
+  color: #cccccc;
+}

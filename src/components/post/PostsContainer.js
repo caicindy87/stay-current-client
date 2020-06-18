@@ -27,10 +27,14 @@ class PostsContainer extends Component {
     e.preventDefault();
 
     postApi.createNewPost(inputs, currentUser).then((post) => {
-      this.setState((prevState) => ({
-        posts: [...prevState.posts, post],
-      }));
-      this.props.updateMyPostsOnNewPostSubmit(post);
+      if (post.error) {
+        console.log(post.error);
+      } else {
+        this.setState((prevState) => ({
+          posts: [...prevState.posts, post],
+        }));
+        this.props.updateMyPostsOnNewPostSubmit(post);
+      }
     });
 
     this.props.fetchMyPosts();
@@ -61,6 +65,8 @@ class PostsContainer extends Component {
 
   handleDownvoteClick = (post, downvoteClicked) => {
     const { currentUser } = this.props;
+    console.log("current user", currentUser);
+    const token = localStorage.getItem("token");
 
     if (downvoteClicked) {
       postApi.decreaseDownvote(post, currentUser).then((updatedPost) =>
@@ -71,12 +77,27 @@ class PostsContainer extends Component {
         }))
       );
     } else {
-      postApi.increaseDownvote(post, currentUser).then((updatedPost) =>
-        this.setState((prevState) => ({
-          posts: prevState.posts.map((post) =>
-            post.post_info.id === updatedPost.post_info.id ? updatedPost : post
-          ),
-        }))
+      postApi.increaseDownvote(post, currentUser, token).then(
+        (updatedPost) => {
+          // console.log("post id", post.id);
+          console.log("updated post", updatedPost);
+        }
+        //   this.setState((prevState) => ({
+        //     posts: prevState.posts.map((post) =>
+        //       post.post_info.id === updatedPost.post_info.id
+        //         ? updatedPost
+        //         : post
+        //     ),
+        //   }));
+        // }
+        // this.setState({
+        //   posts: this.state.posts.map((post) =>
+
+        //     post.post_info.id === updatedPost.post_info.id
+        //       ? updatedPost
+        //       : post
+        //   ),
+        // })
       );
     }
   };

@@ -35,7 +35,7 @@ class App extends Component {
           console.log(currentUser.error);
         } else {
           this.setState(
-            { currentUser: currentUser }
+            { currentUser: currentUser },
             this.fetchMyPosts(currentUser)
           );
         }
@@ -46,12 +46,7 @@ class App extends Component {
   handleLogin = (user) => {
     localStorage.setItem("token", user.token);
 
-    this.setState(
-      {
-        currentUser: user,
-      },
-      this.fetchMyPosts(user)
-    );
+    this.setState({ currentUser: user }, this.fetchMyPosts(user));
   };
 
   handleLogOut = () => {
@@ -128,6 +123,7 @@ class App extends Component {
         <main>
           <Switch>
             <Route
+              exact
               path="/login"
               render={(routerProps) => {
                 return (
@@ -136,6 +132,7 @@ class App extends Component {
               }}
             ></Route>
             <Route
+              exact
               path="/signup"
               render={(routerProps) => {
                 return (

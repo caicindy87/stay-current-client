@@ -38,6 +38,25 @@ class PostsList extends Component {
     this.setState({ filteredPosts: filteredPosts });
   };
 
+  alphabetizeTags = () => {
+    const { tags } = this.props;
+
+    const alphabetizedTags = tags.sort((a, b) => {
+      const nameA = a.name.toUpperCase();
+      const nameB = b.name.toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+
+      return 0;
+    });
+
+    return alphabetizedTags;
+  };
+
   sortPostsFromMostToLeastUpvotes = () => {
     let posts = [];
     if (this.state.filteredPosts.length === 0) {
@@ -56,10 +75,10 @@ class PostsList extends Component {
   render() {
     const {
       currentUser,
-      tags,
       handleUpvoteClick,
       handleDownvoteClick,
       handlePostSubmit,
+      errors,
     } = this.props;
 
     return (
@@ -68,7 +87,7 @@ class PostsList extends Component {
           <Modal.Header>Create a post</Modal.Header>
           <Modal.Content>
             <PostNew
-              tags={tags}
+              tags={this.alphabetizeTags()}
               handlePostSubmit={handlePostSubmit}
               handleClose={this.handleClose}
             />
@@ -79,17 +98,27 @@ class PostsList extends Component {
             <div className="new-post">
               <input
                 type="textarea"
-                value=""
                 placeholder="What news is on your mind?"
                 onClick={this.handleOpen}
+                readOnly
               ></input>
               <Button className="submit-post" onClick={this.handleOpen}>
                 Post
               </Button>
+              <ul className="errors-container">
+                {errors.length !== 0
+                  ? errors.map((e) => (
+                      <li key={e} className="error">
+                        {e}
+                      </li>
+                    ))
+                  : null}
+              </ul>
             </div>
           ) : (
             <About />
           )}
+
           <Item.Group>
             {this.sortPostsFromMostToLeastUpvotes().map((post) => {
               return (
@@ -107,7 +136,7 @@ class PostsList extends Component {
         </div>
         <div className="tags-container">
           <Label.Group size="big">
-            {tags.map((tag) => {
+            {this.alphabetizeTags().map((tag) => {
               return (
                 <Label
                   key={tag.id}

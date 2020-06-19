@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Form, Dropdown } from "semantic-ui-react";
+import { Container, Form } from "semantic-ui-react";
 
 import "../../style/PostNew.scss";
 

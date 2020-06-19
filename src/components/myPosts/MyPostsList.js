@@ -9,10 +9,10 @@ class MyPostsList extends Component {
     return postsClone.sort((a, b) => {
       if (b.post_info.created_at < a.post_info.created_at) {
         return -1;
-      }
-      if (b.post_info.created_at > a.post_info.created_at) {
+      } else if (b.post_info.created_at > a.post_info.created_at) {
         return 1;
       }
+      return 0;
     });
   };
 
@@ -22,17 +22,19 @@ class MyPostsList extends Component {
       handleEditPostSubmit,
       handleDeletePost,
       currentUser,
+      errors,
     } = this.props;
 
     return (
       <div className="myposts-container">
         <div className="profile-container">
           <h1>{currentUser.username}</h1>
-          <img src={currentUser.profile_pic} className="profile-pic" />
+          <img src={currentUser.profile_pic} className="profile-pic" alt="" />
           <p className="bio">{currentUser.bio}</p>
         </div>
         <div className="my-posts-list">
           <h2>Past Posts</h2>
+          {errors.length !== 0 ? errors.map((e) => <li>{e}</li>) : null}
           {this.sortPostsFromNewestToOldest().map((post) => (
             <MyPost
               key={post.post_info.id}

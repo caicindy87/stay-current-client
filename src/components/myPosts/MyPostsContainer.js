@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route, withRouter } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 import MyPostsList from "../../components/myPosts/MyPostsList";
 import "../../style/MyPostsContainer.scss";
@@ -12,6 +12,7 @@ class MyPostsContainer extends Component {
       myPosts,
       handleEditPostSubmit,
       handleDeletePost,
+      errors,
     } = this.props;
 
     return (
@@ -28,6 +29,7 @@ class MyPostsContainer extends Component {
                   tags={tags}
                   handleEditPostSubmit={handleEditPostSubmit}
                   handleDeletePost={handleDeletePost}
+                  errors={errors}
                 />
               );
             }}
@@ -38,4 +40,4 @@ class MyPostsContainer extends Component {
   }
 }
 
-export default withRouter(MyPostsContainer);
+export default MyPostsContainer;

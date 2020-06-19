@@ -44,7 +44,7 @@ export default class Post extends Component {
     return text.split(urlRegex).map((part) => {
       if (part.match(urlRegex)) {
         return (
-          <a key={part} href={part} target="_blank">
+          <a key={part} href={part} target="_blank" rel="noopener noreferrer">
             {part}
           </a>
         );
@@ -54,7 +54,7 @@ export default class Post extends Component {
   };
 
   render() {
-    const { post, currentUser, handleFilterBySelectedTag } = this.props;
+    const { post, handleFilterBySelectedTag } = this.props;
     const { post_info } = this.props.post;
     const { upvoteClicked, downvoteClicked } = this.state;
 

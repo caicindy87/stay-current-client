@@ -8,13 +8,13 @@ import signupImage from "../../icons/signup.jpg";
 
 class Signup extends Component {
   state = {
-    error: false,
     fields: {
       email: "",
       username: "",
       password: "",
       passwordConfirm: "",
     },
+    errors: [],
   };
 
   handleChange = (e) => {
@@ -32,7 +32,7 @@ class Signup extends Component {
 
     authApi.auth.signup(this.state.fields).then((user) => {
       if (user.error) {
-        this.setState({ error: true });
+        this.setState({ errors: user.error });
       } else {
         handleSignup(user);
         history.push("/");
@@ -41,16 +41,25 @@ class Signup extends Component {
   };
 
   render() {
-    const { fields, error } = this.state;
+    const { fields, errors } = this.state;
 
     return (
       <div className="signup-form-container">
         <div className="signup-img">
-          <img src={signupImage} />
+          <img src={signupImage} alt="" />
         </div>
         <div className="signup-form">
           <h1>Create an Account</h1>
-          {error ? <h3 className="signup-error-msg">Try Again</h3> : null}
+          <ul className="error-list">
+            {errors.length !== 0
+              ? errors.map((e) => (
+                  <li key={e} className="error">
+                    {e}
+                  </li>
+                ))
+              : null}
+          </ul>
+
           <form onSubmit={this.handleSignupSubmit}>
             <label htmlFor="username">Username</label>
             <input

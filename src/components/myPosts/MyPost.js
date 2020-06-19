@@ -36,7 +36,7 @@ class MyPost extends Component {
     return text.split(urlRegex).map((part) => {
       if (part.match(urlRegex)) {
         return (
-          <a key={part} href={part} target="_blank">
+          <a key={part} href={part} target="_blank" rel="noopener noreferrer">
             {part}
           </a>
         );

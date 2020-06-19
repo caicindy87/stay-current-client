@@ -4,7 +4,6 @@ import { Switch, Route } from "react-router-dom";
 import "../style/App.scss";
 import Login from "./auth/Login";
 import Signup from "./auth/Signup";
-import About from "./About";
 import NavBar from "./NavBar";
 import PostsContainer from "./post/PostsContainer";
 import MyPostsContainer from "../components/myPosts/MyPostsContainer";
@@ -12,13 +11,13 @@ import authApi from "../services/authApi";
 import tagApi from "../services/tagApi";
 import myPostApi from "../services/myPostApi";
 import ArticlesContainer from "./articles/ArticlesContainer";
-import PostsList from "./post/PostsList";
 
 class App extends Component {
   state = {
     currentUser: {},
     tags: [],
     myPosts: [],
+    errors: { currentUser: [], myPost: [] },
   };
 
   componentDidMount() {
@@ -32,7 +31,9 @@ class App extends Component {
     if (token) {
       authApi.auth.getCurrentUser().then((currentUser) => {
         if (currentUser.error) {
-          console.log(currentUser.error);
+          this.setState({
+            errors: { ...this.state.errors, currentUser: currentUser.error },
+          });
         } else {
           this.setState(
             { currentUser: currentUser },
@@ -75,7 +76,6 @@ class App extends Component {
 
   fetchMyPosts = (user) => {
     const token = localStorage.getItem("token");
-    console.log("user for fetching", user);
 
     myPostApi
       .getMyPosts(user, token)
@@ -97,11 +97,20 @@ class App extends Component {
     myPostApi
       .editMyPost(inputs, currentUser, postId, token)
       .then((updatedPost) => {
-        this.setState((prevState) => ({
-          myPosts: prevState.myPosts.map((post) =>
-            post.post_info.id === updatedPost.post_info.id ? updatedPost : post
-          ),
-        }));
+        if (updatedPost.error) {
+          this.setState({
+            errors: { ...this.state.errors, myPost: updatedPost.error },
+          });
+        } else {
+          this.setState((prevState) => ({
+            errors: { ...this.state.errors, myPost: [] },
+            myPosts: prevState.myPosts.map((post) =>
+              post.post_info.id === updatedPost.post_info.id
+                ? updatedPost
+                : post
+            ),
+          }));
+        }
       });
   };
 
@@ -119,7 +128,7 @@ class App extends Component {
   };
 
   render() {
-    const { currentUser, tags, myPosts } = this.state;
+    const { currentUser, tags, myPosts, errors } = this.state;
 
     return (
       <div className="app">
@@ -156,6 +165,7 @@ class App extends Component {
             myPosts={myPosts}
             handleEditPostSubmit={this.handleEditPostSubmit}
             handleDeletePost={this.handleDeletePost}
+            errors={errors.myPost}
           />
           <ArticlesContainer />
         </main>

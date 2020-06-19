@@ -7,10 +7,10 @@ class Article extends Component {
     return (
       <div className="article-card">
         <div className="image">
-          <img src={article.urlToImage} alt="article-image"></img>
+          <img src={article.urlToImage} alt=""></img>
         </div>
         <div className="article-content">
-          <a href={article.url} target="_blank">
+          <a href={article.url} target="_blank" rel="noopener noreferrer">
             <h2 className="title">{article.title}</h2>
           </a>
           <p className="source">{article.source.name}</p>

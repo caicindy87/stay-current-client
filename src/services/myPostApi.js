@@ -9,7 +9,6 @@ const headers = {
 };
 
 const getMyPosts = (user, token) => {
-  console.log("fetching", user);
   return fetch(`${API_ROOT}/users/${user.id}/posts`, {
     method: "GET",
     headers: { ...headers, Authorization: `Bearer ${token}` },

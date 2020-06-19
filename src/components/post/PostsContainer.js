@@ -8,6 +8,7 @@ import PostsList from "./PostsList";
 class PostsContainer extends Component {
   state = {
     posts: [],
+    errors: [],
   };
 
   componentDidMount() {
@@ -31,9 +32,10 @@ class PostsContainer extends Component {
 
     postApi.createNewPost(inputs, currentUser, token).then((post) => {
       if (post.error) {
-        console.log(post.error);
+        this.setState({ errors: post.error });
       } else {
         this.setState((prevState) => ({
+          errors: [],
           posts: [...prevState.posts, post],
         }));
         this.props.updateMyPostsOnNewPostSubmit(post);
@@ -91,7 +93,7 @@ class PostsContainer extends Component {
 
   render() {
     const { currentUser, tags } = this.props;
-    const { posts } = this.state;
+    const { posts, errors } = this.state;
 
     return (
       <div className="posts-container">
@@ -120,6 +122,7 @@ class PostsContainer extends Component {
                   handleUpvoteClick={this.handleUpvoteClick}
                   handleDownvoteClick={this.handleDownvoteClick}
                   handlePostSubmit={this.handlePostSubmit}
+                  errors={errors}
                 />
               );
             }}

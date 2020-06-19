@@ -54,7 +54,7 @@ export default class Post extends Component {
   };
 
   render() {
-    const { post, handleFilterBySelectedTag } = this.props;
+    const { post, handleTagSelected } = this.props;
     const { post_info } = this.props.post;
     const { upvoteClicked, downvoteClicked } = this.state;
 
@@ -79,7 +79,7 @@ export default class Post extends Component {
                           as="button"
                           size="big"
                           basic
-                          onClick={handleFilterBySelectedTag}
+                          onClick={handleTagSelected}
                         >
                           {tag.name}
                         </Label>

@@ -126,7 +126,7 @@ class PostsList extends Component {
                   key={post.post_info.id}
                   post={post}
                   currentUser={currentUser}
-                  handleFilterBySelectedTag={this.handleFilterBySelectedTag}
+                  handleTagSelected={this.handleTagSelected}
                   handleUpvoteClick={handleUpvoteClick}
                   handleDownvoteClick={handleDownvoteClick}
                 />

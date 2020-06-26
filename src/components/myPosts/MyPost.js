@@ -99,7 +99,7 @@ class MyPost extends Component {
               <Item.Description>
                 {this.urlify(post_info.text)}
                 {post_info.image ? (
-                  <Image src={post_info.image} size="large" />
+                  <Image src={post_info.image.url} size="large" alt="" />
                 ) : null}
               </Item.Description>
               <Item.Extra>

@@ -7,7 +7,7 @@ class PostNew extends Component {
   state = {
     fields: {
       text: "",
-      image: "",
+      image: null,
       selectedTags: [],
     },
   };
@@ -18,6 +18,12 @@ class PostNew extends Component {
     this.setState({
       fields: newFields,
     });
+  };
+
+  onImageChange = (e) => {
+    console.log("image", e.target.files[0]);
+    const image = e.target.files[0];
+    this.setState({ fields: { ...this.state.fields, image: image } });
   };
 
   handleDropdownChange = (e, { value }) => {
@@ -42,7 +48,8 @@ class PostNew extends Component {
       <Container className="new-post-form" textAlign="center">
         <Form
           onSubmit={(e) => {
-            handlePostSubmit(e, fields);
+            console.log("fields", this.state.fields);
+            handlePostSubmit(e, this.state.fields);
             handleClose();
           }}
         >
@@ -56,11 +63,11 @@ class PostNew extends Component {
           <br />
           <Form.Input
             label="Image (Optional)"
-            type="text"
+            type="file"
             name="image"
-            value={fields.image}
-            placeholder="Add an image URL "
-            onChange={this.handleInputChange}
+            accept="image/*"
+            multiple={false}
+            onChange={this.onImageChange}
           />
           <br />
           <Form.Dropdown

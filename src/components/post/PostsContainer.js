@@ -25,12 +25,16 @@ class PostsContainer extends Component {
   };
 
   handlePostSubmit = (e, inputs) => {
+    console.log("inputs", inputs);
+    e.preventDefault();
     const { currentUser, history } = this.props;
     const token = localStorage.getItem("token");
+    const formData = new FormData();
+    formData.append("text", inputs.text);
+    formData.append("selectedTags", inputs.selectedTags);
+    formData.append("image", inputs.image);
 
-    e.preventDefault();
-
-    postApi.createNewPost(inputs, currentUser, token).then((post) => {
+    postApi.createNewPost(formData, currentUser, token).then((post) => {
       if (post.error) {
         this.setState({ errors: post.error });
       } else {

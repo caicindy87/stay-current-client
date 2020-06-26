@@ -15,16 +15,11 @@ const getPosts = (token) => {
   }).then((resp) => resp.json());
 };
 
-const createNewPost = ({ text, image, selectedTags }, user, token) => {
+const createNewPost = (formData, user, token) => {
   return fetch(`${API_ROOT}/users/${user.id}/posts`, {
     method: "POST",
-    headers: { ...headers, Authorization: `Bearer ${token}` },
-    body: JSON.stringify({
-      text: text,
-      image: image,
-      selected_tags_id: selectedTags,
-      user_id: user.id,
-    }),
+    headers: { Accept: "application/json", Authorization: `Bearer ${token}` },
+    body: formData,
   }).then((resp) => resp.json());
 };
 

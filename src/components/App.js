@@ -89,13 +89,19 @@ class App extends Component {
   };
 
   handleEditPostSubmit = (e, inputs, postId) => {
+    e.preventDefault();
     const { currentUser } = this.state;
     const token = localStorage.getItem("token");
+    const editFormData = new FormData();
+    editFormData.append("text", inputs.text);
+    editFormData.append("selectedTags", inputs.selectedTags);
 
-    e.preventDefault();
+    inputs.image.signed_id
+      ? editFormData.append("image", inputs.image.signed_id)
+      : editFormData.append("image", inputs.image);
 
     myPostApi
-      .editMyPost(inputs, currentUser, postId, token)
+      .editMyPost(editFormData, currentUser, postId, token)
       .then((updatedPost) => {
         if (updatedPost.error) {
           this.setState({

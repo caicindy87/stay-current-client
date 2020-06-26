@@ -48,7 +48,6 @@ class PostNew extends Component {
       <Container className="new-post-form" textAlign="center">
         <Form
           onSubmit={(e) => {
-            console.log("fields", this.state.fields);
             handlePostSubmit(e, this.state.fields);
             handleClose();
           }}

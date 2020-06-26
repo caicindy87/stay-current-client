@@ -15,15 +15,11 @@ const getMyPosts = (user, token) => {
   }).then((resp) => resp.json());
 };
 
-const editMyPost = (inputs, user, postId, token) => {
+const editMyPost = (editFormData, user, postId, token) => {
   return fetch(`${API_ROOT}/users/${user.id}/posts/${postId}`, {
     method: "PATCH",
-    headers: { ...headers, Authorization: `Bearer ${token}` },
-    body: JSON.stringify({
-      text: inputs.text,
-      image: inputs.image,
-      selected_tags_id: inputs.selectedTags,
-    }),
+    headers: { Accept: "application/json", Authorization: `Bearer ${token}` },
+    body: editFormData,
   }).then((resp) => resp.json());
 };
 

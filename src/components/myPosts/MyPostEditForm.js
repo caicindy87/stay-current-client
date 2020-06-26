@@ -5,7 +5,7 @@ class MyPostEditForm extends Component {
   state = {
     fields: {
       text: "",
-      image: "",
+      image: null,
       selectedTags: [],
     },
   };
@@ -29,6 +29,11 @@ class MyPostEditForm extends Component {
     this.setState({
       fields: newFields,
     });
+  };
+
+  onImageChange = (e) => {
+    const image = e.target.files[0];
+    this.setState({ fields: { ...this.state.fields, image: image } });
   };
 
   handleDropdownChange = (e, { value }) => {
@@ -66,12 +71,12 @@ class MyPostEditForm extends Component {
             onChange={this.handleInputChange}
           />
           <Form.Input
-            type="text"
+            type="file"
             name="image"
-            label="Image"
-            value={fields.image === "" ? "No image" : fields.image}
-            placeholder="Edit image url"
-            onChange={this.handleInputChange}
+            label="Replace image"
+            accept="image/*"
+            multiple={false}
+            onChange={this.onImageChange}
           />
           <Dropdown
             placeholder="Edit tags"

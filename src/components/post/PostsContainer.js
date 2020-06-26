@@ -25,7 +25,6 @@ class PostsContainer extends Component {
   };
 
   handlePostSubmit = (e, inputs) => {
-    console.log("inputs", inputs);
     e.preventDefault();
     const { currentUser, history } = this.props;
     const token = localStorage.getItem("token");

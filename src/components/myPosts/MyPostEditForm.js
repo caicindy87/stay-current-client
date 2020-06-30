@@ -67,7 +67,7 @@ class MyPostEditForm extends Component {
             type="textarea"
             name="text"
             value={fields.text}
-            placeholder="Share your thoughts or other resources where you learn about current events."
+            placeholder="What's happening?"
             onChange={this.handleInputChange}
           />
           <Form.Input
@@ -78,7 +78,8 @@ class MyPostEditForm extends Component {
             multiple={false}
             onChange={this.onImageChange}
           />
-          <Dropdown
+          <Form.Dropdown
+            label="Tags"
             placeholder="Edit tags"
             fluid
             multiple
@@ -89,7 +90,7 @@ class MyPostEditForm extends Component {
             }
             options={selectOptions}
             onChange={this.handleDropdownChange}
-          ></Dropdown>
+          />
           <br />
           <Form.Button className="save-edit-post-btn">Save changes</Form.Button>
         </Form>

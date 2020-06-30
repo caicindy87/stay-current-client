@@ -68,7 +68,7 @@ export default class Post extends Component {
               <Item.Meta>{post.publish_date} ago</Item.Meta>
               <Item.Description>{this.urlify(post_info.text)}</Item.Description>
               {post_info.image ? (
-                <img src={post_info.image.url} size="large" alt="" />
+                <Image src={post_info.image.url} size="large" alt="" />
               ) : null}
               <Item.Extra>
                 <Label.Group>

@@ -56,7 +56,7 @@ class PostNew extends Component {
             type="textarea"
             name="text"
             value={fields.text}
-            placeholder="Share current events"
+            placeholder="What's happening?"
             onChange={this.handleInputChange}
           />
           <br />

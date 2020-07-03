@@ -73,7 +73,7 @@ class MyPostEditForm extends Component {
       <div className="edit-my-post-form">
         <Form onSubmit={(e) => this.handleSubmit(e)}>
           <ul className="error-msg-container">
-            {error ? <li>Text can't be blank</li> : null}
+            {error ? <li className="error-msg">Text can't be blank</li> : null}
           </ul>
           <Form.TextArea
             type="textarea"

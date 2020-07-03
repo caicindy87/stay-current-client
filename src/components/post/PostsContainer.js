@@ -8,7 +8,6 @@ import PostsList from "./PostsList";
 class PostsContainer extends Component {
   state = {
     posts: [],
-    errors: [],
   };
 
   componentDidMount() {
@@ -24,7 +23,7 @@ class PostsContainer extends Component {
       .catch((err) => console.log(err));
   };
 
-  handlePostSubmit = (e, inputs) => {
+  postSubmit = (e, inputs) => {
     e.preventDefault();
     const { currentUser, history } = this.props;
     const token = localStorage.getItem("token");
@@ -32,15 +31,11 @@ class PostsContainer extends Component {
     postApi
       .createNewPost(inputs, currentUser, token)
       .then((post) => {
-        if (post.error) {
-          this.setState({ errors: post.error });
-        } else {
-          this.setState((prevState) => ({
-            errors: [],
-            posts: [...prevState.posts, post],
-          }));
-          this.props.updateMyPostsOnNewPostSubmit(post);
-        }
+        this.setState((prevState) => ({
+          errors: [],
+          posts: [...prevState.posts, post],
+        }));
+        this.props.updateMyPostsOnNewPostSubmit(post);
       })
       .catch((err) => console.log(err));
 
@@ -95,7 +90,7 @@ class PostsContainer extends Component {
 
   render() {
     const { currentUser, tags } = this.props;
-    const { posts, errors } = this.state;
+    const { posts } = this.state;
 
     return (
       <div className="posts-container">
@@ -106,7 +101,7 @@ class PostsContainer extends Component {
               return (
                 <PostNew
                   currentUser={currentUser}
-                  handlePostSubmit={this.handlePostSubmit}
+                  postSubmit={this.postSubmit}
                   tags={tags}
                 />
               );
@@ -123,8 +118,7 @@ class PostsContainer extends Component {
                   tags={tags}
                   handleUpvoteClick={this.handleUpvoteClick}
                   handleDownvoteClick={this.handleDownvoteClick}
-                  handlePostSubmit={this.handlePostSubmit}
-                  errors={errors}
+                  postSubmit={this.postSubmit}
                 />
               );
             }}

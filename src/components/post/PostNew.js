@@ -37,11 +37,11 @@ class PostNew extends Component {
   };
 
   handleSubmit = (e) => {
-    const { handlePostSubmit, handleClose } = this.props;
+    const { postSubmit, handleClose } = this.props;
     const { fields } = this.state;
 
     if (!/^\s*$/.test(fields.text)) {
-      handlePostSubmit(e, fields);
+      postSubmit(e, fields);
       handleClose();
     } else {
       this.setState({ error: true });
@@ -60,7 +60,7 @@ class PostNew extends Component {
       <Container className="new-post-form" textAlign="center">
         <Form onSubmit={(e) => this.handleSubmit(e)}>
           <ul className="error-msg-container">
-            {error ? <li>Text can't be blank</li> : null}
+            {error ? <li className="error-msg">Text can't be blank</li> : null}
           </ul>
           <Form.TextArea
             type="textarea"

@@ -15,7 +15,15 @@ const getPosts = (token) => {
   }).then((resp) => resp.json());
 };
 
-const createNewPost = (formData, user, token) => {
+const createNewPost = (inputs, user, token) => {
+  console.log("inputs", inputs);
+  const formData = new FormData();
+  formData.append("text", inputs.text);
+  formData.append("selectedTags", inputs.selectedTags);
+  if (inputs.image !== null) {
+    formData.append("image", inputs.image);
+  }
+
   return fetch(`${API_ROOT}/users/${user.id}/posts`, {
     method: "POST",
     headers: { Accept: "application/json", Authorization: `Bearer ${token}` },

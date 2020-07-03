@@ -17,7 +17,14 @@ class MyPost extends Component {
 
   handleOpen = () => this.setState({ modalOpen: true });
 
-  handleClose = () => this.setState({ modalOpen: false });
+  handleClose = () => {
+    // if (this.props.errors !== undefined && this.props.errors.length !== 0) {
+    //   this.setState({ modalOpen: true });
+    // } else {
+    //   this.setState({ modalOpen: false });
+    // }
+    this.setState({ modalOpen: false });
+  };
 
   showConfirm = () => this.setState({ confirmOpen: true });
 

@@ -34,7 +34,6 @@ class MyPostsList extends Component {
         </div>
         <div className="my-posts-list">
           <h2>Past Posts</h2>
-          {errors.length !== 0 ? errors.map((e) => <li>{e}</li>) : null}
           {this.sortPostsFromNewestToOldest().map((post) => (
             <MyPost
               key={post.post_info.id}
@@ -42,6 +41,7 @@ class MyPostsList extends Component {
               tags={tags}
               handleEditPostSubmit={handleEditPostSubmit}
               handleDeletePost={handleDeletePost}
+              errors={errors}
             />
           ))}
         </div>

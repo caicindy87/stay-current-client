@@ -97,9 +97,11 @@ class App extends Component {
     editFormData.append("text", inputs.text);
     editFormData.append("selectedTags", inputs.selectedTags);
 
-    inputs.image.signed_id
-      ? editFormData.append("image", inputs.image.signed_id)
-      : editFormData.append("image", inputs.image);
+    if (inputs.image) {
+      inputs.image.signed_id
+        ? editFormData.append("image", inputs.image.signed_id)
+        : editFormData.append("image", inputs.image);
+    }
 
     myPostApi
       .editMyPost(editFormData, currentUser, postId, token)

@@ -70,7 +70,11 @@ class PostsList extends Component {
 
   handleOpen = () => this.setState({ modalOpen: true });
 
-  handleClose = () => this.setState({ modalOpen: false });
+  handleClose = () => {
+    if (this.props.errors !== undefined && this.props.errors.length !== 0) {
+      this.setState({ modalOpen: false });
+    }
+  };
 
   render() {
     const {
@@ -90,6 +94,7 @@ class PostsList extends Component {
               tags={this.alphabetizeTags()}
               handlePostSubmit={handlePostSubmit}
               handleClose={this.handleClose}
+              errors={errors}
             />
           </Modal.Content>
         </Modal>
@@ -105,15 +110,6 @@ class PostsList extends Component {
               <Button className="submit-post" onClick={this.handleOpen}>
                 Post
               </Button>
-              <ul className="errors-container">
-                {errors.length !== 0
-                  ? errors.map((e) => (
-                      <li key={e} className="error">
-                        {e}
-                      </li>
-                    ))
-                  : null}
-              </ul>
             </div>
           ) : (
             <About />

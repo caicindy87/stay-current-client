@@ -8,6 +8,7 @@ class MyPostEditForm extends Component {
       image: null,
       selectedTags: [],
     },
+    error: false,
   };
 
   componentDidMount() {
@@ -45,9 +46,23 @@ class MyPostEditForm extends Component {
     }));
   };
 
+  //
+  handleSubmit = (e) => {
+    const { post_info, handleEditPostSubmit, handleClose } = this.props;
+    const { fields } = this.state;
+
+    // checks if text input is only empty string and/or whitespaces before submitting
+    if (!/^\s*$/.test(fields.text)) {
+      handleEditPostSubmit(e, fields, post_info.id);
+      handleClose();
+    } else {
+      this.setState({ error: true });
+    }
+  };
+
   render() {
     const { fields } = this.state;
-    const { handleEditPostSubmit, post_info, tags, handleClose } = this.props;
+    const { post_info, tags } = this.props;
     const selectOptions = tags.map((tag) => ({
       key: tag.id,
       text: tag.name,
@@ -57,12 +72,10 @@ class MyPostEditForm extends Component {
 
     return (
       <div className="edit-my-post-form">
-        <Form
-          onSubmit={(e) => {
-            handleEditPostSubmit(e, fields, post_info.id);
-            handleClose();
-          }}
-        >
+        <Form onSubmit={(e) => this.handleSubmit(e)}>
+          <ul className="error-msg-container">
+            {this.state.error ? <li>Text can't be blank</li> : null}
+          </ul>
           <Form.TextArea
             type="textarea"
             name="text"
@@ -73,14 +86,14 @@ class MyPostEditForm extends Component {
           <Form.Input
             type="file"
             name="image"
-            label="Replace image"
+            label="Replace image (optional)"
             accept="image/*"
             multiple={false}
             onChange={this.onImageChange}
           />
           <Form.Dropdown
             label="Tags"
-            placeholder="Edit tags"
+            placeholder="Edit tags (optional)"
             fluid
             multiple
             search

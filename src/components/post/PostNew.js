@@ -37,7 +37,7 @@ class PostNew extends Component {
 
   render() {
     const { fields } = this.state;
-    const { handlePostSubmit, handleClose } = this.props;
+    const { handlePostSubmit, handleClose, errors } = this.props;
     const selectOptions = this.props.tags.map((tag) => ({
       key: tag.id,
       text: tag.name,
@@ -52,6 +52,15 @@ class PostNew extends Component {
             handleClose();
           }}
         >
+          <ul className="error-msg-container">
+            {errors !== undefined && errors.length !== 0
+              ? errors.map((e) => (
+                  <li key={e} className="error-msg">
+                    {e}
+                  </li>
+                ))
+              : null}
+          </ul>
           <Form.TextArea
             type="textarea"
             name="text"
@@ -61,7 +70,7 @@ class PostNew extends Component {
           />
           <br />
           <Form.Input
-            label="Image (Optional)"
+            label="Image (optional)"
             type="file"
             name="image"
             accept="image/*"
@@ -70,8 +79,8 @@ class PostNew extends Component {
           />
           <br />
           <Form.Dropdown
-            label="Tags (Optional)"
-            placeholder="Add tags"
+            label="Tags"
+            placeholder="Add tags (optional)"
             fluid
             multiple
             search

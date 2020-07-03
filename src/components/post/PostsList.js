@@ -29,6 +29,7 @@ class PostsList extends Component {
     }
   };
 
+  // filter all posts by selected tag
   handleFilterBySelectedTag = (tagName) => {
     const { posts } = this.props;
     const filteredPosts = posts.filter((post) =>
@@ -77,8 +78,7 @@ class PostsList extends Component {
       currentUser,
       handleUpvoteClick,
       handleDownvoteClick,
-      handlePostSubmit,
-      errors,
+      postSubmit,
     } = this.props;
 
     return (
@@ -88,7 +88,7 @@ class PostsList extends Component {
           <Modal.Content>
             <PostNew
               tags={this.alphabetizeTags()}
-              handlePostSubmit={handlePostSubmit}
+              postSubmit={postSubmit}
               handleClose={this.handleClose}
             />
           </Modal.Content>
@@ -105,20 +105,10 @@ class PostsList extends Component {
               <Button className="submit-post" onClick={this.handleOpen}>
                 Post
               </Button>
-              <ul className="errors-container">
-                {errors.length !== 0
-                  ? errors.map((e) => (
-                      <li key={e} className="error">
-                        {e}
-                      </li>
-                    ))
-                  : null}
-              </ul>
             </div>
           ) : (
             <About />
           )}
-
           <Item.Group>
             {this.sortPostsFromMostToLeastUpvotes().map((post) => {
               return (

@@ -15,10 +15,12 @@ class MyPost extends Component {
     confirmOpen: false,
   };
 
+  // method to handle modal
   handleOpen = () => this.setState({ modalOpen: true });
 
   handleClose = () => this.setState({ modalOpen: false });
 
+  // methods to handle delete confirmation
   showConfirm = () => this.setState({ confirmOpen: true });
 
   handleConfirm = () => {
@@ -31,6 +33,7 @@ class MyPost extends Component {
 
   handleCancelDelete = () => this.setState({ confirmOpen: false });
 
+  // detect link in text of post and convert from string to clickable url
   urlify = (text) => {
     const urlRegex = /(https?:\/\/[^\s]+)/g;
     return text.split(urlRegex).map((part) => {
@@ -46,7 +49,7 @@ class MyPost extends Component {
   };
 
   render() {
-    const { post, tags, handleEditPostSubmit } = this.props;
+    const { post, tags, postEditSubmit } = this.props;
     const { post_info } = this.props.post;
     const { confirmOpen } = this.state;
 
@@ -89,7 +92,7 @@ class MyPost extends Component {
                   <MyPostEditForm
                     post_info={post_info}
                     tags={tags}
-                    handleEditPostSubmit={handleEditPostSubmit}
+                    postEditSubmit={postEditSubmit}
                     handleClose={this.handleClose}
                   />
                 </Modal.Content>

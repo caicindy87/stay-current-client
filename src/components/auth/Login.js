@@ -48,7 +48,7 @@ class Login extends Component {
         <div className="login-form">
           <h1>Log In</h1>
           {error ? (
-            <h3 className="login-error-msg">Invalid username or password</h3>
+            <h3 className="error-msg">Invalid username or password</h3>
           ) : null}
           <form onSubmit={this.handleLoginSubmit}>
             <label htmlFor="username">Username</label>

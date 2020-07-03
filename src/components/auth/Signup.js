@@ -53,7 +53,7 @@ class Signup extends Component {
           <ul className="error-list">
             {errors.length !== 0
               ? errors.map((e) => (
-                  <li key={e} className="error">
+                  <li key={e} className="error-msg">
                     {e}
                   </li>
                 ))

@@ -4,7 +4,7 @@
 
 Stay Current is a single-page application that allows uers to stay up to date with today’s current events by exploring resources shared by users or top headlines from news sources. Once logged in, users can also share their own resources, articles, tweets, videos, etc. with other users to browse.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Stay Current Backend](https://github.com/caicindy87/stay-current-api)
 
 ## Prerequisites
 

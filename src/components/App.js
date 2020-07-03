@@ -17,7 +17,6 @@ class App extends Component {
     currentUser: {},
     tags: [],
     myPosts: [],
-    errors: { currentUser: [], myPost: [] },
   };
 
   componentDidMount() {
@@ -30,16 +29,10 @@ class App extends Component {
 
     if (token) {
       authApi.auth.getCurrentUser().then((currentUser) => {
-        if (currentUser.error) {
-          this.setState({
-            errors: { ...this.state.errors, currentUser: currentUser.error },
-          });
-        } else {
-          this.setState(
-            { currentUser: currentUser },
-            this.fetchMyPosts(currentUser)
-          );
-        }
+        this.setState(
+          { currentUser: currentUser },
+          this.fetchMyPosts(currentUser)
+        );
       });
     }
   };
@@ -83,41 +76,35 @@ class App extends Component {
       .catch((err) => console.log(err));
   };
 
+  // updates user's posts without reload when user submits a new post
   updateMyPostsOnNewPostSubmit = (newPost) => {
     this.setState({
       myPosts: [...this.state.myPosts, newPost],
     });
   };
 
-  handleEditPostSubmit = (e, inputs, postId) => {
+  postEditSubmit = (e, inputs, postId) => {
     e.preventDefault();
     const { currentUser } = this.state;
     const token = localStorage.getItem("token");
+
     const editFormData = new FormData();
     editFormData.append("text", inputs.text);
     editFormData.append("selectedTags", inputs.selectedTags);
-
-    inputs.image.signed_id
-      ? editFormData.append("image", inputs.image.signed_id)
-      : editFormData.append("image", inputs.image);
+    if (inputs.image) {
+      inputs.image.signed_id
+        ? editFormData.append("image", inputs.image.signed_id)
+        : editFormData.append("image", inputs.image);
+    }
 
     myPostApi
       .editMyPost(editFormData, currentUser, postId, token)
       .then((updatedPost) => {
-        if (updatedPost.error) {
-          this.setState({
-            errors: { ...this.state.errors, myPost: updatedPost.error },
-          });
-        } else {
-          this.setState((prevState) => ({
-            errors: { ...this.state.errors, myPost: [] },
-            myPosts: prevState.myPosts.map((post) =>
-              post.post_info.id === updatedPost.post_info.id
-                ? updatedPost
-                : post
-            ),
-          }));
-        }
+        this.setState((prevState) => ({
+          myPosts: prevState.myPosts.map((post) =>
+            post.post_info.id === updatedPost.post_info.id ? updatedPost : post
+          ),
+        }));
       })
       .catch((err) => console.log(err));
   };
@@ -136,7 +123,7 @@ class App extends Component {
   };
 
   render() {
-    const { currentUser, tags, myPosts, errors } = this.state;
+    const { currentUser, tags, myPosts } = this.state;
 
     return (
       <div className="app">
@@ -171,9 +158,8 @@ class App extends Component {
             currentUser={currentUser}
             tags={tags}
             myPosts={myPosts}
-            handleEditPostSubmit={this.handleEditPostSubmit}
+            postEditSubmit={this.postEditSubmit}
             handleDeletePost={this.handleDeletePost}
-            errors={errors.myPost}
           />
           <ArticlesContainer />
         </main>

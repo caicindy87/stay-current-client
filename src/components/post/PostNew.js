@@ -10,6 +10,7 @@ class PostNew extends Component {
       image: null,
       selectedTags: [],
     },
+    error: false,
   };
 
   handleInputChange = (e) => {
@@ -35,9 +36,20 @@ class PostNew extends Component {
     }));
   };
 
-  render() {
+  handleSubmit = (e) => {
+    const { postSubmit, handleClose } = this.props;
     const { fields } = this.state;
-    const { handlePostSubmit, handleClose } = this.props;
+
+    if (!/^\s*$/.test(fields.text)) {
+      postSubmit(e, fields);
+      handleClose();
+    } else {
+      this.setState({ error: true });
+    }
+  };
+
+  render() {
+    const { fields, error } = this.state;
     const selectOptions = this.props.tags.map((tag) => ({
       key: tag.id,
       text: tag.name,
@@ -46,12 +58,10 @@ class PostNew extends Component {
 
     return (
       <Container className="new-post-form" textAlign="center">
-        <Form
-          onSubmit={(e) => {
-            handlePostSubmit(e, this.state.fields);
-            handleClose();
-          }}
-        >
+        <Form onSubmit={(e) => this.handleSubmit(e)}>
+          <ul className="error-msg-container">
+            {error ? <li className="error-msg">Text can't be blank</li> : null}
+          </ul>
           <Form.TextArea
             type="textarea"
             name="text"
@@ -61,7 +71,7 @@ class PostNew extends Component {
           />
           <br />
           <Form.Input
-            label="Image (Optional)"
+            label="Image (optional)"
             type="file"
             name="image"
             accept="image/*"
@@ -70,8 +80,8 @@ class PostNew extends Component {
           />
           <br />
           <Form.Dropdown
-            label="Tags (Optional)"
-            placeholder="Add tags"
+            label="Tags"
+            placeholder="Add tags (optional)"
             fluid
             multiple
             search

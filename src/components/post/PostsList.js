@@ -70,11 +70,7 @@ class PostsList extends Component {
 
   handleOpen = () => this.setState({ modalOpen: true });
 
-  handleClose = () => {
-    if (this.props.errors !== undefined && this.props.errors.length !== 0) {
-      this.setState({ modalOpen: false });
-    }
-  };
+  handleClose = () => this.setState({ modalOpen: false });
 
   render() {
     const {
@@ -94,7 +90,6 @@ class PostsList extends Component {
               tags={this.alphabetizeTags()}
               handlePostSubmit={handlePostSubmit}
               handleClose={this.handleClose}
-              errors={errors}
             />
           </Modal.Content>
         </Modal>
@@ -114,7 +109,6 @@ class PostsList extends Component {
           ) : (
             <About />
           )}
-
           <Item.Group>
             {this.sortPostsFromMostToLeastUpvotes().map((post) => {
               return (

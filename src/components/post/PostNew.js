@@ -10,6 +10,7 @@ class PostNew extends Component {
       image: null,
       selectedTags: [],
     },
+    error: false,
   };
 
   handleInputChange = (e) => {
@@ -35,9 +36,20 @@ class PostNew extends Component {
     }));
   };
 
-  render() {
+  handleSubmit = (e) => {
+    const { handlePostSubmit, handleClose } = this.props;
     const { fields } = this.state;
-    const { handlePostSubmit, handleClose, errors } = this.props;
+
+    if (!/^\s*$/.test(fields.text)) {
+      handlePostSubmit(e, fields);
+      handleClose();
+    } else {
+      this.setState({ error: true });
+    }
+  };
+
+  render() {
+    const { fields, error } = this.state;
     const selectOptions = this.props.tags.map((tag) => ({
       key: tag.id,
       text: tag.name,
@@ -46,20 +58,9 @@ class PostNew extends Component {
 
     return (
       <Container className="new-post-form" textAlign="center">
-        <Form
-          onSubmit={(e) => {
-            handlePostSubmit(e, this.state.fields);
-            handleClose();
-          }}
-        >
+        <Form onSubmit={(e) => this.handleSubmit(e)}>
           <ul className="error-msg-container">
-            {errors !== undefined && errors.length !== 0
-              ? errors.map((e) => (
-                  <li key={e} className="error-msg">
-                    {e}
-                  </li>
-                ))
-              : null}
+            {error ? <li>Text can't be blank</li> : null}
           </ul>
           <Form.TextArea
             type="textarea"

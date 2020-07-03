@@ -10,7 +10,7 @@ class MyPostsContainer extends Component {
       currentUser,
       tags,
       myPosts,
-      handleEditPostSubmit,
+      postEditSubmit,
       handleDeletePost,
       errors,
     } = this.props;
@@ -27,7 +27,7 @@ class MyPostsContainer extends Component {
                   posts={myPosts}
                   currentUser={currentUser}
                   tags={tags}
-                  handleEditPostSubmit={handleEditPostSubmit}
+                  postEditSubmit={postEditSubmit}
                   handleDeletePost={handleDeletePost}
                   errors={errors}
                 />

@@ -46,14 +46,13 @@ class MyPostEditForm extends Component {
     }));
   };
 
-  //
   handleSubmit = (e) => {
-    const { post_info, handleEditPostSubmit, handleClose } = this.props;
+    const { post_info, postEditSubmit, handleClose } = this.props;
     const { fields } = this.state;
 
     // checks if text input is only empty string and/or whitespaces before submitting
     if (!/^\s*$/.test(fields.text)) {
-      handleEditPostSubmit(e, fields, post_info.id);
+      postEditSubmit(e, fields, post_info.id);
       handleClose();
     } else {
       this.setState({ error: true });

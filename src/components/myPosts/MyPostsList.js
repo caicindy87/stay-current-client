@@ -19,7 +19,7 @@ class MyPostsList extends Component {
   render() {
     const {
       tags,
-      handleEditPostSubmit,
+      postEditSubmit,
       handleDeletePost,
       currentUser,
       errors,
@@ -39,7 +39,7 @@ class MyPostsList extends Component {
               key={post.post_info.id}
               post={post}
               tags={tags}
-              handleEditPostSubmit={handleEditPostSubmit}
+              postEditSubmit={postEditSubmit}
               handleDeletePost={handleDeletePost}
               errors={errors}
             />

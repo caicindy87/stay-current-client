@@ -89,7 +89,7 @@ class App extends Component {
     });
   };
 
-  handleEditPostSubmit = (e, inputs, postId) => {
+  postEditSubmit = (e, inputs, postId) => {
     e.preventDefault();
     const { currentUser } = this.state;
     const token = localStorage.getItem("token");
@@ -173,7 +173,7 @@ class App extends Component {
             currentUser={currentUser}
             tags={tags}
             myPosts={myPosts}
-            handleEditPostSubmit={this.handleEditPostSubmit}
+            postEditSubmit={this.postEditSubmit}
             handleDeletePost={this.handleDeletePost}
             errors={errors.myPost}
           />

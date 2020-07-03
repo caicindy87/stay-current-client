@@ -25,22 +25,24 @@ class PostsContainer extends Component {
   };
 
   handlePostSubmit = (e, inputs) => {
+    e.preventDefault();
     const { currentUser, history } = this.props;
     const token = localStorage.getItem("token");
 
-    e.preventDefault();
-
-    postApi.createNewPost(inputs, currentUser, token).then((post) => {
-      if (post.error) {
-        this.setState({ errors: post.error });
-      } else {
-        this.setState((prevState) => ({
-          errors: [],
-          posts: [...prevState.posts, post],
-        }));
-        this.props.updateMyPostsOnNewPostSubmit(post);
-      }
-    });
+    postApi
+      .createNewPost(inputs, currentUser, token)
+      .then((post) => {
+        if (post.error) {
+          this.setState({ errors: post.error });
+        } else {
+          this.setState((prevState) => ({
+            errors: [],
+            posts: [...prevState.posts, post],
+          }));
+          this.props.updateMyPostsOnNewPostSubmit(post);
+        }
+      })
+      .catch((err) => console.log(err));
 
     history.push("/");
   };

@@ -79,7 +79,8 @@ class App extends Component {
 
     myPostApi
       .getMyPosts(user, token)
-      .then((posts) => this.setState({ myPosts: posts }));
+      .then((posts) => this.setState({ myPosts: posts }))
+      .catch((err) => console.log(err));
   };
 
   updateMyPostsOnNewPostSubmit = (newPost) => {
@@ -89,13 +90,19 @@ class App extends Component {
   };
 
   handleEditPostSubmit = (e, inputs, postId) => {
+    e.preventDefault();
     const { currentUser } = this.state;
     const token = localStorage.getItem("token");
+    const editFormData = new FormData();
+    editFormData.append("text", inputs.text);
+    editFormData.append("selectedTags", inputs.selectedTags);
 
-    e.preventDefault();
+    inputs.image.signed_id
+      ? editFormData.append("image", inputs.image.signed_id)
+      : editFormData.append("image", inputs.image);
 
     myPostApi
-      .editMyPost(inputs, currentUser, postId, token)
+      .editMyPost(editFormData, currentUser, postId, token)
       .then((updatedPost) => {
         if (updatedPost.error) {
           this.setState({
@@ -111,7 +118,8 @@ class App extends Component {
             ),
           }));
         }
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   handleDeletePost = (postId) => {

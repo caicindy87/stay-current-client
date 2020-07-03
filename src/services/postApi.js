@@ -16,7 +16,6 @@ const getPosts = (token) => {
 };
 
 const createNewPost = (inputs, user, token) => {
-  console.log("inputs", inputs);
   const formData = new FormData();
   formData.append("text", inputs.text);
   formData.append("selectedTags", inputs.selectedTags);

@@ -28,22 +28,21 @@ class PostsContainer extends Component {
     e.preventDefault();
     const { currentUser, history } = this.props;
     const token = localStorage.getItem("token");
-    // const formData = new FormData();
-    // formData.append("text", inputs.text);
-    // formData.append("selectedTags", inputs.selectedTags);
-    // formData.append("image", inputs.image);
 
-    postApi.createNewPost(inputs, currentUser, token).then((post) => {
-      if (post.error) {
-        this.setState({ errors: post.error });
-      } else {
-        this.setState((prevState) => ({
-          errors: [],
-          posts: [...prevState.posts, post],
-        }));
-        this.props.updateMyPostsOnNewPostSubmit(post);
-      }
-    });
+    postApi
+      .createNewPost(inputs, currentUser, token)
+      .then((post) => {
+        if (post.error) {
+          this.setState({ errors: post.error });
+        } else {
+          this.setState((prevState) => ({
+            errors: [],
+            posts: [...prevState.posts, post],
+          }));
+          this.props.updateMyPostsOnNewPostSubmit(post);
+        }
+      })
+      .catch((err) => console.log(err));
 
     history.push("/");
   };

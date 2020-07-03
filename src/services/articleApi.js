@@ -9,7 +9,6 @@ const headers = {
 };
 
 const getArticles = (page) => {
-  console.log("current page", page);
   return fetch(`${API_ROOT}/news?page=${page}`, {
     method: "GET",
     headers: headers,

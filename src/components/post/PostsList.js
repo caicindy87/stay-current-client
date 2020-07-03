@@ -105,7 +105,7 @@ class PostsList extends Component {
               <Button className="submit-post" onClick={this.handleOpen}>
                 Post
               </Button>
-              {/* <ul className="errors-container">
+              <ul className="errors-container">
                 {errors.length !== 0
                   ? errors.map((e) => (
                       <li key={e} className="error">
@@ -113,7 +113,7 @@ class PostsList extends Component {
                       </li>
                     ))
                   : null}
-              </ul> */}
+              </ul>
             </div>
           ) : (
             <About />

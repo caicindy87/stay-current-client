@@ -21,8 +21,8 @@ class PostNew extends Component {
   };
 
   onImageChange = (e) => {
-    console.log("image", e.target.files[0]);
     const image = e.target.files[0];
+
     this.setState({ fields: { ...this.state.fields, image: image } });
   };
 

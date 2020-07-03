@@ -79,7 +79,8 @@ class App extends Component {
 
     myPostApi
       .getMyPosts(user, token)
-      .then((posts) => this.setState({ myPosts: posts }));
+      .then((posts) => this.setState({ myPosts: posts }))
+      .catch((err) => console.log(err));
   };
 
   updateMyPostsOnNewPostSubmit = (newPost) => {
@@ -117,7 +118,8 @@ class App extends Component {
             ),
           }));
         }
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   handleDeletePost = (postId) => {

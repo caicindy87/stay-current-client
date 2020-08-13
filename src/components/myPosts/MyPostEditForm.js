@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Dropdown } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 
 class MyPostEditForm extends Component {
   state = {

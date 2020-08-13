@@ -82,63 +82,70 @@ class PostsList extends Component {
     } = this.props;
 
     return (
-      <div className="container">
-        <Modal onClose={this.handleClose} open={this.state.modalOpen} closeIcon>
-          <Modal.Header>Create a post</Modal.Header>
-          <Modal.Content>
-            <PostNew
-              tags={this.alphabetizeTags()}
-              postSubmit={postSubmit}
-              handleClose={this.handleClose}
-            />
-          </Modal.Content>
-        </Modal>
-        <div className="posts-list">
-          {!!localStorage.getItem("token") ? (
-            <div className="new-post">
-              <input
-                type="textarea"
-                placeholder="What news is on your mind?"
-                onClick={this.handleOpen}
-                readOnly
-              ></input>
-              <Button className="submit-post" onClick={this.handleOpen}>
-                Post
-              </Button>
+      <div className="posts-list">
+        <div className="inner-width">
+          <Modal
+            onClose={this.handleClose}
+            open={this.state.modalOpen}
+            closeIcon
+          >
+            <Modal.Header>Create a post</Modal.Header>
+            <Modal.Content>
+              <PostNew
+                tags={this.alphabetizeTags()}
+                postSubmit={postSubmit}
+                handleClose={this.handleClose}
+              />
+            </Modal.Content>
+          </Modal>
+
+          <div className="posts">
+            {!!localStorage.getItem("token") ? (
+              <div className="new-post">
+                <input
+                  type="textarea"
+                  placeholder="What news is on your mind?"
+                  onClick={this.handleOpen}
+                  readOnly
+                ></input>
+                <Button className="submit-post" onClick={this.handleOpen}>
+                  Post
+                </Button>
+              </div>
+            ) : (
+              <About />
+            )}
+            <div className="container">
+              {this.sortPostsFromMostToLeastUpvotes().map((post) => {
+                return (
+                  <Post
+                    key={post.post_info.id}
+                    post={post}
+                    currentUser={currentUser}
+                    handleTagSelected={this.handleTagSelected}
+                    handleUpvoteClick={handleUpvoteClick}
+                    handleDownvoteClick={handleDownvoteClick}
+                  />
+                );
+              })}
             </div>
-          ) : (
-            <About />
-          )}
-          <Item.Group>
-            {this.sortPostsFromMostToLeastUpvotes().map((post) => {
-              return (
-                <Post
-                  key={post.post_info.id}
-                  post={post}
-                  currentUser={currentUser}
-                  handleTagSelected={this.handleTagSelected}
-                  handleUpvoteClick={handleUpvoteClick}
-                  handleDownvoteClick={handleDownvoteClick}
-                />
-              );
-            })}
-          </Item.Group>
-        </div>
-        <div className="tags-container">
-          <Label.Group size="big">
-            {this.alphabetizeTags().map((tag) => {
-              return (
-                <Label
-                  key={tag.id}
-                  as="button"
-                  basic
-                  onClick={this.handleTagSelected}
-                >
-                  {tag.name}
-                </Label>
-              );
-            })}
-          </Label.Group>
+          </div>
+          <div className="tags-container">
+            <Label.Group size="big">
+              {this.alphabetizeTags().map((tag) => {
+                return (
+                  <Label
+                    key={tag.id}
+                    as="button"
+                    basic
+                    onClick={this.handleTagSelected}
+                  >
+                    {tag.name}
+                  </Label>
+                );
+              })}
+            </Label.Group>
+          </div>
         </div>
       </div>
     );

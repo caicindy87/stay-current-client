@@ -60,11 +60,64 @@ export default class Post extends Component {
 
     return (
       <div className="post">
-        <Item.Group>
-          <Item>
-            <Item.Image size="tiny" src={post_info.user.profile_pic} />
+        <img src={post_info.user.profile_pic} className="avatar" />
+        <div className="section">
+          <div className="info">
+            <span className="username">{post_info.user.username}</span>
+            <span>{post.publish_date} ago</span>
+          </div>
+          <div className="content">
+            <p>{this.urlify(post_info.text)}</p>
+            {post_info.image ? (
+              <img src={post_info.image.url} alt="" className="img" />
+            ) : null}
+            <div className="tags">
+              {post_info.tags
+                ? post_info.tags.map((tag) => (
+                    <Label
+                      key={tag.id}
+                      as="button"
+                      size="big"
+                      basic
+                      onClick={handleTagSelected}
+                    >
+                      {tag.name}
+                    </Label>
+                  ))
+                : null}
+            </div>
+            <div className="vote-btn-container">
+              <button
+                className="upvote-btn"
+                onClick={this.handleSetStateOnUpvoteClick}
+                disabled={
+                  !!localStorage.getItem("token") ? downvoteClicked : true
+                }
+              >
+                <FontAwesomeIcon
+                  icon={upvoteClicked ? faThumbsUp : faThumbsUpReg}
+                />
+              </button>
+              <p className="downvote-count">{post_info.upvotes}</p>
+            </div>
+            <div className="vote-btn-container">
+              <button
+                className="downvote-btn"
+                onClick={this.handleSetStateOnDownvoteClick}
+                disabled={
+                  !!localStorage.getItem("token") ? upvoteClicked : true
+                }
+              >
+                <FontAwesomeIcon
+                  icon={downvoteClicked ? faThumbsDown : faThumbsDownReg}
+                />
+              </button>
+              <p className="upvote-count">{post_info.downvotes}</p>
+            </div>
+          </div>
+          {/* <Item>
             <Item.Content>
-              <Item.Header>{post_info.user.username}</Item.Header>
+              <h3>{post_info.user.username}</h3>
               <Item.Meta>{post.publish_date} ago</Item.Meta>
               <Item.Description>{this.urlify(post_info.text)}</Item.Description>
               {post_info.image ? (
@@ -116,8 +169,8 @@ export default class Post extends Component {
                 <p className="upvote-count">{post_info.downvotes}</p>
               </div>
             </Item.Content>
-          </Item>
-        </Item.Group>
+          </Item> */}
+        </div>
       </div>
     );
   }

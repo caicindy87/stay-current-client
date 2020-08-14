@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Item, Label, Modal, Button } from "semantic-ui-react";
+import { Item, Label, Modal, Button, Dropdown } from "semantic-ui-react";
 
 import Post from "./Post";
 import "../../style/PostsList.scss";
@@ -80,6 +80,11 @@ class PostsList extends Component {
       handleDownvoteClick,
       postSubmit,
     } = this.props;
+    const selectOptions = this.props.tags.map((tag) => ({
+      key: tag.id,
+      text: tag.name,
+      value: tag.id,
+    }));
 
     return (
       <div className="posts-list">
@@ -115,6 +120,18 @@ class PostsList extends Component {
             ) : (
               <About />
             )}
+            <div className="tags-dropdown">
+              <Dropdown
+                label="Tags"
+                placeholder="Tags"
+                fluid
+                multiple
+                search
+                selection
+                options={selectOptions}
+                onChange={this.handleTagSelected}
+              ></Dropdown>
+            </div>
             <div className="container">
               {this.sortPostsFromMostToLeastUpvotes().map((post) => {
                 return (

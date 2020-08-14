@@ -125,7 +125,7 @@ class PostsList extends Component {
                 label="Tags"
                 placeholder="Tags"
                 fluid
-                multiple
+                clearable
                 search
                 selection
                 options={selectOptions}

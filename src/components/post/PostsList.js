@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Item, Label, Modal, Button, Dropdown } from "semantic-ui-react";
+import { Label, Modal, Button, Dropdown } from "semantic-ui-react";
 
 import Post from "./Post";
 import "../../style/PostsList.scss";
@@ -61,13 +61,18 @@ class PostsList extends Component {
   sortPostsFromMostToLeastUpvotes = () => {
     let posts = [];
 
+    // if no tag selected, show all posts
     if (!this.state.selectedTag) {
       posts = this.props.posts;
       return posts.sort((a, b) => b.post_info.upvotes - a.post_info.upvotes);
-    }
-    if (this.state.selectedTag && this.state.filteredPosts.length === 0) {
+    } else if (
+      // if tag selected, but no results
+      this.state.selectedTag &&
+      this.state.filteredPosts.length === 0
+    ) {
       return;
     } else {
+      // if tag selected and have results
       posts = this.state.filteredPosts;
       return posts.sort((a, b) => b.post_info.upvotes - a.post_info.upvotes);
     }

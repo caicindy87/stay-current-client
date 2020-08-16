@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Item, Label, Modal, Button } from "semantic-ui-react";
+import { Label, Modal, Button, Dropdown } from "semantic-ui-react";
 
 import Post from "./Post";
 import "../../style/PostsList.scss";
@@ -60,13 +60,22 @@ class PostsList extends Component {
 
   sortPostsFromMostToLeastUpvotes = () => {
     let posts = [];
-    if (this.state.filteredPosts.length === 0) {
-      posts = this.props.posts;
-    } else {
-      posts = this.state.filteredPosts;
-    }
 
-    return posts.sort((a, b) => b.post_info.upvotes - a.post_info.upvotes);
+    // if no tag selected, show all posts
+    if (!this.state.selectedTag) {
+      posts = this.props.posts;
+      return posts.sort((a, b) => b.post_info.upvotes - a.post_info.upvotes);
+    } else if (
+      // if tag selected, but no results
+      this.state.selectedTag &&
+      this.state.filteredPosts.length === 0
+    ) {
+      return;
+    } else {
+      // if tag selected and have results
+      posts = this.state.filteredPosts;
+      return posts.sort((a, b) => b.post_info.upvotes - a.post_info.upvotes);
+    }
   };
 
   handleOpen = () => this.setState({ modalOpen: true });
@@ -80,65 +89,93 @@ class PostsList extends Component {
       handleDownvoteClick,
       postSubmit,
     } = this.props;
+    const selectOptions = this.props.tags.map((tag) => ({
+      key: tag.id,
+      text: tag.name,
+      value: tag.id,
+    }));
 
     return (
-      <div className="container">
-        <Modal onClose={this.handleClose} open={this.state.modalOpen} closeIcon>
-          <Modal.Header>Create a post</Modal.Header>
-          <Modal.Content>
-            <PostNew
-              tags={this.alphabetizeTags()}
-              postSubmit={postSubmit}
-              handleClose={this.handleClose}
-            />
-          </Modal.Content>
-        </Modal>
-        <div className="posts-list">
-          {!!localStorage.getItem("token") ? (
-            <div className="new-post">
-              <input
-                type="textarea"
-                placeholder="What news is on your mind?"
-                onClick={this.handleOpen}
-                readOnly
-              ></input>
-              <Button className="submit-post" onClick={this.handleOpen}>
-                Post
-              </Button>
+      <div className="posts-list">
+        <div className="inner-width">
+          <Modal
+            onClose={this.handleClose}
+            open={this.state.modalOpen}
+            closeIcon
+          >
+            <Modal.Header>Create a post</Modal.Header>
+            <Modal.Content>
+              <PostNew
+                tags={this.alphabetizeTags()}
+                postSubmit={postSubmit}
+                handleClose={this.handleClose}
+              />
+            </Modal.Content>
+          </Modal>
+
+          <div className="posts">
+            {!!localStorage.getItem("token") ? (
+              <div className="new-post">
+                <input
+                  type="textarea"
+                  placeholder="What news is on your mind?"
+                  onClick={this.handleOpen}
+                  readOnly
+                ></input>
+                <Button className="submit-post" onClick={this.handleOpen}>
+                  Post
+                </Button>
+              </div>
+            ) : (
+              <About />
+            )}
+            <div className="tags-dropdown">
+              <Dropdown
+                label="Tags"
+                placeholder="Tags"
+                fluid
+                clearable
+                search
+                selection
+                options={selectOptions}
+                onChange={this.handleTagSelected}
+              ></Dropdown>
             </div>
-          ) : (
-            <About />
-          )}
-          <Item.Group>
-            {this.sortPostsFromMostToLeastUpvotes().map((post) => {
-              return (
-                <Post
-                  key={post.post_info.id}
-                  post={post}
-                  currentUser={currentUser}
-                  handleTagSelected={this.handleTagSelected}
-                  handleUpvoteClick={handleUpvoteClick}
-                  handleDownvoteClick={handleDownvoteClick}
-                />
-              );
-            })}
-          </Item.Group>
-        </div>
-        <div className="tags-container">
-          <Label.Group size="big">
-            {this.alphabetizeTags().map((tag) => {
-              return (
-                <Label
-                  key={tag.id}
-                  as="button"
-                  basic
-                  onClick={this.handleTagSelected}
-                >
-                  {tag.name}
-                </Label>
-              );
-            })}
-          </Label.Group>
+            <div className="container">
+              {!this.sortPostsFromMostToLeastUpvotes() ? (
+                <p className="no-results">No results</p>
+              ) : (
+                this.sortPostsFromMostToLeastUpvotes().map((post) => {
+                  return (
+                    <Post
+                      key={post.post_info.id}
+                      post={post}
+                      currentUser={currentUser}
+                      handleTagSelected={this.handleTagSelected}
+                      handleUpvoteClick={handleUpvoteClick}
+                      handleDownvoteClick={handleDownvoteClick}
+                    />
+                  );
+                })
+              )}
+            </div>
+          </div>
+          <div className="tags-container">
+            <Label.Group size="big">
+              {this.alphabetizeTags().map((tag) => {
+                return (
+                  <Label
+                    key={tag.id}
+                    as="button"
+                    basic
+                    onClick={this.handleTagSelected}
+                  >
+                    {tag.name}
+                  </Label>
+                );
+              })}
+            </Label.Group>
+          </div>
         </div>
       </div>
     );

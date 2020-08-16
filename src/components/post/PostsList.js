@@ -60,13 +60,17 @@ class PostsList extends Component {
 
   sortPostsFromMostToLeastUpvotes = () => {
     let posts = [];
-    if (this.state.filteredPosts.length === 0) {
+
+    if (!this.state.selectedTag) {
       posts = this.props.posts;
+      return posts.sort((a, b) => b.post_info.upvotes - a.post_info.upvotes);
+    }
+    if (this.state.selectedTag && this.state.filteredPosts.length === 0) {
+      return;
     } else {
       posts = this.state.filteredPosts;
+      return posts.sort((a, b) => b.post_info.upvotes - a.post_info.upvotes);
     }
-
-    return posts.sort((a, b) => b.post_info.upvotes - a.post_info.upvotes);
   };
 
   handleOpen = () => this.setState({ modalOpen: true });
@@ -133,18 +137,22 @@ class PostsList extends Component {
               ></Dropdown>
             </div>
             <div className="container">
-              {this.sortPostsFromMostToLeastUpvotes().map((post) => {
-                return (
-                  <Post
-                    key={post.post_info.id}
-                    post={post}
-                    currentUser={currentUser}
-                    handleTagSelected={this.handleTagSelected}
-                    handleUpvoteClick={handleUpvoteClick}
-                    handleDownvoteClick={handleDownvoteClick}
-                  />
-                );
-              })}
+              {!this.sortPostsFromMostToLeastUpvotes() ? (
+                <p className="no-results">No results</p>
+              ) : (
+                this.sortPostsFromMostToLeastUpvotes().map((post) => {
+                  return (
+                    <Post
+                      key={post.post_info.id}
+                      post={post}
+                      currentUser={currentUser}
+                      handleTagSelected={this.handleTagSelected}
+                      handleUpvoteClick={handleUpvoteClick}
+                      handleDownvoteClick={handleDownvoteClick}
+                    />
+                  );
+                })
+              )}
             </div>
           </div>
           <div className="tags-container">

@@ -67,9 +67,9 @@ export default class Post extends Component {
             <span>{post.publish_date} ago</span>
           </div>
           <div className="content">
-            <p>{this.urlify(post_info.text)}</p>
+            <p className="text">{this.urlify(post_info.text)}</p>
             {post_info.image ? (
-              <img src={post_info.image.url} alt="" className="img" />
+              <img src={post_info.image.url} alt="" className="post-img" />
             ) : null}
             <div className="tags">
               {post_info.tags

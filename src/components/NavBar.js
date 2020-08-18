@@ -1,13 +1,23 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 
-import logo from "../icons/logo.jpg";
-import loginIcon from "../icons/loginIcon.jpg";
-import logoutIcon from "../icons/logoutIcon.jpg";
-import profileIcon from "../icons/profileIcon.jpg";
+import logo from "../icons/logo.png";
+import loginIcon from "../icons/loginIcon.png";
+import logoutIcon from "../icons/logoutIcon.png";
+import profileIcon from "../icons/profileIcon.png";
 import newsIcon from "../icons/newsIcon.jpeg";
 
 class NavBar extends Component {
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleScroll);
+  }
+
+  handleScroll = () => {
+    if (window.scrollY > 20) {
+      document.querySelector(".navbar").style.backgroundColor = "#e5e5e5";
+    }
+  };
+
   render() {
     const { handleLogOut, currentUser } = this.props;
 

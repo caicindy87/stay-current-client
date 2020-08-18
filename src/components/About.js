@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import HomepageImage from "../icons/homepage.svg";
+import homepageImg from "../icons/surfNews.png";
 import "../style/About.scss";
 
 class About extends Component {
@@ -8,7 +8,7 @@ class About extends Component {
     return (
       <div className="about">
         <div className="homepage-image">
-          <HomepageImage />
+          <img src={homepageImg} alt="" />
         </div>
         <p className="about-text">Surf the news.</p>
       </div>

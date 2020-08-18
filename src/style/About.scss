@@ -4,7 +4,7 @@
   padding: 25px 40px;
   border-radius: 15px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
 
   .about-text {
@@ -15,5 +15,9 @@
   }
 
   .homepage-image {
+    width: calc(45%);
+    img {
+      width: 70%;
+    }
   }
 }

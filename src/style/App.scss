@@ -1,14 +1,21 @@
+.inner-width {
+  margin: auto;
+  padding: 0 40px;
+}
+
 .navbar {
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   z-index: 1000;
   background-color: white;
   padding: 15px 0px;
+
+  .inner-width {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
   .icon {
     padding: 0px 5px;
@@ -26,13 +33,36 @@
     }
   }
 
-  .navbar-right {
+  .menu-toggler {
+    background: none;
+    width: 30px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    z-index: 999;
+    display: none;
+
+    span {
+      display: block;
+      height: 3px;
+      background-color: white;
+      margin: 6px 0;
+      position: relative;
+    }
+  }
+
+  .navbar-menu {
     a {
       color: #16324f;
       font-family: Geomanist;
       font-size: 20px;
       text-decoration: underline;
       padding-right: 15px;
+    }
+
+    a:hover {
+      color: #ffd400 !important;
     }
   }
 }

@@ -14,6 +14,7 @@ class NavBar extends Component {
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
+    window.addEventListener("resize", this.handleResize);
   }
 
   componentWillUnmount() {
@@ -30,6 +31,12 @@ class NavBar extends Component {
 
   handleClick = () => {
     this.setState({ isButtonActive: !this.state.isButtonActive });
+  };
+
+  handleResize = () => {
+    if (window.screen.width >= 900) {
+      this.setState({ isButtonActive: false });
+    }
   };
 
   render() {

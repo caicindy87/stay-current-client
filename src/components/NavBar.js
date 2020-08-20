@@ -12,9 +12,15 @@ class NavBar extends Component {
     window.addEventListener("scroll", this.handleScroll);
   }
 
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+  }
+
   handleScroll = () => {
     if (window.scrollY > 20) {
-      document.querySelector(".navbar").style.backgroundColor = "#e5e5e5";
+      document.querySelector(".navbar").className = "navbar sticky";
+    } else {
+      document.querySelector(".navbar").className = "navbar";
     }
   };
 

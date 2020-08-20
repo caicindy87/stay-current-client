@@ -36,21 +36,22 @@
 
   .menu-toggler {
     background: none;
-    width: 30px;
+    width: 40px;
     border: none;
     cursor: pointer;
     position: relative;
     outline: none;
     z-index: 999;
     display: none;
+  }
 
-    span {
-      display: block;
-      height: 3px;
-      background-color: white;
-      margin: 6px 0;
-      position: relative;
-    }
+  .menu-toggler span {
+    display: block;
+    height: 3px;
+    background-color: #16324f;
+    margin: 6px 0;
+    position: relative;
+    transition: 0.3s linear;
   }
 
   .navbar-menu {
@@ -60,6 +61,7 @@
       font-size: 20px;
       text-decoration: underline;
       padding-right: 13px;
+      transition: 0.2s linear;
     }
 
     a:hover {
@@ -104,4 +106,48 @@ main {
 
 .error-msg {
   color: #c0392b;
+}
+
+@media only screen and (max-width: 900px) {
+  .navbar {
+    .menu-toggler {
+      display: block;
+    }
+
+    .navbar-menu {
+      position: fixed;
+      height: 100vh;
+      width: 100%;
+      background-color: #f1f1f1;
+      top: 0;
+      right: -100%;
+      max-width: 250px;
+      padding: 80px 50px;
+      transition: 0.3s linear;
+
+      a {
+        display: block;
+        font-size: 20px;
+        margin: 30px 0;
+      }
+    }
+
+    .navbar-menu.active {
+      right: 0;
+    }
+
+    .menu-toggler.active span:nth-child(1) {
+      transform: rotate(-45deg);
+      top: 4px;
+    }
+
+    .menu-toggler.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggler.active span:nth-child(3) {
+      transform: rotate(45deg);
+      bottom: 14px;
+    }
+  }
 }

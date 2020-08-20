@@ -8,6 +8,10 @@ import profileIcon from "../icons/profileIcon.png";
 import newsIcon from "../icons/newsIcon.jpeg";
 
 class NavBar extends Component {
+  state = {
+    isButtonActive: false,
+  };
+
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
   }
@@ -24,6 +28,10 @@ class NavBar extends Component {
     }
   };
 
+  handleClick = () => {
+    this.setState({ isButtonActive: !this.state.isButtonActive });
+  };
+
   render() {
     const { handleLogOut, currentUser } = this.props;
 
@@ -34,24 +42,34 @@ class NavBar extends Component {
             <img src={logo} alt="logo" className="logo-img"></img>
             Stay Current
           </a>
-          <button className="menu-toggler">
+          <button
+            className={
+              this.state.isButtonActive ? "menu-toggler active" : "menu-toggler"
+            }
+            onClick={this.handleClick}
+          >
             <span></span>
             <span></span>
             <span></span>
           </button>
-          <div className="navbar-menu">
-            <Link to="/news">
+          <div
+            className={
+              this.state.isButtonActive ? "navbar-menu active" : "navbar-menu"
+            }
+          >
+            <Link to="/news" onClick={this.handleClick}>
               <img src={newsIcon} alt="news-icon" className="icon"></img>
               News
             </Link>
             {!!localStorage.getItem("token") ? (
               <>
-                <Link to="/profile">
+                <Link to="/profile" onClick={this.handleClick}>
                   <img
                     src={profileIcon}
                     alt="profile-icon"
                     className="icon"
                   ></img>
+
                   {currentUser.username}
                 </Link>
               </>
@@ -62,6 +80,7 @@ class NavBar extends Component {
                   to="/"
                   onClick={() => {
                     handleLogOut();
+                    this.handleClick();
                   }}
                 >
                   <img
@@ -73,7 +92,7 @@ class NavBar extends Component {
                 </Link>
               </>
             ) : (
-              <Link to="/login">
+              <Link to="/login" onClick={this.handleClick}>
                 <img src={loginIcon} alt="login-icon" className="icon"></img>
                 Log In
               </Link>

@@ -19,6 +19,7 @@ class NavBar extends Component {
 
   componentWillUnmount() {
     window.removeEventListener("scroll", this.handleScroll);
+    window.removeEventListener("resize", this.closeSideMenu);
   }
 
   handleScroll = () => {

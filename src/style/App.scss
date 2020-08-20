@@ -118,7 +118,7 @@ main {
       position: fixed;
       height: 100vh;
       width: 100%;
-      background-color: #f1f1f1;
+      background-color: #16324f;
       top: 0;
       right: -100%;
       max-width: 250px;
@@ -127,13 +127,22 @@ main {
 
       a {
         display: block;
-        font-size: 20px;
-        margin: 30px 0;
+        font-size: 23px;
+        color: #f1f1f1;
+        margin: 35px auto;
+        text-decoration: none;
+        text-align: left;
       }
     }
 
     .navbar-menu.active {
       right: 0;
+    }
+
+    .menu-toggler.active {
+      span {
+        background-color: #f1f1f1;
+      }
     }
 
     .menu-toggler.active span:nth-child(1) {

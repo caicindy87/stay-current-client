@@ -58,18 +58,21 @@ class NavBar extends Component {
             }
           >
             <Link to="/news" onClick={this.handleClick}>
-              <img src={newsIcon} alt="news-icon" className="icon"></img>
+              {this.state.isButtonActive ? null : (
+                <img src={newsIcon} alt="news-icon" className="icon"></img>
+              )}
               News
             </Link>
             {!!localStorage.getItem("token") ? (
               <>
                 <Link to="/profile" onClick={this.handleClick}>
-                  <img
-                    src={profileIcon}
-                    alt="profile-icon"
-                    className="icon"
-                  ></img>
-
+                  {this.state.isButtonActive ? null : (
+                    <img
+                      src={profileIcon}
+                      alt="profile-icon"
+                      className="icon"
+                    ></img>
+                  )}
                   {currentUser.username}
                 </Link>
               </>
@@ -83,11 +86,13 @@ class NavBar extends Component {
                     this.handleClick();
                   }}
                 >
-                  <img
-                    src={logoutIcon}
-                    alt="logout-icon"
-                    className="icon"
-                  ></img>
+                  {this.state.isButtonActive ? null : (
+                    <img
+                      src={logoutIcon}
+                      alt="logout-icon"
+                      className="icon"
+                    ></img>
+                  )}
                   Log Out
                 </Link>
               </>

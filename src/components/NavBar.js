@@ -14,7 +14,7 @@ class NavBar extends Component {
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
-    window.addEventListener("resize", this.handleResize);
+    window.addEventListener("resize", this.closeSideMenu);
   }
 
   componentWillUnmount() {
@@ -33,10 +33,8 @@ class NavBar extends Component {
     this.setState({ isButtonActive: !this.state.isButtonActive });
   };
 
-  handleResize = () => {
-    if (window.screen.width >= 900) {
-      this.setState({ isButtonActive: false });
-    }
+  closeSideMenu = () => {
+    this.setState({ isButtonActive: false });
   };
 
   render() {
@@ -64,7 +62,7 @@ class NavBar extends Component {
               this.state.isButtonActive ? "navbar-menu active" : "navbar-menu"
             }
           >
-            <Link to="/news" onClick={this.handleClick}>
+            <Link to="/news" onClick={this.closeSideMenu}>
               {this.state.isButtonActive ? null : (
                 <img src={newsIcon} alt="news-icon" className="icon"></img>
               )}
@@ -72,7 +70,7 @@ class NavBar extends Component {
             </Link>
             {!!localStorage.getItem("token") ? (
               <>
-                <Link to="/profile" onClick={this.handleClick}>
+                <Link to="/profile" onClick={this.closeSideMenu}>
                   {this.state.isButtonActive ? null : (
                     <img
                       src={profileIcon}
@@ -90,7 +88,7 @@ class NavBar extends Component {
                   to="/"
                   onClick={() => {
                     handleLogOut();
-                    this.handleClick();
+                    this.closeSideMenu();
                   }}
                 >
                   {this.state.isButtonActive ? null : (
@@ -104,8 +102,10 @@ class NavBar extends Component {
                 </Link>
               </>
             ) : (
-              <Link to="/login" onClick={this.handleClick}>
-                <img src={loginIcon} alt="login-icon" className="icon"></img>
+              <Link to="/login" onClick={this.closeSideMenu}>
+                {this.state.isButtonActive ? null : (
+                  <img src={loginIcon} alt="login-icon" className="icon"></img>
+                )}
                 Log In
               </Link>
             )}

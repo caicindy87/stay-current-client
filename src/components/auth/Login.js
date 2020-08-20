@@ -5,7 +5,7 @@ import { Button } from "semantic-ui-react";
 import authApi from "../../services/authApi";
 import "../../style/Login.scss";
 import "../../fonts/Geomanist-Regular.otf";
-import LoginImage from "../../icons/login.svg";
+import loginImg from "../../icons/login.png";
 
 class Login extends Component {
   state = {
@@ -43,7 +43,7 @@ class Login extends Component {
     return (
       <div className="login-form-container">
         <div className="login-image">
-          <LoginImage />
+          <img src={loginImg} alt="" />
         </div>
         <div className="login-form">
           <h1>Log In</h1>

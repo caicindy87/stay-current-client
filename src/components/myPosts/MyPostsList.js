@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 
 import MyPost from "./MyPost";
+import "../../style/PostsList.scss";
+import "../../style/MyPostsList.scss";
 
 class MyPostsList extends Component {
   sortPostsFromNewestToOldest = () => {
@@ -26,24 +28,26 @@ class MyPostsList extends Component {
     } = this.props;
 
     return (
-      <div className="myposts-container">
-        <div className="profile-container">
-          <h1>{currentUser.username}</h1>
-          <img src={currentUser.profile_pic} className="profile-pic" alt="" />
-          <p className="bio">{currentUser.bio}</p>
-        </div>
-        <div className="my-posts-list">
-          <h2>Past Posts</h2>
-          {this.sortPostsFromNewestToOldest().map((post) => (
-            <MyPost
-              key={post.post_info.id}
-              post={post}
-              tags={tags}
-              postEditSubmit={postEditSubmit}
-              handleDeletePost={handleDeletePost}
-              errors={errors}
-            />
-          ))}
+      <div className="posts-list">
+        <div className="inner-width">
+          <div className="profile">
+            <img src={currentUser.profile_pic} className="profile-pic" alt="" />
+            <p className="username">{currentUser.username}</p>
+
+            <p className="bio">{currentUser.bio}</p>
+          </div>
+          <div className="posts">
+            {this.sortPostsFromNewestToOldest().map((post) => (
+              <MyPost
+                key={post.post_info.id}
+                post={post}
+                tags={tags}
+                postEditSubmit={postEditSubmit}
+                handleDeletePost={handleDeletePost}
+                errors={errors}
+              />
+            ))}
+          </div>
         </div>
       </div>
     );

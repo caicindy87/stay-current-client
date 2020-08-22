@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import MyPostsList from "../../components/myPosts/MyPostsList";
-import "../../style/MyPostsContainer.scss";
 
 class MyPostsContainer extends Component {
   render() {
@@ -16,7 +15,7 @@ class MyPostsContainer extends Component {
     } = this.props;
 
     return (
-      <div className="my-posts-container">
+      <div className="myposts-container">
         <Switch>
           <Route
             exact

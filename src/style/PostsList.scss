@@ -1,65 +1,3 @@
-// .posts-list {
-//   display: grid;
-//   grid-template-columns: 1.4fr 275px;
-//   grid-template-rows: [row1-start] 20px [row1-end] 1fr [third-line] auto;
-//   font-family: Geomanist;
-//   column-gap: 40px;
-//   margin: 0px 15%;
-
-//   .posts {
-//     grid-column-start: 1;
-//     grid-row-start: row1-end;
-
-//     .new-post {
-//       height: 150px;
-//       border-bottom: solid 1px #ebf2fa;
-//       border-radius: 25px;
-//       box-shadow: 2px 2px 5px #4e545c;
-//       padding: 30px;
-//       background-color: white;
-
-//       input {
-//         width: 100%;
-//         height: 60%;
-//         color: #16324f;
-//         font-size: 20px;
-//         border: none;
-//       }
-
-//       .submit-post {
-//         float: right;
-//         width: 200px;
-//         font-size: 20px;
-//         font-family: Geomanist-Medium;
-//       }
-//     }
-//   }
-
-//   .tags-container {
-//     background-color: #ebf2fa;
-//     padding: 20px;
-//     height: 100%;
-//     border: solid 1px #ebf2fa;
-//     border-radius: 15px;
-//     grid-column-start: 2;
-//     grid-column-end: 3;
-//     grid-row-start: row1-end;
-
-//     .ui.basic.label {
-//       display: block;
-//     }
-//   }
-
-//   .ui.basic.label:hover {
-//     color: #ffd400;
-//     border: 1px solid #ffd400;
-//     cursor: pointer;
-//   }
-// }
-
-// @media only screen and (min-width: 768px) {
-// }
-
 .posts-list {
   .inner-width {
     max-width: 1300px;
@@ -85,14 +23,14 @@
       width: 100%;
       height: 60%;
       color: #16324f;
-      font-size: 20px;
+      font-size: 18px;
       border: none;
     }
 
     .submit-post {
       float: right;
       width: 200px;
-      font-size: 20px;
+      font-size: 18px;
       font-family: Geomanist-Medium;
     }
   }
@@ -103,7 +41,7 @@
     .no-results {
       padding: 20px 0;
       margin-top: 10px;
-      font-size: 20px;
+      font-size: 18px;
       color: #16324f;
       text-align: center;
     }
@@ -116,6 +54,20 @@
     width: 25%;
     border: solid 1px #ebf2fa;
     border-radius: 15px;
+
+    .ui.basic.label {
+      display: block;
+    }
+  }
+
+  .ui.basic.label:hover {
+    color: #ffd400;
+    border: 1px solid #ffd400;
+    cursor: pointer;
+  }
+
+  .ui.basic.label:focus {
+    outline: auto #ffd400 !important;
   }
 }
 

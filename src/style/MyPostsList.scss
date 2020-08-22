@@ -1,0 +1,61 @@
+.profile {
+  width: 20%;
+  padding: 30px;
+  margin: 15px 0;
+  text-align: center;
+  background-color: #ebf2fa;
+  border-radius: 25px;
+  font-size: 18px;
+
+  .username {
+    font-family: Geomanist-Medium;
+  }
+
+  .bio {
+    font-family: Geomanist;
+  }
+
+  img {
+    width: 80%;
+    border-radius: 50%;
+  }
+}
+
+.posts-list {
+  .mypost-tags.ui.basic.label:hover {
+    cursor: auto;
+    color: #16324f;
+    border: 1px solid #16324f;
+  }
+
+  .mypost-tags.ui.basic.label:focus {
+    outline: none !important;
+  }
+}
+
+.ui.primary.button {
+  background-color: #d63031;
+}
+
+.ui.primary.button:hover {
+  background-color: red;
+}
+
+.ui.modal > .content {
+  font-size: 18px;
+}
+
+@media only screen and (max-width: 900px) {
+  .profile {
+    width: 100%;
+    padding: 15px;
+    background-color: #fff;
+    border-bottom: 1px solid #8d99ae;
+    border-radius: 0;
+    margin-bottom: 40px;
+
+    img {
+      width: 20%;
+    }
+  }
+}

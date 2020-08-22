@@ -1,13 +1,8 @@
 import React, { Component } from "react";
-import {
-  Item,
-  Image,
-  Dropdown,
-  Modal,
-  Confirm,
-  Label,
-} from "semantic-ui-react";
+import { Dropdown, Modal, Confirm, Label } from "semantic-ui-react";
 import MyPostEditForm from "./MyPostEditForm";
+import "../../style/Post.scss";
+import "../../style/MyPost.scss";
 
 class MyPost extends Component {
   state = {
@@ -54,11 +49,28 @@ class MyPost extends Component {
     const { confirmOpen } = this.state;
 
     return (
-      <div className="my-post">
-        <Item.Group>
-          <Item>
-            <Item.Image size="tiny" src={post_info.user.profile_pic} />
-            <Item.Content>
+      <div className="post">
+        <img src={post_info.user.profile_pic} className="avatar" alt="" />
+
+        <Modal onClose={this.handleClose} open={this.state.modalOpen} closeIcon>
+          <Modal.Header content="Edit post"></Modal.Header>
+          <Modal.Content>
+            <MyPostEditForm
+              post_info={post_info}
+              tags={tags}
+              postEditSubmit={postEditSubmit}
+              handleClose={this.handleClose}
+            />
+          </Modal.Content>
+        </Modal>
+
+        <div className="section">
+          <div className="top-section">
+            <div className="info mypost-info">
+              <span className="username">{post_info.user.username}</span>
+              <span>{post.publish_date} ago</span>
+            </div>
+            <div className="options">
               <Dropdown className="options-button" icon="ellipsis horizontal">
                 <Dropdown.Menu>
                   <Dropdown.Item
@@ -82,43 +94,31 @@ class MyPost extends Component {
                   />
                 </Dropdown.Menu>
               </Dropdown>
-              <Modal
-                onClose={this.handleClose}
-                open={this.state.modalOpen}
-                closeIcon
-              >
-                <Modal.Header content="Edit post"></Modal.Header>
-                <Modal.Content>
-                  <MyPostEditForm
-                    post_info={post_info}
-                    tags={tags}
-                    postEditSubmit={postEditSubmit}
-                    handleClose={this.handleClose}
-                  />
-                </Modal.Content>
-              </Modal>
-              <Item.Header>{post_info.user.username}</Item.Header>
-              <Item.Meta>{post.publish_date} ago</Item.Meta>
-              <Item.Description>
-                {this.urlify(post_info.text)}
-                {post_info.image ? (
-                  <Image src={post_info.image.url} size="large" alt="" />
-                ) : null}
-              </Item.Description>
-              <Item.Extra>
-                <Label.Group>
-                  {post_info.tags
-                    ? post_info.tags.map((tag) => (
-                        <Label key={tag.id} size="big" basic>
-                          {tag.name}
-                        </Label>
-                      ))
-                    : null}
-                </Label.Group>
-              </Item.Extra>
-            </Item.Content>
-          </Item>
-        </Item.Group>
+            </div>
+          </div>
+
+          <div className="content">
+            <p className="text">{this.urlify(post_info.text)}</p>
+            {post_info.image ? (
+              <img src={post_info.image.url} alt="" className="post-img" />
+            ) : null}
+            <div className="tags">
+              {post_info.tags
+                ? post_info.tags.map((tag) => (
+                    <Label
+                      key={tag.id}
+                      as="button"
+                      size="big"
+                      basic
+                      className="mypost-tags"
+                    >
+                      {tag.name}
+                    </Label>
+                  ))
+                : null}
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

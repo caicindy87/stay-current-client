@@ -9,26 +9,29 @@ class ArticlesList extends Component {
     const { articles, fetchMoreArticles, hasMore } = this.props;
 
     return (
-      <div className="articles-wrapper">
-        <div className="phrase">
-          <h1>Top Stories</h1>
-        </div>
-        <div className="articles-list">
-          <InfiniteScroll
-            dataLength={articles.length}
-            next={fetchMoreArticles}
-            hasMore={hasMore}
-            loader={<h4>Loading...</h4>}
-            endMessage={
-              <p style={{ textAlign: "center" }}>
-                <b>Yay! You have seen it all</b>
-              </p>
-            }
-          >
-            {articles.map((a) => (
-              <Article key={a.url} article={a} />
-            ))}
-          </InfiniteScroll>
+      <div className="articles-list">
+        <div className="inner-width">
+          <div className="header">
+            <h1>Top Stories</h1>
+            <div className="underline"></div>
+          </div>
+          <div className="articles">
+            <InfiniteScroll
+              dataLength={articles.length}
+              next={fetchMoreArticles}
+              hasMore={hasMore}
+              loader={<h4>Loading...</h4>}
+              endMessage={
+                <p style={{ textAlign: "center" }}>
+                  <b>Yay! You have seen it all</b>
+                </p>
+              }
+            >
+              {articles.map((a) => (
+                <Article key={a.url} article={a} />
+              ))}
+            </InfiniteScroll>
+          </div>
         </div>
       </div>
     );

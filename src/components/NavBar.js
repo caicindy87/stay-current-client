@@ -6,6 +6,7 @@ import loginIcon from "../icons/loginIcon.png";
 import logoutIcon from "../icons/logoutIcon.png";
 import profileIcon from "../icons/profileIcon.png";
 import newsIcon from "../icons/newsIcon.jpeg";
+import "../style/Navbar.scss";
 
 class NavBar extends Component {
   state = {

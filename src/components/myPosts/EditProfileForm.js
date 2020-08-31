@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Form } from "semantic-ui-react";
 
 import "../../style/EditProfileForm.scss";
+import profileApi from "../../services/profileApi";
 
 class EditProfileForm extends Component {
   state = {
@@ -35,12 +36,37 @@ class EditProfileForm extends Component {
     this.setState({ fields: { ...this.state.fields, image: image } });
   };
 
+  createFormData = () => {
+    const { fields } = this.state;
+    const formData = new FormData();
+    formData.append("text", fields.text);
+
+    // If upload new image, append the image. If no new image (keep the current image), append image's signed_id
+    if (fields.image) {
+      fields.image.signed_id
+        ? formData.append("image", fields.image.signed_id)
+        : formData.append("image", fields.image);
+    }
+
+    return formData;
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+    const { currentUser } = this.props;
+    const token = localStorage.getItem("token");
+    const data = this.createFormData();
+
+    profileApi.editProfile(data, currentUser, token);
+  };
+
   render() {
     const { currentUser } = this.props;
     const { fields } = this.state;
 
     return (
-      <Form>
+      <Form onSubmit={(e) => this.handleSubmit(e)}>
         <Form.Group className="avatar-section">
           <img src={currentUser.profile_pic} className="profile-pic" alt="" />
           <Form.Input

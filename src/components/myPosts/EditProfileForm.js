@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Image } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 
 import "../../style/EditProfileForm.scss";
 
@@ -22,16 +22,15 @@ class EditProfileForm extends Component {
             onChange={this.onImageChange}
           ></Form.Input>
         </Form.Group>
-
-        <Form.Field
+        <Form.TextArea
+          className="bio"
           type="text"
           name="text"
+          label="Bio"
           value={currentUser.bio}
           onChange={this.handleInputChange}
-        >
-          <label>Bio</label>
-          <input></input>
-        </Form.Field>
+        ></Form.TextArea>
+        <Form.Button className="save-edit-post-btn">Save changes</Form.Button>
       </Form>
     );
   }

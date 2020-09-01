@@ -91,6 +91,8 @@ class App extends Component {
     const editFormData = new FormData();
     editFormData.append("text", inputs.text);
     editFormData.append("selectedTags", inputs.selectedTags);
+
+    // If upload new image, append the image. If no new image (keep the current image), append image's signed_id
     if (inputs.image) {
       inputs.image.signed_id
         ? editFormData.append("image", inputs.image.signed_id)

@@ -1,10 +1,20 @@
 import React, { Component } from "react";
+import { Button, Modal } from "semantic-ui-react";
 
 import MyPost from "./MyPost";
+import EditProfileForm from "./EditProfileForm";
 import "../../style/PostsList.scss";
 import "../../style/MyPostsList.scss";
 
 class MyPostsList extends Component {
+  state = {
+    modalOpen: false,
+  };
+
+  handleOpen = () => this.setState({ modalOpen: true });
+
+  handleClose = () => this.setState({ modalOpen: false });
+
   sortPostsFromNewestToOldest = () => {
     const postsClone = [...this.props.posts];
 
@@ -35,6 +45,19 @@ class MyPostsList extends Component {
             <p className="username">{currentUser.username}</p>
 
             <p className="bio">{currentUser.bio}</p>
+            <Modal
+              onClose={this.handleClose}
+              open={this.state.modalOpen}
+              closeIcon
+            >
+              <Modal.Header>Edit Profile</Modal.Header>
+              <Modal.Content>
+                <EditProfileForm currentUser={currentUser} />
+              </Modal.Content>
+            </Modal>
+            <Button size="small" onClick={this.handleOpen}>
+              Edit Profile
+            </Button>
           </div>
           <div className="posts">
             {this.sortPostsFromNewestToOldest().map((post) => (
